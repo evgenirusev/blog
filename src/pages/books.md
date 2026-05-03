@@ -9,8 +9,6 @@ I'll add categories as the list grows.
 
 ## Decision-making, problem-solving, and operational efficiency
 
-What I read when I want to think more clearly.
-
 - **The Great Mental Models** (Vols 1–4) — Shane Parrish
 - **Poor Charlie's Almanack: The Essential Wit and Wisdom of Charles T. Munger** — Charles T. Munger (ed. Peter Kaufman)
 - **Bulletproof Problem Solving: The One Skill That Changes Everything** — Charles Conn & Robert McLean
@@ -20,16 +18,13 @@ What I read when I want to think more clearly.
 
 ## Books that have deeply influenced my life
 
-Philosophy, ethics, and the questions that don't have engineering answers.
-
 - **The Myth of Sisyphus** — Albert Camus
-- **The Stranger** — Albert Camus
 - **Existentialism Is a Humanism** — Jean-Paul Sartre
+- **The Stranger** — Albert Camus
 - **Tao Te Ching** — Lao Tzu
 - **Meditations** — Marcus Aurelius
 - **Beyond Good and Evil** — Friedrich Nietzsche
 - **Thus Spoke Zarathustra** — Friedrich Nietzsche
-- **The Art of War** — Sun Tzu
 - **Zen Mind, Beginner's Mind** — Shunryu Suzuki
 - **The Analects** — Confucius
 - **The Selfish Gene** — Richard Dawkins
