@@ -2,6 +2,20 @@ import { defineConfig, envField, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
+import remarkCollapse from "remark-collapse";
+
+// Tiny inline plugin: after remark-collapse wraps the TOC in <details>,
+// open it by default so the reader doesn't have to click.
+const remarkDetailsOpen = () => (tree: { children?: unknown[] }) => {
+  const walk = (node: { type?: string; value?: string; children?: unknown[] }) => {
+    if (node.type === "html" && node.value === "<details>") {
+      node.value = "<details open>";
+    }
+    if (node.children) node.children.forEach(c => walk(c as typeof node));
+  };
+  walk(tree as typeof tree & { type?: string; value?: string });
+};
+
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
@@ -19,7 +33,11 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkToc],
+    remarkPlugins: [
+      remarkToc,
+      [remarkCollapse, { test: "Table of contents" }],
+      remarkDetailsOpen,
+    ],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
