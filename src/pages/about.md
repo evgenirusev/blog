@@ -17,7 +17,8 @@ I help organizations move AI from pilot to production — the unsexy 80% beyond 
 ## Where else to find me
 
 - **GitHub** — [github.com/evgenirusev](https://github.com/evgenirusev) (open-source AI patterns and demos)
-- **LinkedIn** — [linkedin.com/in/evgenirusev](https://www.linkedin.com/in/evgenirusev/) (short-form, daily takes)
+- **LinkedIn** — [linkedin.com/in/evgeni-rusev](https://www.linkedin.com/in/evgeni-rusev-24636017b/) (short-form, daily takes)
+- **X / Twitter** — [@ev_rusev](https://x.com/ev_rusev)
 - **Medium** — [medium.com/@evgenirusev](https://medium.com/@evgenirusev) (syndicated copies of long-form posts)
 - **Email** — [evgeni.rusev@tecknoworks.com](mailto:evgeni.rusev@tecknoworks.com)
 
