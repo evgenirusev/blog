@@ -19,9 +19,9 @@ I'll add categories as the list grows.
 ## Books that have deeply influenced my life
 
 - **The Myth of Sisyphus** — Albert Camus
+- **Tao Te Ching** — Lao Tzu
 - **Existentialism Is a Humanism** — Jean-Paul Sartre
 - **The Stranger** — Albert Camus
-- **Tao Te Ching** — Lao Tzu
 - **Meditations** — Marcus Aurelius
 - **Beyond Good and Evil** — Friedrich Nietzsche
 - **Thus Spoke Zarathustra** — Friedrich Nietzsche
