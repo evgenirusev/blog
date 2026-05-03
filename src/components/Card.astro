@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@/utils/slugify";
 import { getPath } from "@/utils/getPath";
 import Datetime from "./Datetime.astro";
+import { SITE } from "@/config";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -10,24 +11,46 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, ogImage: initOgImage, ...props } = data;
+
+const postPath = getPath(id, filePath);
+
+// Resolve thumbnail URL — manual ogImage > dynamic OG image > none
+let thumbUrl: string | undefined;
+if (typeof initOgImage === "string") {
+  thumbUrl = initOgImage;
+} else if (initOgImage && typeof initOgImage === "object" && "src" in initOgImage) {
+  thumbUrl = (initOgImage as { src: string }).src;
+} else if (SITE.dynamicOgImage) {
+  thumbUrl = `${postPath}/index.png`;
+}
 ---
 
 <li class="my-6">
   <a
-    href={getPath(id, filePath)}
-    class:list={[
-      "inline-block text-lg font-medium text-accent",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
+    href={postPath}
+    class="group flex flex-col gap-3 sm:flex-row sm:gap-4 sm:items-start"
   >
-    <Heading
-      style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
-    >
-      {title}
-    </Heading>
+    {thumbUrl && (
+      <img
+        src={thumbUrl}
+        alt=""
+        class="w-full h-40 sm:w-48 sm:h-28 object-cover rounded border border-border flex-shrink-0"
+        loading="lazy"
+      />
+    )}
+    <div class="flex-1 min-w-0">
+      <Heading
+        class:list={[
+          "inline-block text-lg font-medium text-accent",
+          "decoration-dashed underline-offset-4 group-hover:underline",
+        ]}
+        style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+      >
+        {title}
+      </Heading>
+      <Datetime {...props} />
+      <p class="mt-1">{description}</p>
+    </div>
   </a>
-  <Datetime {...props} />
-  <p>{description}</p>
 </li>
