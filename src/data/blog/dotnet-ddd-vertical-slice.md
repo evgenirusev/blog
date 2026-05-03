@@ -11,7 +11,7 @@ tags:
   - clean-architecture
   - vertical-slice
   - architecture
-ogImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*q5fCIRCN4lx_7-qSvmFDvA.png"
+ogImage: "../../assets/images/posts/dotnet-ddd-vertical-slice.png"
 description: "A Domain-Driven Design template for .NET using Vertical Slice architecture — build highly decoupled monolithic applications with a clear path to microservices when you need it."
 ---
 
@@ -27,7 +27,7 @@ The approach aims to facilitate the development of highly decoupled monolithic .
 
 [Link to source code](https://github.com/evgenirusev/.NET-Domain-Driven-Design-Template)
 
-![DDD Vertical Slice overview](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*q5fCIRCN4lx_7-qSvmFDvA.png)
+![Modular monolith with vertical slice architecture: .NET Core API Gateway routing to bounded contexts (product catalog, orders, inventory, payments, customers, statistics), each with its own vertical slice and database](../../assets/images/posts/dotnet-ddd-vertical-slice.png)
 
 ## Case Study
 
