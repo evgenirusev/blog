@@ -22,7 +22,6 @@ I'll add categories as the list grows.
 - **Tao Te Ching** — Lao Tzu
 - **Existentialism Is a Humanism** — Jean-Paul Sartre
 - **The Stranger** — Albert Camus
-- **Meditations** — Marcus Aurelius
 - **Beyond Good and Evil** — Friedrich Nietzsche
 - **Thus Spoke Zarathustra** — Friedrich Nietzsche
 - **Zen Mind, Beginner's Mind** — Shunryu Suzuki
@@ -31,3 +30,4 @@ I'll add categories as the list grows.
 - **Man's Search for Meaning** — Viktor E. Frankl
 - **In Praise of Shadows** — Jun'ichiro Tanizaki
 - **The Power of Now** — Eckhart Tolle
+- **Meditations** — Marcus Aurelius
