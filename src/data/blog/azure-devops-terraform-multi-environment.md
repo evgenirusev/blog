@@ -12,10 +12,13 @@ tags:
   - ci-cd
   - azure-devops
   - infrastructure-as-code
+ogImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*nOL4B1JzCF3gHksNu7XcmQ.png"
 description: "Step-by-step guide to setting up a multi-environment DevOps solution with CI/CD pipelines and Azure resource provisioning using Terraform and Azure DevOps."
 ---
 
 > Originally published on [Medium](https://medium.com/@evgeni.n.rusev/devops-for-azure-multi-environment-provisioning-with-terraform-ci-cd-pipelines-4589a411d986), July 2024.
+
+## Table of contents
 
 ## Introduction
 

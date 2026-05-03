@@ -12,12 +12,15 @@ tags:
   - lancedb
   - hybrid-search
   - llm
+ogImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SV_9LNU3uVWfgjq85iMpjA.png"
 description: "How a multi-agent orchestrator combined with LanceDB's hybrid search cut document review time by 80% — practical patterns from a Legal Tech production build, with full source code."
 ---
 
 > Originally published on [Medium](https://medium.com/@evgeni.n.rusev/multi-agent-ai-with-hybrid-search-cutting-document-review-time-by-80-f7367a9b1361), June 2025.
 
 **Source code:** [available on GitHub](https://github.com/evgenirusev/multi-agent-hybrid-search-with-lancedb)
+
+## Table of contents
 
 ## The Problem
 

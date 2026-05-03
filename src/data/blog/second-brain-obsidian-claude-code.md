@@ -12,12 +12,17 @@ tags:
   - second-brain
   - llm
   - productivity
+ogImage: "../../assets/images/posts/second-brain-obsidian-claude-code.webp"
 description: "A practical guide to building an AI-native personal knowledge base in Obsidian, with Claude Code as the structuring engine. From manual Notion to automated cross-domain wiki in an afternoon."
 ---
 
 > Originally published on [Medium](https://medium.com/@evgeni.n.rusev/how-i-built-my-second-brain-with-obsidian-claude-code-9fb54b7665ca), April 2026.
 
+![Obsidian + Claude Code — building an AI-native second brain](../../assets/images/posts/second-brain-obsidian-claude-code.webp)
+
 *A practical guide to building an AI-native personal knowledge base that reads, structures, and connects ideas for you.*
+
+## Table of contents
 
 ## The Problem
 
