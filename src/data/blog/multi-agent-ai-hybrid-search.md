@@ -3,7 +3,7 @@ author: Evgeni Rusev
 pubDatetime: 2025-06-17T12:00:00Z
 title: "Multi-Agent AI with Hybrid Search: Cutting Document Review Time by 80%"
 slug: multi-agent-ai-hybrid-search
-featured: true
+featured: false
 draft: false
 tags:
   - multi-agent
