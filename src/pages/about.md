@@ -9,8 +9,7 @@ I help organizations move AI from pilot to production — the 80% beyond the mod
 
 ## What I write about
 
-- AI engineering — agents, evaluations, agentic patterns, production readiness, RAG
-- Applied AI — interesting use cases, productivity workflows, AI-augmented thinking (e.g., building a second brain in Obsidian)
+- AI engineering and tooling — agents, evaluations, agentic patterns, production readiness, RAG, AI-augmented workflows
 - What breaks when AI hits real enterprise systems
 - The path from POC to production-grade AI
 - Practical lessons from running AI transformations across multiple industries
