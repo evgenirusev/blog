@@ -9,7 +9,7 @@ I'll add categories as the list grows.
 
 ## Decision-making, problem-solving, and operational efficiency
 
-Books that sharpen how I reason, structure problems, and think about systems.
+What I read when I want to think more clearly.
 
 - **The Great Mental Models** (Vols 1–4) — Shane Parrish
 - **Poor Charlie's Almanack: The Essential Wit and Wisdom of Charles T. Munger** — Charles T. Munger (ed. Peter Kaufman)
