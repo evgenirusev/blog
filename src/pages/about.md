@@ -9,7 +9,7 @@ I help organizations move AI from pilot to production — the 80% beyond the mod
 
 ## What I write about
 
-- AI engineering — agents, RAG, evaluation, production patterns
+- AI engineering — agents, evaluations, agentic patterns, production readiness, RAG
 - What breaks when AI hits real enterprise systems
 - The path from POC to production-grade AI
 - Practical lessons from running AI transformations across multiple industries
