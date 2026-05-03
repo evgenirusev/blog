@@ -9,8 +9,6 @@ I'll add categories as the list grows.
 
 ## Decision-making, problem-solving, and operational efficiency
 
-Structured thinking, precision, and your own blindspots.
-
 - **The Great Mental Models** (Vols 1–4) — Shane Parrish
 - **Poor Charlie's Almanack: The Essential Wit and Wisdom of Charles T. Munger** — Charles T. Munger (ed. Peter Kaufman)
 - **Bulletproof Problem Solving: The One Skill That Changes Everything** — Charles Conn & Robert McLean
@@ -19,8 +17,6 @@ Structured thinking, precision, and your own blindspots.
 - **Deep Simplicity: Bringing Order to Chaos and Complexity** — John Gribbin
 
 ## Books that have deeply influenced my life
-
-Esoteric wisdom, philosophy, and the big questions.
 
 - **The Myth of Sisyphus** — Albert Camus
 - **Tao Te Ching** — Lao Tzu
