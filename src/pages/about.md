@@ -3,7 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-I'm Evgeni Rusev — AI Practice Lead at [Tecknoworks](https://tecknoworks.com), a boutique Microsoft Gold Partner. I lead AI engagements with companies across manufacturing, mining, and finance — from mid-market firms to global enterprises.
+I'm Evgeni Rusev — AI Practice Lead at [Tecknoworks](https://tecknoworks.com), a boutique Microsoft Gold Partner. I lead AI engagements with companies across manufacturing, mining, and finance.
 
 I help organizations move AI from pilot to production — the 80% beyond the model: integration, data quality, governance, observability, and the engineering discipline that makes AI work outside a notebook.
 
