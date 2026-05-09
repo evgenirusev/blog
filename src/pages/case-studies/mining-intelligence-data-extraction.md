@@ -3,7 +3,7 @@ layout: ../../layouts/AboutLayout.astro
 title: "Mining Intelligence Company Replaces Manual Data Extraction with AI"
 ---
 
-> Originally published on the [Tecknoworks website](https://tecknoworks.com/cases/mining-intelligence-ai-data-extraction/), May 2026. I led this engagement at Tecknoworks.
+> Originally published on the [Tecknoworks website](https://tecknoworks.com/cases/mining-intelligence-ai-data-extraction/), May 2026.
 
 ![Mining operations dashboard powered by AI data extraction — production volumes, equipment health, fuel efficiency, and source-traced structured data extracted from operational PDFs](../../assets/images/posts/mining-intelligence-data-extraction.jpeg)
 
@@ -29,6 +29,8 @@ title: "Mining Intelligence Company Replaces Manual Data Extraction with AI"
 **Client:** Top-three global management consultancy providing operational intelligence to mining companies.
 
 **Industry:** Mining intelligence.
+
+**My Role:** Led the engagement at Tecknoworks.
 
 ---
 

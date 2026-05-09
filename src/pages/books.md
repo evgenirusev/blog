@@ -19,14 +19,14 @@ I'll add categories as the list grows.
 ## Books that have influenced my life
 
 - **The Myth of Sisyphus** — Albert Camus
-- **Tao Te Ching** — Lao Tzu
-- **Existentialism Is a Humanism** — Jean-Paul Sartre
-- **The Stranger** — Albert Camus
-- **Beyond Good and Evil** — Friedrich Nietzsche
 - **Zen Mind, Beginner's Mind** — Shunryu Suzuki
-- **The Analects** — Confucius
-- **The Selfish Gene** — Richard Dawkins
+- **Existentialism Is a Humanism** — Jean-Paul Sartre
+- **Tao Te Ching** — Lao Tzu
+- **The Stranger** — Albert Camus
 - **Man's Search for Meaning** — Viktor E. Frankl
-- **In Praise of Shadows** — Jun'ichiro Tanizaki
+- **The Analects** — Confucius
 - **The Power of Now** — Eckhart Tolle
 - **Meditations** — Marcus Aurelius
+- **Beyond Good and Evil** — Friedrich Nietzsche
+- **The Selfish Gene** — Richard Dawkins
+- **Buddha's Brain** — Rick Hanson
