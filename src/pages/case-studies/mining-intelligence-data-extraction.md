@@ -27,6 +27,7 @@ title: "Mining Intelligence Company Replaces Manual Data Extraction with AI"
 </div>
 
 **Client:** Top-three global management consultancy providing operational intelligence to mining companies.
+
 **Industry:** Mining intelligence.
 
 ---
