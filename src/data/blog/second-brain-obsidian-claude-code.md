@@ -73,6 +73,8 @@ Each source file contains YAML frontmatter (tags, author, related links) followe
 
 This is what it looks like in Obsidian's graph view after ingesting notes from just four books:
 
+![Obsidian graph view of an LLM-maintained second brain — book nodes at the center, radiating out to 86 mental model pages across eight domains, with dense cross-domain connections](../../assets/images/posts/second-brain-graph.webp)
+
 Obsidian graph view shows interconnected concepts. Every node is a standalone markdown file. Every line is a `[[wikilink]]` connecting two ideas. The book nodes sit near the center, radiating outward to 86 mental model pages Claude created across eight domains — physics, chemistry, biology, economics, mathematics, systems thinking, and general thinking. You can see how concepts from different chapters — and even different sources — cluster together naturally.
 
 The graph isn't just pretty — it's functional. Click any node and you land on a structured wiki page with a definition, key principles, examples, and 2–3 carefully chosen connections to related concepts. The cross-disciplinary connections — chemistry to physics to biology — emerge because Claude works with all the content at once and the schema enforces selective linking.
