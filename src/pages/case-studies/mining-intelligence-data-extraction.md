@@ -7,9 +7,27 @@ title: "Mining Intelligence Company Replaces Manual Data Extraction with AI"
 
 ![AI-automated data extraction for mining intelligence](https://tecknoworks.com/wp-content/uploads/2026/04/ai-automated-data-extraction.png)
 
+<div class="not-prose my-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+  <div class="rounded-lg border border-border p-5 text-center">
+    <div class="text-3xl font-bold text-accent">80%+</div>
+    <div class="mt-2 text-sm opacity-80">Reduction in manual data gathering</div>
+  </div>
+  <div class="rounded-lg border border-border p-5 text-center">
+    <div class="text-3xl font-bold text-accent">100%</div>
+    <div class="mt-2 text-sm opacity-80">Source traceability</div>
+  </div>
+  <div class="rounded-lg border border-border p-5 text-center">
+    <div class="text-3xl font-bold text-accent">500+</div>
+    <div class="mt-2 text-sm opacity-80">Unit conversion rules</div>
+  </div>
+  <div class="rounded-lg border border-border p-5 text-center">
+    <div class="text-3xl font-bold text-accent">2 weeks</div>
+    <div class="mt-2 text-sm opacity-80">Kickoff to production</div>
+  </div>
+</div>
+
 **Client:** Top-three global management consultancy providing operational intelligence to mining companies.
 **Industry:** Mining intelligence.
-**Outcome:** Manual data gathering time down 80%. Two weeks from kickoff to production. The PDF software subscription got cancelled.
 
 ---
 
