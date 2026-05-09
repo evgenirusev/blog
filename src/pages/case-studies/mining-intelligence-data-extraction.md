@@ -48,9 +48,11 @@ They were paying for an expensive PDF subscription just to search. And still fal
 
 ## The solution: a production layer around the AI
 
-We didn't rebuild the AI; we improved it and built everything around it.
+As part of the project, an AI capability was introduced to read mining documents and extract key data points. The model was progressively built and refined throughout the integration, evolving alongside the system itself.
 
-The agentic AI component connects to the full document library. When an analyst opens a mine record, the relevant fields are already populated — each tagged with source document, page, and section. A confidence indicator tells analysts which values to trust and which to double-check. One click to accept. Edit if something's off. Full audit trail either way.
+But a model on its own doesn't help an analyst at 8am who needs to update 30 mine records before lunch.
+
+We embedded that intelligence directly into the tools their analysts use every day — with pre-filled fields, confidence scores, source citations, and an approval workflow that lets people review and accept instead of search and type. And they needed it fast.
 
 The trust layers that made the system production-grade:
 
