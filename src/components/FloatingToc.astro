@@ -194,9 +194,19 @@
 <script is:inline>
   // State preserved across page-load events so we can clean up on rebuild
   // (View Transitions re-fire `astro:page-load` without a full reload).
-  let floatingTocObserver = null;
+  let floatingTocScrollHandler = null;
   let floatingTocClickHandler = null;
+  let floatingTocRafId = 0;
   let floatingTocActiveId = null;
+  // Briefly suppress the scroll-driven update right after a TOC click so the
+  // active indicator doesn't flicker through every section the smooth-scroll
+  // passes through on the way to the target.
+  let floatingTocSuppressUntil = 0;
+
+  // Distance (in px) below the viewport top at which a heading is considered
+  // "the current section." Past this line == active. Anything still below it
+  // is upcoming. Tuned to feel natural for the article's typography.
+  const FLOATING_TOC_TRIGGER_Y = 120;
 
   function buildFloatingToc() {
     const article = document.getElementById("article");
@@ -204,17 +214,21 @@
     const tocList = document.getElementById("floating-toc-list");
 
     // Tear down anything from the previous page first, regardless of whether
-    // the new page has a TOC. Prevents listener / observer leaks across
-    // navigations.
-    if (floatingTocObserver) {
-      floatingTocObserver.disconnect();
-      floatingTocObserver = null;
+    // the new page has a TOC. Prevents listener / RAF leaks across navigations.
+    if (floatingTocScrollHandler) {
+      window.removeEventListener("scroll", floatingTocScrollHandler);
+      floatingTocScrollHandler = null;
     }
     if (floatingTocClickHandler && tocList) {
       tocList.removeEventListener("click", floatingTocClickHandler);
       floatingTocClickHandler = null;
     }
+    if (floatingTocRafId) {
+      cancelAnimationFrame(floatingTocRafId);
+      floatingTocRafId = 0;
+    }
     floatingTocActiveId = null;
+    floatingTocSuppressUntil = 0;
 
     if (!article || !tocContainer || !tocList) return;
 
@@ -267,6 +281,49 @@
       }
     });
 
+    const setActive = id => {
+      if (id === floatingTocActiveId) return;
+      floatingTocActiveId = id;
+      tocList.querySelectorAll("a").forEach(l => {
+        const isActive = l.dataset.tocLink === id;
+        l.classList.toggle("active", isActive);
+        if (isActive) {
+          l.setAttribute("aria-current", "location");
+        } else {
+          l.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    // Pick the active heading purely from current scroll position: the last
+    // heading whose top edge has crossed FLOATING_TOC_TRIGGER_Y. If nothing
+    // has crossed yet (we're above the first section), default to the first
+    // heading so the panel always reflects "where am I" rather than going
+    // blank or sticking on stale state.
+    const computeActiveId = () => {
+      let activeId = headings[0].id;
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top <= FLOATING_TOC_TRIGGER_Y) {
+          activeId = h.id;
+        } else {
+          break;
+        }
+      }
+      return activeId;
+    };
+
+    floatingTocScrollHandler = () => {
+      if (performance.now() < floatingTocSuppressUntil) return;
+      if (floatingTocRafId) return;
+      floatingTocRafId = requestAnimationFrame(() => {
+        floatingTocRafId = 0;
+        setActive(computeActiveId());
+      });
+    };
+    window.addEventListener("scroll", floatingTocScrollHandler, {
+      passive: true,
+    });
+
     // Smooth-scroll on click (preserves the URL hash). Stored in a module
     // ref so we can remove it cleanly on the next page-load.
     floatingTocClickHandler = e => {
@@ -287,54 +344,20 @@
       target.setAttribute("tabindex", "-1");
       target.focus({ preventScroll: true });
       history.replaceState(null, "", "#" + id);
+      // Apply the active state immediately and lock out the scroll handler
+      // until the smooth-scroll has time to settle (~700ms is plenty for
+      // most page heights).
+      setActive(id);
+      floatingTocSuppressUntil = performance.now() + 700;
     };
     tocList.addEventListener("click", floatingTocClickHandler);
 
-    // Scroll-spy: pick the topmost intersecting heading whose top edge sits
-    // in the upper ~30% of the viewport. When an H3 is nested under an H2,
-    // the H3 wins as you scroll into it because it appears later in
-    // document order.
-    const setActive = id => {
-      if (id === floatingTocActiveId) return;
-      floatingTocActiveId = id;
-      tocList.querySelectorAll("a").forEach(l => {
-        const isActive = l.dataset.tocLink === id;
-        l.classList.toggle("active", isActive);
-        if (isActive) {
-          l.setAttribute("aria-current", "location");
-        } else {
-          l.removeAttribute("aria-current");
-        }
-      });
-    };
-
-    const headingIds = new Set(headings.map(h => h.id));
-
-    floatingTocObserver = new IntersectionObserver(
-      entries => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .map(e => ({ id: e.target.id, top: e.boundingClientRect.top }))
-          .sort((a, b) => a.top - b.top);
-
-        if (visible.length > 0) {
-          setActive(visible[0].id);
-        }
-      },
-      { rootMargin: "-100px 0px -70% 0px", threshold: 0 }
-    );
-
-    headings.forEach(h => floatingTocObserver.observe(h));
-
-    // Initial active state: prefer the URL hash (deep-link), then the first
-    // heading. The IO will correct this once the user scrolls. Without this,
-    // landing on /post#some-h3 would briefly highlight the wrong item.
-    const hashId = location.hash.slice(1);
-    if (hashId && headingIds.has(hashId)) {
-      setActive(hashId);
-    } else if (headings.length > 0) {
-      setActive(headings[0].id);
-    }
+    // Initial active state: derive it from actual scroll position rather
+    // than just the URL hash. Handles deep-links (browser scrolled to
+    // anchor), refreshes that landed at the top, and browser-restored
+    // scroll positions identically — the highlight always matches what
+    // the reader sees.
+    setActive(computeActiveId());
   }
 
   // `astro:page-load` fires on the initial page load AND on every View
