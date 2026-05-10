@@ -30,7 +30,7 @@ A selection of production AI engagements I've led.
   <img
     src="/images/case-studies/sql-to-fabric-ai-migration.png"
     alt="Modernizing legacy analytics with AI and Microsoft Fabric — migration overview and performance dashboard"
-    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch sm:object-contain flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
