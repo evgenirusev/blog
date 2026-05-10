@@ -1,0 +1,344 @@
+---
+// Floating side TOC for long posts.
+//
+// Pattern: a fixed-position right rail with a thin vertical track on the left
+// of the items and an accent-colored bar marking the current section. Mirrors
+// the structure of the inline TOC: H2 chapters with H3 subsections nested
+// beneath, indented.
+//
+// - Visible at viewport widths >= 1280px. Below that, the inline
+//   `## Table of contents` in the article body handles navigation.
+// - Auto-builds from H2 + H3 headings on the client.
+// - Auto-hides if the article has fewer than 4 H2s — and removes the
+//   layout-shift class so the page doesn't leave an empty TOC slot.
+// - Active section tracked via IntersectionObserver, picking the topmost
+//   intersecting heading.
+//
+// Opt-in per post via `floatingToc: true` in frontmatter.
+---
+
+<aside id="floating-toc" aria-label="On this page">
+  <p class="floating-toc-title">On this page</p>
+  <ul id="floating-toc-list"></ul>
+</aside>
+
+<style is:global>
+  /* Hidden by default; only shown at laptop+ viewports. */
+  #floating-toc {
+    display: none;
+  }
+
+  /* When the floating TOC is rendered, treat the article + TOC as a
+     single block and center *that* block in the viewport. At 1280px
+     (where there's barely any margin to share) the floor of 3rem keeps
+     things from crowding; at wide viewports the margin distributes
+     symmetrically on both sides. The `with-floating-toc` class is
+     added to <main> in PostDetails.astro when `floatingToc: true`.
+
+     The shift is applied to *all* .app-layout elements on the page
+     (header, back button, main, footer) so they share one common left
+     edge — otherwise the navigation, "Go back" link, and article would
+     visually misalign.
+
+     Block width = 56rem (article) + 1rem (gap) + 17rem (TOC) = 74rem.
+     At 1280px this lands symmetrically at 3rem margins on both sides. */
+  @media (min-width: 1280px) {
+    body:has(main.with-floating-toc) .app-layout {
+      margin-left: max(3rem, calc((100vw - 74rem) / 2)) !important;
+      margin-right: auto !important;
+    }
+
+    #floating-toc {
+      display: block;
+      position: fixed;
+      top: 7rem;
+      /* Article left edge + article width + 1rem gap, equivalent to:
+         max(60rem, (100vw + 40rem) / 2). Stays in lockstep with the
+         centered article. */
+      left: max(60rem, calc((100vw + 40rem) / 2));
+      width: 17rem;
+      max-height: calc(100vh - 9rem);
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border) transparent;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    #floating-toc {
+      top: 8rem;
+      max-height: calc(100vh - 11rem);
+    }
+  }
+
+  /* Hide the inline `## Table of contents` block on viewports where the
+     floating TOC is showing — they'd otherwise duplicate each other.
+     We hide the H2, any empty siblings between it and the `<details>`
+     block (remark-collapse currently emits an empty `<p>` wrapper there),
+     and the first `<details>` that follows. The `:has(#table-of-contents)`
+     guard ensures we only collapse the details when the inline TOC marker
+     is actually present — posts without an inline TOC keep their first
+     `<details>` block intact. */
+  @media (min-width: 1280px) {
+    body:has(main.with-floating-toc)
+      #article:has(> #table-of-contents)
+      > #table-of-contents,
+    body:has(main.with-floating-toc)
+      #article:has(> #table-of-contents)
+      > #table-of-contents ~ p:empty,
+    body:has(main.with-floating-toc)
+      #article:has(> #table-of-contents)
+      > details:first-of-type {
+      display: none;
+    }
+  }
+
+  #floating-toc .floating-toc-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.55;
+    margin: 0 0 1.1rem 1rem;
+    line-height: 1;
+  }
+
+  /* Base list styling — applies to both top-level and nested. */
+  #floating-toc-list,
+  #floating-toc-list ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Only the top-level list draws the vertical track. */
+  #floating-toc-list {
+    border-left: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  #floating-toc-list li {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  #floating-toc-list li::before,
+  #floating-toc-list li::marker {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Chapter break — small extra space above each H2 that follows another
+     H2, separating chapters from their preceding H3 group. */
+  #floating-toc-list > .toc-h2 + .toc-h2 {
+    margin-top: 0.2rem !important;
+  }
+
+  /* H2 link */
+  #floating-toc-list a {
+    display: block;
+    position: relative;
+    padding: 0.3rem 0.5rem 0.3rem 1rem;
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.35;
+    opacity: 0.65;
+    transition:
+      opacity 0.15s ease,
+      color 0.15s ease;
+  }
+
+  /* H3 link — indented, slightly smaller, dimmer by default, normal weight */
+  #floating-toc-list .toc-h3 a {
+    padding: 0.22rem 0.5rem 0.22rem 1.85rem;
+    font-size: 0.74rem;
+    font-weight: 400;
+    opacity: 0.55;
+  }
+
+  /* Hover: subtle accent-tint shift, not full active state */
+  #floating-toc-list a:hover {
+    opacity: 1;
+    color: color-mix(
+      in srgb,
+      var(--color-accent) 55%,
+      var(--color-foreground)
+    ) !important;
+  }
+
+  #floating-toc-list a.active {
+    opacity: 1;
+    color: var(--color-accent) !important;
+    font-weight: 600;
+  }
+
+  /* The "pointer" — accent vertical bar overlaying the track at the
+     active item's position. Works for both H2 and H3 because every link's
+     left edge sits flush against the track. */
+  #floating-toc-list a.active::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 2px;
+    background: var(--color-accent);
+    border-radius: 1px;
+  }
+</style>
+
+<script is:inline>
+  // State preserved across page-load events so we can clean up on rebuild
+  // (View Transitions re-fire `astro:page-load` without a full reload).
+  let floatingTocObserver = null;
+  let floatingTocClickHandler = null;
+  let floatingTocActiveId = null;
+
+  function buildFloatingToc() {
+    const article = document.getElementById("article");
+    const tocContainer = document.getElementById("floating-toc");
+    const tocList = document.getElementById("floating-toc-list");
+
+    // Tear down anything from the previous page first, regardless of whether
+    // the new page has a TOC. Prevents listener / observer leaks across
+    // navigations.
+    if (floatingTocObserver) {
+      floatingTocObserver.disconnect();
+      floatingTocObserver = null;
+    }
+    if (floatingTocClickHandler && tocList) {
+      tocList.removeEventListener("click", floatingTocClickHandler);
+      floatingTocClickHandler = null;
+    }
+    floatingTocActiveId = null;
+
+    if (!article || !tocContainer || !tocList) return;
+
+    // Collect H2 and H3 headings in document order, skipping the inline
+    // "Table of contents" marker.
+    const headings = Array.from(
+      article.querySelectorAll("h2[id], h3[id]")
+    ).filter(h => h.id !== "table-of-contents");
+
+    const h2Count = headings.filter(h => h.tagName === "H2").length;
+
+    // If we don't have enough chapters to bother with a TOC, hide the
+    // panel AND remove the layout-shift class so the page doesn't leave
+    // an empty 14rem hole where the TOC would have sat.
+    if (h2Count < 4) {
+      tocContainer.style.display = "none";
+      document
+        .querySelector("main.with-floating-toc")
+        ?.classList.remove("with-floating-toc");
+      return;
+    }
+
+    // Make sure the panel is visible (it could have been hidden on a
+    // previous page that didn't have enough H2s).
+    tocContainer.style.display = "";
+
+    tocList.innerHTML = "";
+
+    let currentH2Sublist = null;
+
+    headings.forEach(heading => {
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = "#" + heading.id;
+      // textContent picks up the appended "#" link from addHeadingLinks() —
+      // strip it.
+      link.textContent = heading.textContent.replace(/#\s*$/, "").trim();
+      link.dataset.tocLink = heading.id;
+      li.appendChild(link);
+
+      if (heading.tagName === "H2") {
+        li.className = "toc-h2";
+        // Pre-create the sublist for any H3s that follow.
+        currentH2Sublist = document.createElement("ul");
+        li.appendChild(currentH2Sublist);
+        tocList.appendChild(li);
+      } else if (heading.tagName === "H3" && currentH2Sublist) {
+        li.className = "toc-h3";
+        currentH2Sublist.appendChild(li);
+      }
+    });
+
+    // Smooth-scroll on click (preserves the URL hash). Stored in a module
+    // ref so we can remove it cleanly on the next page-load.
+    floatingTocClickHandler = e => {
+      // Let modifier-clicks fall through to native behavior (open in new
+      // tab/window, etc.) instead of hijacking with smooth-scroll.
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
+        return;
+      }
+      const link = e.target.closest("a");
+      if (!link) return;
+      const id = link.dataset.tocLink;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Move focus to the heading so keyboard users continue tabbing from
+      // there, not from the TOC. preventScroll keeps the smooth scroll above.
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+      history.replaceState(null, "", "#" + id);
+    };
+    tocList.addEventListener("click", floatingTocClickHandler);
+
+    // Scroll-spy: pick the topmost intersecting heading whose top edge sits
+    // in the upper ~30% of the viewport. When an H3 is nested under an H2,
+    // the H3 wins as you scroll into it because it appears later in
+    // document order.
+    const setActive = id => {
+      if (id === floatingTocActiveId) return;
+      floatingTocActiveId = id;
+      tocList.querySelectorAll("a").forEach(l => {
+        const isActive = l.dataset.tocLink === id;
+        l.classList.toggle("active", isActive);
+        if (isActive) {
+          l.setAttribute("aria-current", "location");
+        } else {
+          l.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const headingIds = new Set(headings.map(h => h.id));
+
+    floatingTocObserver = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .map(e => ({ id: e.target.id, top: e.boundingClientRect.top }))
+          .sort((a, b) => a.top - b.top);
+
+        if (visible.length > 0) {
+          setActive(visible[0].id);
+        }
+      },
+      { rootMargin: "-100px 0px -70% 0px", threshold: 0 }
+    );
+
+    headings.forEach(h => floatingTocObserver.observe(h));
+
+    // Initial active state: prefer the URL hash (deep-link), then the first
+    // heading. The IO will correct this once the user scrolls. Without this,
+    // landing on /post#some-h3 would briefly highlight the wrong item.
+    const hashId = location.hash.slice(1);
+    if (hashId && headingIds.has(hashId)) {
+      setActive(hashId);
+    } else if (headings.length > 0) {
+      setActive(headings[0].id);
+    }
+  }
+
+  // `astro:page-load` fires on the initial page load AND on every View
+  // Transition navigation swap. Without this, the TOC stays empty when
+  // arriving at a post via client-side navigation (e.g. from the Posts list).
+  document.addEventListener("astro:page-load", buildFloatingToc);
+</script>

@@ -7,7 +7,7 @@ export const SITE = {
   ogImage: "astropaper-og.jpg", // TODO: replace with custom OG image
   lightAndDarkMode: true,
   postPerIndex: 4,
-  postPerPage: 4,
+  postPerPage: 10,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: false,
   showBackButton: true,

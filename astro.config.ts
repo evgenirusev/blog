@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import rehypeExternalLinks from "rehype-external-links";
 
 // Tiny inline plugin: after remark-collapse wraps the TOC in <details>,
 // open it by default so the reader doesn't have to click.
@@ -37,6 +38,15 @@ export default defineConfig({
       remarkToc,
       [remarkCollapse, { test: "Table of contents" }],
       remarkDetailsOpen,
+    ],
+    // Auto-add target="_blank" + rel="noopener noreferrer" to every external
+    // link (anything starting with http/https), so off-site links open in a
+    // new tab instead of unloading the current page.
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        { target: "_blank", rel: ["noopener", "noreferrer"] },
+      ],
     ],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes

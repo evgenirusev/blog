@@ -82,6 +82,24 @@
       @apply inline-block cursor-pointer text-foreground select-none [&_p]:hidden [&_ul]:my-0!;
     }
 
+    /* Inline Table of Contents links — drop the busy default dashed
+       underline; restore on hover so the affordance is still there. */
+    details ul a {
+      @apply no-underline hover:underline hover:decoration-dashed hover:underline-offset-4;
+    }
+
+    /* Tighter vertical rhythm for inline TOC list items. Top-level (H2)
+       items get a small breath; nested (H3) items sit closer together to
+       feel like a connected sub-group under their parent chapter. */
+    details ul > li {
+      @apply my-0.5!;
+    }
+
+    details ul ul > li {
+      @apply my-0!;
+    }
+
+
     summary {
       @apply focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent focus-visible:outline-dashed;
     }
