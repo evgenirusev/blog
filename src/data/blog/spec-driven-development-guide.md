@@ -260,7 +260,7 @@ Most of our enterprise projects run **Specs + Jira**. Each tool does what it's b
 
 For smaller teams that want to drop Jira entirely, the alternative is to apply the same SDD pattern to tasks themselves — a `/tasks` folder of Markdown files, version-controlled alongside `/specs`. That's covered further down in [Specs Beyond Coding](#specs-beyond-coding).
 
-## Putting It Into Practice With Claude Skills
+## Putting It Into Practice
 
 Honestly, the SDD process is simple enough that you don't need any tooling beyond a `/specs` folder, the template, and the rule *"always update the spec before writing code."* If you're a small team or a solo developer, plain Claude Code (or Cursor, or Copilot) is enough — point it at the folder and ship. No orchestrator required. A single lightweight Claude skill that knows the conventions is the most you'd need.
 
