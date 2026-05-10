@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/AboutLayout.astro
 title: "About"
+showAvatar: true
 ---
 
 I'm Evgeni Rusev — AI Practice Lead at [Tecknoworks](https://tecknoworks.com), a boutique Microsoft Gold Partner. I lead AI engagements with companies across legal tech, manufacturing, mining, and finance.
@@ -10,6 +11,7 @@ I help organizations move AI from pilot to production — the 80% beyond the mod
 ## What I write about
 
 - AI engineering and tooling — agents, evaluations, agentic patterns, production readiness, RAG, AI-augmented workflows
+- Development processes for AI-accelerated teams — Spec-Driven Development, requirements engineering, and how shipping changes when AI is part of the build loop
 - What breaks when AI hits real enterprise systems
 - The path from POC to production-grade AI
 - Practical lessons from running AI transformations across multiple industries

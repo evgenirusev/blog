@@ -4,9 +4,14 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Layout from "./Layout.astro";
+import ProfileAvatar from "@/components/ProfileAvatar.astro";
 import { SITE } from "@/config";
 
-type Props = MarkdownLayoutProps<{ title: string }>;
+// `showAvatar` opts a page into the floated profile picture. The shared
+// AboutLayout is also used by Books and Case Studies, where we don't want
+// the avatar — so we gate it on a frontmatter flag rather than always
+// rendering it.
+type Props = MarkdownLayoutProps<{ title: string; showAvatar?: boolean }>;
 
 const { frontmatter } = Astro.props;
 ---
@@ -17,6 +22,13 @@ const { frontmatter } = Astro.props;
   <main id="main-content" class="app-layout">
     <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
       <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
+      {
+        frontmatter.showAvatar && (
+          <div class="float-right ml-6 mb-2">
+            <ProfileAvatar />
+          </div>
+        )
+      }
       <slot />
     </section>
   </main>

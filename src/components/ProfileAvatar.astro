@@ -1,0 +1,24 @@
+---
+// Circular avatar used on About and the homepage hero.
+// The source asset is a head-and-shoulders square crop, so plain
+// `object-cover` on a fixed-size wrapper lands the head correctly inside
+// the circle. Wrapper enforces dimensions explicitly because Astro's
+// global `responsiveStyles: true` (in astro.config.ts) injects sizing
+// that otherwise interferes with our Tailwind h/w classes when the
+// component is placed inside a flex container.
+import { Image } from "astro:assets";
+import profileImage from "@/assets/images/profile.png";
+---
+
+<div
+  class="h-32 w-32 shrink-0 overflow-hidden rounded-full border border-border sm:h-40 sm:w-40"
+>
+  <Image
+    src={profileImage}
+    alt="Evgeni Rusev"
+    width={200}
+    height={200}
+    loading="eager"
+    class="m-0! block h-full! w-full! object-cover"
+  />
+</div>

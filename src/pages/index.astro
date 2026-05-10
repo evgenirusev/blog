@@ -6,6 +6,7 @@ import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
+import ProfileAvatar from "@/components/ProfileAvatar.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
@@ -41,18 +42,25 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p>
-        AI Practice Lead at <a href="https://tecknoworks.com" class="underline decoration-dashed underline-offset-4 hover:text-accent">Tecknoworks</a>. I help companies move AI from pilot to production — the 80% beyond the model: integration, data quality, governance, observability, and the engineering discipline that makes AI work outside a notebook.
-      </p>
-      <p class="mt-2">
-        This is where I write about AI engineering, agent systems, and what actually works in the field.
-        <LinkButton
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="/about/"
-        >
-          More about me
-        </LinkButton>.
-      </p>
+      <div
+        class="flex flex-col-reverse items-center gap-6 sm:flex-row"
+      >
+        <div class="w-full sm:w-auto sm:flex-1">
+          <p>
+            AI Practice Lead at <a href="https://tecknoworks.com" class="underline decoration-dashed underline-offset-4 hover:text-accent">Tecknoworks</a>. I help companies move AI from pilot to production — the 80% beyond the model: integration, data quality, governance, observability, and the engineering discipline that makes AI work outside a notebook.
+          </p>
+          <p class="mt-2">
+            This is where I write about AI engineering, agent systems, and what actually works in the field.
+            <LinkButton
+              class="underline decoration-dashed underline-offset-4 hover:text-accent"
+              href="/about/"
+            >
+              More about me
+            </LinkButton>.
+          </p>
+        </div>
+        <ProfileAvatar />
+      </div>
       {
         // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
