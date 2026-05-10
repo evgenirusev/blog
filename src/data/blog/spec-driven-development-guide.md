@@ -1,7 +1,7 @@
 ---
 author: Evgeni Rusev
 pubDatetime: 2026-05-09T12:00:00Z
-title: "Spec-Driven Development: A Comprehensive Guide for AI-Accelerated Teams"
+title: "Spec-Driven Development: A Comprehensive Guide"
 slug: spec-driven-development-guide
 featured: true
 draft: false
@@ -14,18 +14,20 @@ tags:
   - requirements
   - llm
 ogImage: "../../assets/images/posts/spec-driven-development-guide.png"
-description: "A comprehensive guide to Spec-Driven Development: why centralized Markdown specs are the missing layer for AI-accelerated teams, and how to put it into practice with a Claude skill orchestrator that handles bootstrap, implementation, and Jira sync."
+description: "A comprehensive guide to Spec-Driven Development: why centralized Markdown specs are the missing layer for AI-accelerated teams, and how to put it into practice."
 ---
+
+*Why centralized Markdown specs are the missing layer for AI-accelerated teams — and how to put it into practice.*
 
 ![Spec-Driven Development — specs, plan, tasks, implement](../../assets/images/posts/spec-driven-development-guide.png)
 
-*Why centralized Markdown specs are the missing layer for AI-accelerated teams — and how to put it into practice with a Claude skill orchestrator.*
+*After running Spec-Driven Development across 8 production projects at [Tecknoworks](https://tecknoworks.com), this is the guide — what works, what doesn't, and the patterns we landed on.*
 
 ## Table of contents
 
 ## Why Spec-Driven Development
 
-Below is the case for SDD — what changed in software development over the past 18 months, where it hurts most, and why specs are the lightest fix that actually compounds.
+Below is the case for Spec-Driven Development — what changed in software development over the past 18 months, where the cost concentrates, and why specs are the lightest fix that actually compounds.
 
 ### Coding isn't the bottleneck anymore
 
@@ -33,7 +35,7 @@ Software development used to have a clear bottleneck: *writing the code*. Since 
 
 The bottleneck is no longer coding. It's **understanding what to build** — and giving the LLM the right context to build it.
 
-That bottleneck doesn't bite for prototypes — vibe-code freely, throw the prompts away, ship. But for **production software that evolves** — real users, features accumulating over months or years, multiple authors, new requirements every week — vibe-coding stops compounding. The "understanding what to build" problem eats the coding gains AI gave you. *That's* what SDD is built for. (We'll get concrete on the failure modes near the end.)
+That bottleneck doesn't matter for prototypes — vibe-code freely, throw the prompts away, ship. But for **production software that evolves** — real users, features accumulating over months or years, multiple authors, new requirements every week — vibe-coding stops compounding. The "understanding what to build" problem eats the coding gains AI gave you. *That's* what SDD is built for. (We'll get concrete on the failure modes near the end.)
 
 ### The new bottleneck: requirements + context
 
@@ -63,24 +65,16 @@ Requirements work doesn't expand — it stays roughly fixed. But because AI comp
 
 Most teams adopting AI coding stop here, with the bottleneck firmly parked in requirements. **Spec-Driven Development is what accelerates the requirements side too**, so the gains compound instead of capping out at "we code faster, but spend the rest of the sprint in meetings."
 
-### Specs eliminate alignment friction
+### Specs solve the alignment problems code can't
 
-The biggest day-to-day cost specs eliminate is **alignment friction.** PMs and developers consistently end up with different mental models of what's being built — and the gap only surfaces during implementation, when it's expensive to close.
+Code is a lossy projection of intent. Why a feature exists, what it's *trying* to achieve for the user, what was deliberately excluded, what constraints shaped the design — none of that lives in the code. When you ship from a prompt and throw the prompt away, you're version-controlling the output and shredding the source.
 
-Without a centralized record, every conversation re-derives the same context: clarifying questions over chat, partial answers, details lost in threads, "didn't we agree on…" debates. The team is in a constant state of soft re-alignment, and each cycle is lossy.
+The most expensive consequence shows up in **PM-developer alignment.** Without a shared, current record of what the system is supposed to do, every conversation re-derives the same context: clarifying questions, partial answers, "didn't we agree on…" debates. The team is in a constant state of soft re-alignment, and each cycle is lossy. The spec collapses this into a single artifact: both sides look at the same document, the diff *is* the conversation, and disagreements surface immediately — when reviewing a spec change — rather than two weeks later in a PR.
 
-The spec collapses this into a single artifact that becomes the common language. Both sides look at the same document. The diff *is* the conversation. Disagreements surface immediately — when reviewing a spec change — rather than two weeks later, in a PR.
+A few smaller failure modes specs also clean up:
 
-### Code doesn't tell you the full intent
-
-Beyond AI efficiency and team alignment, specs solve a deeper problem: **code doesn't tell you the full intent.** Why a feature exists, what it's trying to achieve for the user, what was deliberately excluded, what constraints shaped the design — none of that lives in the code. It lives in the spec.
-
-The spec is the source. The code is what you derive from it. When you ship from a prompt and throw the prompt away, you're version-controlling the output and shredding the source. SDD inverts this: the spec is the artifact you maintain, and the code is regenerated from it as the spec evolves.
-
-### Other recurring problems specs solve
-
-- **The Jira drift problem.** Projects accumulate dozens of stories over time, they conflict with each other, and they go stale. A developer working on a new story may unknowingly contradict decisions captured in an older ticket nobody remembers to update.
-- **The bug-vs-feature debate.** If the system doesn't behave as the spec describes, it's a bug. If the desired behavior isn't in the spec, it's a feature request. No more arguments about whether something "should have been obvious."
+- **Stale Jira tickets.** Projects accumulate dozens of tickets over time. They conflict, go stale, and contradict each other. A developer working on a new story can unknowingly violate decisions captured in an older ticket nobody remembers. The current spec, by definition, can't go stale this way.
+- **The bug-vs-feature debate.** If the system doesn't behave as the spec describes, it's a bug. If the desired behavior isn't in the spec, it's a feature request. No more arguments about what "should have been obvious."
 
 ## What a Spec Actually Is
 
@@ -399,42 +393,27 @@ For organizations that need Jira for reporting, time tracking, or compliance, th
 
 ## What we've seen in practice
 
-We've now deployed SDD across **four real client projects**, including an engagement with a top-three global management consultancy. The most surprising pattern: **PMs themselves take over the spec-writing**, not just developers.
+We've now deployed SDD across **eight real client projects**, including an engagement with a top-three global management consultancy. The most surprising pattern: **PMs themselves take over the spec-writing**, not just developers.
 
 On that consultancy project, the lead stakeholder installed Claude Code himself in week two. From that point on, after every meeting, *he* updated the specs from the transcript — no developer translation step, no Jira tickets, no requirements-clarification meetings. We dropped Jira entirely. The spec was the contract; the diff was the conversation.
 
 His words: *"It feels like a revolution in product management and software development."*
 
-His estimate: **roughly 3x faster delivery**, primarily because the daily 1-hour requirements meeting was no longer needed.
+His estimate: **roughly 3x faster delivery** — driven by collapsing the full requirements loop. What used to be daily clarification meetings, Jira tickets, developer translation, and back-and-forth review became a single spec edit feeding the AI directly into a PR.
 
-Across the four projects, the consistent pattern is **around 50% efficiency gains on requirements-to-merged-PR cycles** vs. the same teams' pre-SDD baseline — biggest wins on long-lived, evolving production software.
+Across the eight projects, the consistent pattern is **around 50% efficiency gains on requirements-to-merged-PR cycles** vs. the same teams' pre-SDD baseline — biggest wins on long-lived, evolving production software.
 
 One anecdote that crystallized the case for me: on a separate long-running platform, a single permissioning change once generated *three days* of back-and-forth — contradictory expectations spread across older tickets, no authoritative source for current behavior. The fix was a spec: capture the rules, surface the contradictions, get sign-off, delegate implementation. The same kind of change, today, takes hours.
 
-## Why a Lightweight Practice, Not a Framework
-
-There's a growing space of more structured, opinionated frameworks for AI-assisted development that automate the journey from prompt to requirements to design to code using built-in agent workflows. They tend to be a strong fit for teams starting from zero process who want an opinionated, all-in-one workflow out of the box.
-
-For teams that already have a working SDLC, we found ourselves wanting something lighter — closer to a practice than a product. A few properties drove that choice:
-
-- **Tool independence.** SDD is a practice, not a product. It works with Claude Code, Cursor, Copilot, Windsurf, or any AI coding assistant — today and tomorrow. Specs are plain Markdown files in a Git repository. No proprietary format, no special IDE, no subscription dependency. In a landscape where AI tooling changes monthly, keeping requirements management tool-agnostic dramatically reduces long-term risk.
-- **Human-authored requirements, AI-implemented code.** Developers and PMs write and own the specs. The AI implements from them. This keeps domain expertise and product judgment where they belong — with the humans who understand the business context. AI is better at catching implementation mistakes than humans are at reviewing AI-generated requirements for subtle omissions, so we lean into that asymmetry.
-- **Git-native by design.** Specs live in the repository. Every change is a Git commit — diffable, reviewable in a PR, attributable to an author, and linked to the implementation that follows. The spec and the code change ship in the same PR, telling the full story.
-- **Adoptability.** SDD requires one thing: a `/specs` folder with Markdown files and a consistent template. Any developer can learn it in minutes. Any team can adopt it incrementally — start with one feature's spec, prove the value, expand from there.
-
-Different teams will land in different places. If you're starting fresh and want a guided workflow, the more opinionated frameworks are worth looking at. If you have an existing SDLC and need *better requirements management* — not a new development environment — a lightweight practice like SDD delivers the same core benefit with less overhead and more flexibility.
-
 ## Why vibe-coding breaks at production scale
 
-Earlier I drew a line between vibe-coded prototypes — where SDD is overhead — and production software, where it's a force multiplier. Now that you've seen the full mechanics, it's worth being concrete about *why* that line specifically.
+Earlier I drew a line between vibe-coded prototypes — where SDD is overhead — and production software, where it's a force multiplier. Three failure modes hit at production scale that prototypes never see:
 
-Three things start hurting badly at production scale, and these are the failure modes specs are built to absorb:
+- **Regression risk compounds.** Without a single, current, exhaustive record of expected behavior, every change is a gamble — and "we'll catch it in QA" quietly becomes the only acceptance criterion still holding.
+- **Communication friction explodes.** What's new vs. what already exists vs. what was deprecated becomes a daily debate. Half the sprint is gone before anyone writes code.
+- **Onboarding becomes archaeology.** New joiners piece together what the system does today from Jira, tribal knowledge, old PRs, and reading code — slowly, and incompletely. The senior engineer becomes a permanent dependency.
 
-- **Regression risk compounds.** Every new feature has to coexist with everything that came before. Without a single, current, exhaustive record of expected behavior, every change is a gamble — and "we'll catch it in QA" quietly becomes the only acceptance criterion that's still holding.
-- **Communication friction explodes.** What's new vs. what already exists vs. what was deprecated becomes a daily debate. The mental model required to make a "small change" suddenly spans dozens of past decisions nobody remembers in full. Half the sprint is gone before anyone writes code.
-- **Onboarding becomes archaeology.** New developers and PMs join, and there's no single place that tells them what the system does today. They piece it together from Jira, tribal knowledge, old PRs, and reading the code — slowly, and incompletely. The senior engineer becomes a permanent dependency.
-
-For greenfield prototypes, none of this matters yet. Iterate, ship, throw prompts away. For evolving production code, this is the daily reality — and it's where AI-accelerated coding *stops compounding* unless you fix the requirements layer too. SDD shines in the long tail of evolving production software. Which, for most engineers, *is* the actual work.
+For greenfield, none of this matters. For evolving production code, it's the daily reality — and it's where AI-accelerated coding *stops compounding* unless you fix the requirements layer too.
 
 ## Where to Go From Here
 
