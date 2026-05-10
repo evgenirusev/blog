@@ -69,7 +69,7 @@ A selection of production AI engagements I've led.
 <a href="/case-studies/5g-livestreaming-aws-wavelength" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
     src="/images/case-studies/5g-livestreaming-aws-wavelength.png"
-    alt="5G edge livestreaming for live sports"
+    alt="5G edge livestreaming — mobile device through 5G edge zones to stadium, 800ms vs 200ms latency comparison"
     class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
     loading="lazy"
   />
