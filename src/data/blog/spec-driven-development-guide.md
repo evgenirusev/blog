@@ -14,10 +14,10 @@ tags:
   - requirements
   - llm
 ogImage: "../../assets/images/posts/spec-driven-development-guide.png"
-description: "A comprehensive guide to Spec-Driven Development: why centralized Markdown specs are the missing layer for AI-accelerated teams, and how to put it into practice."
+description: "A comprehensive guide to Spec-Driven Development: why specs are the missing layer for AI-accelerated teams, and how to put it into practice."
 ---
 
-*Why centralized Markdown specs are the missing layer for AI-accelerated teams — and how to put it into practice.*
+*Why specs are the missing layer for AI-accelerated teams — and how to put it into practice.*
 
 ![Spec-Driven Development — specs, plan, tasks, implement](../../assets/images/posts/spec-driven-development-guide.png)
 
