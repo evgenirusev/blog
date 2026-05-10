@@ -59,6 +59,14 @@ html[data-theme="dark"] {
   @apply mx-auto w-full max-w-app px-4;
 }
 
+/* When a page opts into wide layout (via `wide: true` frontmatter on
+   AboutLayout), widen the whole chrome together — header, breadcrumb,
+   main, and footer all use `.app-layout`/`.max-w-app`, so widening
+   them in lockstep keeps the page columns aligned. */
+body:has(main.layout-wide) :is(.app-layout, .max-w-app) {
+  max-width: var(--container-6xl);
+}
+
 .active-nav {
   @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
