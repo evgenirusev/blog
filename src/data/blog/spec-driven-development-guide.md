@@ -35,7 +35,7 @@ Software development used to have a clear bottleneck: *writing the code*. Since 
 
 The bottleneck is no longer coding. It's **understanding what to build** — and giving the LLM the right context to build it.
 
-That bottleneck doesn't matter for prototypes — vibe-code freely, throw the prompts away, ship. But for **production software that evolves** — real users, features accumulating over months or years, multiple authors, new requirements every week — vibe-coding stops compounding. The "understanding what to build" problem eats the coding gains AI gave you. *That's* what SDD is built for. (We'll get concrete on the failure modes near the end.)
+That bottleneck doesn't matter for prototypes — vibe-code freely, throw the prompts away, ship. But for **production software that evolves** — real users, features accumulating over months or years, multiple authors, new requirements every week — vibe-coding stops compounding. The "understanding what to build" problem eats the coding gains AI gave you. *That's* what Spec-Driven Development is built for. (We'll get concrete on the failure modes near the end.)
 
 ### The new bottleneck: requirements + context
 
@@ -49,7 +49,7 @@ Today, all three are scattered. Requirements live across PMs' minds, Jira, Confl
 
 Onboarding suffers the same way — every new joiner re-derives what the product is *meant to do* from scattered Jira threads and senior-engineer pings.
 
-This is where SDD compounds. A spec captures the requirements, the constraints, and the relevant context in plain Markdown — already in a format the LLM consumes natively. *Find it, structure it, package it for the LLM* collapses into *open the file*.
+This is where Spec-Driven Development compounds. A spec captures the requirements, the constraints, and the relevant context in plain Markdown — already in a format the LLM consumes natively. *Find it, structure it, package it for the LLM* collapses into *open the file*.
 
 ### The sprint has inverted
 
@@ -78,9 +78,9 @@ A few smaller failure modes specs also clean up:
 
 ## What a Spec Actually Is
 
-A spec is a Markdown file that describes — in plain language — what your system is supposed to do for users. The full `/specs` folder, taken together, is a single, version-controlled, exhaustive record of product behavior. **And it's always current** — the spec describes what the system is meant to do *right now*, not what it was meant to do six months ago when some original ticket was written. That distinction matters more than it sounds, and we'll come back to it in a moment. SDD is the practice of treating that folder as the **source of truth**: code is generated from it, tests trace back to it, documentation is regenerated from it. The code becomes downstream of the spec. **The spec becomes the contract.**
+A spec is a Markdown file that describes — in plain language — what your system is supposed to do for users. The full `/specs` folder, taken together, is a single, version-controlled, exhaustive record of product behavior. **And it's always current** — the spec describes what the system is meant to do *right now*, not what it was meant to do six months ago when some original ticket was written. That distinction matters more than it sounds, and we'll come back to it in a moment. Spec-Driven Development is the practice of treating that folder as the **source of truth**: code is generated from it, tests trace back to it, documentation is regenerated from it. The code becomes downstream of the spec. **The spec becomes the contract.**
 
-That's a small but important inversion. Most teams treat code as the source of truth and docs as commentary that goes stale a week later. SDD flips the polarity.
+That's a small but important inversion. Most teams treat code as the source of truth and docs as commentary that goes stale a week later. Spec-Driven Development flips the polarity.
 
 ### What derives from the spec
 
@@ -92,7 +92,7 @@ The same compression happening on the coding side now happens anywhere downstrea
 
 ### Spec vs Jira ticket vs PRD
 
-The most common pushback when introducing SDD is *"don't user stories already do this?"* Not really. These three artifacts capture different shapes of requirement, and confusing them is the main reason teams resist SDD ("we already have Jira").
+The most common pushback when introducing Spec-Driven Development is *"don't user stories already do this?"* Not really. These three artifacts capture different shapes of requirement, and confusing them is the main reason teams resist Spec-Driven Development ("we already have Jira").
 
 | Artifact          | Shape                                                                    | Time horizon                                                         |
 | ----------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------- |
@@ -199,7 +199,7 @@ Each acceptance criterion gets a stable ID (`AC-1`, `AC-2`, …) so you can refe
 
 ## What Makes a Good Spec
 
-A few rules of thumb that hold up across every project we've used SDD on. Don't over-think this — the goal is *good enough to align on*, not perfect.
+A few rules of thumb that hold up across every project we've used Spec-Driven Development on. Don't over-think this — the goal is *good enough to align on*, not perfect.
 
 - **No duplicate requirements.** Each requirement should live in exactly one spec. We use **MECE** as the breakdown principle when splitting specs across files — *mutually exclusive* (no two specs cover the same requirement) and *collectively exhaustive* (every user-facing behavior lives somewhere). When two specs touch the same requirement, the one whose domain owns the data wins; the other cross-references it.
 - **Plain language, testable.** Each acceptance criterion should be specific enough for a QA to write a test from it, written without implementation jargon. Vague ACs ("should work well", "perform reliably") are dead weight.
@@ -208,7 +208,30 @@ A few rules of thumb that hold up across every project we've used SDD on. Don't 
 
 A spec that's 70% right and updated weekly beats a 95%-right spec that goes stale in two months. Iterate.
 
-## The Day-to-Day Workflow
+## Specs and Project Management
+
+The most common question I get: *"Does this replace Jira?"*
+
+Answer: it depends on your team. Two valid models, pick the one that fits.
+
+| Factor                   | Specs + Jira                                          | Specs + `/tasks` folder                            |
+| ------------------------ | ----------------------------------------------------- | -------------------------------------------------- |
+| **Best when**            | Org needs Jira for reporting, time tracking, or compliance | Small-to-medium team optimizing for speed     |
+| **Requirements**         | `/specs` (source of truth)                            | `/specs` (source of truth)                         |
+| **Task tracking**        | Jira epics / stories                                  | `/tasks` folder of Markdown files                  |
+| **Time logging**         | Jira time tracking                                    | External tool or not tracked                       |
+| **Audit trail**          | Jira history + Git history                            | Git history + PR reviews                           |
+| **Cross-team dashboards** | Jira filters and reports                             | `git log` + repo navigation                        |
+
+Most of our enterprise projects run **Specs + Jira**. Each tool does what it's best at — specs are the exhaustive requirements record; Jira is the task tracker and sprint planning surface. The `/spec` orchestrator covered in the next chapter includes a Jira sync skill that pushes spec acceptance criteria into Jira as epics and stories, so the two stay in lockstep.
+
+For smaller teams that want to drop Jira entirely, the alternative is to apply the same Spec-Driven Development pattern to tasks themselves — a `/tasks` folder of Markdown files, version-controlled alongside `/specs`. That's covered further down in [Specs Beyond Coding](#specs-beyond-coding).
+
+## Putting It Into Practice
+
+The Spec-Driven Development process is simple enough — and AI tools have gotten so good — that you don't need any tooling beyond a `/specs` folder, the template, and the rule *"always update the spec before writing code."* If you're a small team or a solo developer, plain Claude Code (or Cursor, or Copilot) is enough — point it at the folder and ship. No orchestrator required. A single lightweight Claude skill that knows the conventions is the most you'd need.
+
+### The Day-to-Day Workflow
 
 Once specs exist, the workflow collapses to one rule:
 
@@ -241,32 +264,11 @@ That's it. With modern models (late 2025 onwards), this works for most use cases
 
 The spec diff is the implementation brief.
 
-## Specs and Project Management
+### Layering in Tooling
 
-The most common question I get: *"Does this replace Jira?"*
+That said — if you really want consistently high-quality, reliable specs, you can layer in tooling: a single Claude skill that knows the conventions, or — more powerful — multiple skills wired together behind an orchestrator.
 
-Answer: it depends on your team. Two valid models, pick the one that fits.
-
-| Factor                   | Specs + Jira                                          | Specs + `/tasks` folder                            |
-| ------------------------ | ----------------------------------------------------- | -------------------------------------------------- |
-| **Best when**            | Org needs Jira for reporting, time tracking, or compliance | Small-to-medium team optimizing for speed     |
-| **Requirements**         | `/specs` (source of truth)                            | `/specs` (source of truth)                         |
-| **Task tracking**        | Jira epics / stories                                  | `/tasks` folder of Markdown files                  |
-| **Time logging**         | Jira time tracking                                    | External tool or not tracked                       |
-| **Audit trail**          | Jira history + Git history                            | Git history + PR reviews                           |
-| **Cross-team dashboards** | Jira filters and reports                             | `git log` + repo navigation                        |
-
-Most of our enterprise projects run **Specs + Jira**. Each tool does what it's best at — specs are the exhaustive requirements record; Jira is the task tracker and sprint planning surface. The `/spec` orchestrator covered in the next chapter includes a Jira sync skill that pushes spec acceptance criteria into Jira as epics and stories, so the two stay in lockstep.
-
-For smaller teams that want to drop Jira entirely, the alternative is to apply the same SDD pattern to tasks themselves — a `/tasks` folder of Markdown files, version-controlled alongside `/specs`. That's covered further down in [Specs Beyond Coding](#specs-beyond-coding).
-
-## Putting It Into Practice
-
-Honestly, the SDD process is simple enough that you don't need any tooling beyond a `/specs` folder, the template, and the rule *"always update the spec before writing code."* If you're a small team or a solo developer, plain Claude Code (or Cursor, or Copilot) is enough — point it at the folder and ship. No orchestrator required. A single lightweight Claude skill that knows the conventions is the most you'd need.
-
-We've built more than that because we needed **consistency across teams**. Tecknoworks runs SDD on **over 15 development teams** now, and standardizing how specs get bootstrapped, updated, implemented, and synced across every project required shared infrastructure. We built it with a small set of Claude skills wired together behind a single command: **`/spec`**.
-
-If you're a smaller team or working on a single project, the rest of this section is mostly informational — feel free to skim. If you're trying to run SDD across multiple squads consistently, this is the model we landed on.
+We've built one because we want every team to adopt this eventually. Tecknoworks runs **15 development teams**, with **3–4 currently using Spec-Driven Development** — and getting broader adoption means making the workflow easy enough that any team can pick it up. The orchestrator wires a small set of Claude skills together behind a single command: **`/spec`**.
 
 You don't memorize subcommands or flags. You type `/spec`, optionally describe what you want in plain language, and the orchestrator figures out the right action from the project state and your intent.
 
@@ -320,7 +322,7 @@ That's it. Under the hood the skill reads the full spec, runs `git diff` to see 
 This is the optional skill that keeps specs and Jira honest if your org uses both. Three modes:
 
 - **Specs → Jira** — push spec acceptance criteria as Jira stories, grouped under one epic per spec file.
-- **Jira → Specs** — bootstrap specs from an existing Jira backlog (useful when adopting SDD on a long-running project).
+- **Jira → Specs** — bootstrap specs from an existing Jira backlog (useful when adopting Spec-Driven Development on a long-running project).
 - **Drift Check** — compare both sides and report the gap.
 
 The mapping is straightforward:
@@ -379,7 +381,7 @@ If the test cases are themselves committed alongside the spec (or generated on d
 
 ### Task management with a /tasks folder
 
-The same pattern that works for specs works for tasks. Most teams I've seen adopt SDD eventually drop manual Jira ticket creation and manage tasks the same way: a `/tasks` folder of Markdown files, version-controlled alongside `/specs` and the code.
+The same pattern that works for specs works for tasks. Most teams I've seen adopt Spec-Driven Development eventually drop manual Jira ticket creation and manage tasks the same way: a `/tasks` folder of Markdown files, version-controlled alongside `/specs` and the code.
 
 The structure mirrors the spec folder — one task file per feature or domain area, with each file listing the work derived from the corresponding spec. When a spec gets a new acceptance criterion, the matching task file gets a new entry. Tasks track status (Not Started / In Progress / Done), reference specific AC IDs, and capture blockers or open questions inline. Claude generates the task entries directly from spec diffs, so the manual translation step ("now go create the Jira ticket") disappears.
 
@@ -393,7 +395,7 @@ For organizations that need Jira for reporting, time tracking, or compliance, th
 
 ## What we've seen in practice
 
-We've now deployed SDD across **eight real client projects**, including an engagement with a top-three global management consultancy. The most surprising pattern: **PMs themselves take over the spec-writing**, not just developers.
+We've now deployed Spec-Driven Development across **eight real client projects**, including an engagement with a top-three global management consultancy. The most surprising pattern: **PMs themselves take over the spec-writing**, not just developers.
 
 On that consultancy project, the lead stakeholder installed Claude Code himself in week two. From that point on, after every meeting, *he* updated the specs from the transcript — no developer translation step, no Jira tickets, no requirements-clarification meetings. We dropped Jira entirely. The spec was the contract; the diff was the conversation.
 
@@ -401,13 +403,13 @@ His words: *"It feels like a revolution in product management and software devel
 
 His estimate: **roughly 3x faster delivery** — driven by collapsing the full requirements loop. What used to be daily clarification meetings, Jira tickets, developer translation, and back-and-forth review became a single spec edit feeding the AI directly into a PR.
 
-Across the eight projects, the consistent pattern is **around 50% efficiency gains on requirements-to-merged-PR cycles** vs. the same teams' pre-SDD baseline — biggest wins on long-lived, evolving production software.
+Across the eight projects, the consistent pattern is **around 50% efficiency gains on requirements-to-merged-PR cycles** vs. the same teams' baseline before adopting it — biggest wins on long-lived, evolving production software.
 
 One anecdote that crystallized the case for me: on a separate long-running platform, a single permissioning change once generated *three days* of back-and-forth — contradictory expectations spread across older tickets, no authoritative source for current behavior. The fix was a spec: capture the rules, surface the contradictions, get sign-off, delegate implementation. The same kind of change, today, takes hours.
 
 ## Why vibe-coding breaks at production scale
 
-Earlier I drew a line between vibe-coded prototypes — where SDD is overhead — and production software, where it's a force multiplier. Three failure modes hit at production scale that prototypes never see:
+Earlier I drew a line between vibe-coded prototypes — where Spec-Driven Development is overhead — and production software, where it's a force multiplier. Three failure modes hit at production scale that prototypes never see:
 
 - **Regression risk compounds.** Without a single, current, exhaustive record of expected behavior, every change is a gamble — and "we'll catch it in QA" quietly becomes the only acceptance criterion still holding.
 - **Communication friction explodes.** What's new vs. what already exists vs. what was deprecated becomes a daily debate. Half the sprint is gone before anyone writes code.
