@@ -11,16 +11,21 @@ import { SITE } from "@/config";
 // AboutLayout is also used by Books and Case Studies, where we don't want
 // the avatar — so we gate it on a frontmatter flag rather than always
 // rendering it.
-type Props = MarkdownLayoutProps<{ title: string; showAvatar?: boolean }>;
+type Props = MarkdownLayoutProps<{
+  title: string;
+  showAvatar?: boolean;
+  wide?: boolean;
+}>;
 
 const { frontmatter } = Astro.props;
+const widthClass = frontmatter.wide ? "max-w-6xl" : "max-w-app";
 ---
 
 <Layout title={`${frontmatter.title} | ${SITE.title}`}>
   <Header />
   <Breadcrumb />
-  <main id="main-content" class="app-layout">
-    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
+  <main id="main-content" class:list={["mx-auto w-full px-4", widthClass]}>
+    <section id="about" class:list={["app-prose mb-28 prose-img:border-0", widthClass]}>
       <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
       {
         frontmatter.showAvatar && (
