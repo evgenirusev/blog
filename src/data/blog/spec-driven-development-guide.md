@@ -1,6 +1,6 @@
 ---
 author: Evgeni Rusev
-pubDatetime: 2026-05-09T12:00:00Z
+pubDatetime: 2026-05-10T12:00:00Z
 title: "Spec-Driven Development: A Comprehensive Guide"
 slug: spec-driven-development-guide
 featured: true
