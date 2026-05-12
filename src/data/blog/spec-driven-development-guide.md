@@ -75,7 +75,7 @@ With a spec as the input, the AI sees the full picture in one place:
 
 The model isn't guessing where the boundaries are; it's reading them. The failure mode collapses from *"AI rewrote half the module chasing a misinterpretation"* down to *"AI implemented the spec — verify against the acceptance criteria."* Bugs that originate in requirements ambiguity largely disappear, leaving the technical bugs that review and tests were built to catch.
 
-### Picking up someone else's work
+### Picking up new tasks
 
 Picking up someone else's task is a context-loss event: re-explaining requirements, pinging the original author, digging through Jira to reconstruct what was actually agreed. The cost is the same whether the new owner is a junior developer, a different squad, or an AI assistant — someone has to rebuild what was already in the original author's head.
 
