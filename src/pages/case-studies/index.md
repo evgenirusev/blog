@@ -15,7 +15,7 @@ A selection of production AI engagements I've led.
   />
   <div class="flex-1 min-w-0">
     <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
-      Mining Intelligence Company Replaces Manual Data Extraction with AI
+      Replacing Manual PDF Extraction with Agentic AI: 80% Reduction, Two Weeks to Production
     </h2>
     <p class="mt-3 text-sm opacity-80">
       <strong>Client:</strong> Top-three global management consultancy. <strong>Industry:</strong> Mining intelligence.

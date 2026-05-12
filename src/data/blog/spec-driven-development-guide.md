@@ -27,54 +27,63 @@ description: "A comprehensive guide to Spec-Driven Development: why specs are th
 
 ## Why Spec-Driven Development
 
-Below is the case for Spec-Driven Development — what changed in software development over the past 18 months, where the cost concentrates, and why specs are the lightest fix that actually compounds.
+What changed, where the cost moved, and why specs are the lightest fix that compounds.
 
 ### Coding isn't the bottleneck anymore
 
-Software development used to have a clear bottleneck: *writing the code*. Since generative AI landed in mainstream coding workflows, that has flipped completely. With modern AI coding assistants, almost every new feature or story can be implemented in a **single, well-defined prompt** — provided you have the right requirements at hand.
+Software development used to have a clear bottleneck: *writing the code*. Since generative AI landed in mainstream coding workflows, that has flipped completely. With modern AI coding assistants, almost every new feature or story can be implemented in a **single, well-defined prompt** — provided you have the right requirements *and context* at hand.
 
-The bottleneck is no longer coding. It's **understanding what to build** — and giving the LLM the right context to build it.
+The bottleneck is no longer coding. It's **understanding what to build** — and **giving the LLM the right context to build it.**
 
-That bottleneck doesn't matter for prototypes — vibe-code freely, throw the prompts away, ship. But for **production software that evolves** — real users, features accumulating over months or years, multiple authors, new requirements every week — vibe-coding stops compounding. The "understanding what to build" problem eats the coding gains AI gave you. *That's* what Spec-Driven Development is built for. (We'll get concrete on the failure modes near the end.)
+That bottleneck doesn't matter for prototypes — vibe-code freely, throw the prompts away, ship. But for **production software that evolves** — real users, features accumulating over months or years, multiple authors, new requirements every week — vibe-coding stops compounding. That's what eats the coding gains AI gave you. *And that's* what Spec-Driven Development is built for.
 
 ### The new bottleneck: requirements + context
 
-Three things have to happen before AI can ship a feature:
+Three things have to happen before AI can implement a feature:
 
 1. The requirements have to be defined and understood.
 2. The relevant context — existing patterns, related modules, prior decisions, constraints — has to be gathered.
 3. All of that has to be packaged into something the LLM can actually ingest.
 
-Today, all three are scattered. Requirements live across PMs' minds, Jira, Confluence, Notion, meeting recordings, and Teams. Context lives in senior engineers' heads, old PRs, and tribal knowledge. The result: engineers who can theoretically ship 5x faster spend most of their time on requirements archaeology and context assembly.
+Today, all three are scattered. Requirements live across PMs' minds, Jira, Confluence, Notion, meeting recordings, and Teams. Context lives in senior engineers' heads, old PRs, and tribal knowledge. The result: engineers who can theoretically ship several times faster spend most of their time on requirements archaeology and context assembly.
 
 Onboarding suffers the same way — every new joiner re-derives what the product is *meant to do* from scattered Jira threads and senior-engineer pings.
 
 This is where Spec-Driven Development compounds. A spec captures the requirements, the constraints, and the relevant context in plain Markdown — already in a format the LLM consumes natively. *Find it, structure it, package it for the LLM* collapses into *open the file*.
 
-### The sprint has inverted
-
-The clearest way to see the shift is to look at how a 2-week sprint used to break down vs. how it breaks down now:
-
-| Sprint phase             | Traditional      | AI-accelerated    |
-| ------------------------ | ---------------- | ----------------- |
-| Coding                   | ~7 days          | ~1–2 days         |
-| Requirements & PM        | ~3 days          | ~3 days           |
-| **Total sprint**         | **~10 days**     | **~4–5 days**     |
-
-Requirements work doesn't expand — it stays roughly fixed. But because AI compresses coding by 5–10x, requirements goes from being ~30% of the sprint to ~70% of it. The bottleneck doesn't disappear when you accelerate one side of the work; it just moves.
-
-Most teams adopting AI coding stop here, with the bottleneck firmly parked in requirements. **Spec-Driven Development is what accelerates the requirements side too**, so the gains compound instead of capping out at "we code faster, but spend the rest of the sprint in meetings."
-
 ### Specs solve the alignment problems code can't
 
-Code is a lossy projection of intent. Why a feature exists, what it's *trying* to achieve for the user, what was deliberately excluded, what constraints shaped the design — none of that lives in the code. When you ship from a prompt and throw the prompt away, you're version-controlling the output and shredding the source.
+One of the biggest costs in evolving software isn't writing code — it's **PM-developer alignment.** Without a shared, current record of what the system is supposed to do, every conversation re-derives the same context, losing detail each time. The structural reason: **code is a lossy projection of intent.** Why a feature exists, what was deliberately excluded, what constraints shaped the design — none of that lives in the code. When AI generates the code and the prompt gets thrown away, you're version-controlling the output and shredding the source.
 
-The most expensive consequence shows up in **PM-developer alignment.** Without a shared, current record of what the system is supposed to do, every conversation re-derives the same context: clarifying questions, partial answers, "didn't we agree on…" debates. The team is in a constant state of soft re-alignment, and each cycle is lossy. The spec collapses this into a single artifact: both sides look at the same document, the diff *is* the conversation, and disagreements surface immediately — when reviewing a spec change — rather than two weeks later in a PR.
+The spec collapses this into a single artifact: the diff *is* the conversation, and disagreements surface when reviewing the spec, not two weeks later in a PR.
 
-A few smaller failure modes specs also clean up:
+Two more failure modes specs eliminate by construction:
 
-- **Stale Jira tickets.** Projects accumulate dozens of tickets over time. They conflict, go stale, and contradict each other. A developer working on a new story can unknowingly violate decisions captured in an older ticket nobody remembers. The current spec, by definition, can't go stale this way.
-- **The bug-vs-feature debate.** If the system doesn't behave as the spec describes, it's a bug. If the desired behavior isn't in the spec, it's a feature request. No more arguments about what "should have been obvious."
+- **Stale Jira tickets.** Tickets conflict, go stale, contradict each other; a developer on a new story can unknowingly violate decisions in an older ticket nobody remembers. The current spec can't go stale this way.
+- **The bug-vs-feature debate.** If the system doesn't match the spec, it's a bug. If the behavior isn't in the spec, it's a feature request. No more "should have been obvious."
+
+### AI works from the spec, not from assumptions
+
+AI coding assistants are only as good as the context you hand them. With requirements scattered across Jira, Confluence, Slack threads, and senior engineers' heads, an assistant pointed at a feature has to fill in the gaps with guesses. That's where most *"the AI rebuilt the wrong thing"* stories come from — not bad models, missing context.
+
+With a spec as the input, the AI sees the full picture in one place:
+
+- **Goals** — what success looks like
+- **Non-goals** — what's deliberately out of scope
+- **Constraints** — what cannot change
+- **Acceptance criteria** — exactly what to verify against
+
+The model isn't guessing where the boundaries are; it's reading them. The failure mode collapses from *"AI rewrote half the module chasing a misinterpretation"* down to *"AI implemented the spec — verify against the acceptance criteria."* Bugs that originate in requirements ambiguity largely disappear, leaving the technical bugs that review and tests were built to catch.
+
+### Picking up someone else's work
+
+Picking up someone else's task is a context-loss event: re-explaining requirements, pinging the original author, digging through Jira to reconstruct what was actually agreed. The cost is the same whether the new owner is a junior developer, a different squad, or an AI assistant — someone has to rebuild what was already in the original author's head.
+
+**Specs collapse that to a file path** — *"it's in /specs/reporting.md, pick it up."* The new owner starts from the same grounded artifact the original author worked from. No re-derivation, no missing context.
+
+The error space also narrows. Mistakes on a task fall into two buckets: **product mistakes** (built the wrong thing) and **technical mistakes** (bugs, regressions). Specs eliminate the first — the spec *is* the contract. What's left is the second, which is what code review and tests were built for anyway.
+
+And it compounds — bigger than the per-task coding speedup, because it pays off on every handoff, every onboarding, every AI-assisted task.
 
 ## What a Spec Actually Is
 
@@ -88,11 +97,11 @@ Once the spec is the source of truth, everything downstream regenerates from it:
 
 ![Spec as source of truth — Product Manager and Developer write the spec, while source code, tests, tasks, and documentation derive from it](../../assets/images/posts/spec-source-of-truth.png)
 
-The same compression happening on the coding side now happens anywhere downstream of the spec — for tests, for tasks, for documentation. We'll come back to specific applications in [Specs Beyond Coding](#specs-beyond-coding).
+The same gains AI brought to coding now apply anywhere downstream of the spec — for tests, for tasks, for documentation. We'll come back to specific applications in [Specs Beyond Coding](#specs-beyond-coding).
 
 ### Spec vs Jira ticket vs PRD
 
-The most common pushback when introducing Spec-Driven Development is *"don't user stories already do this?"* Not really. These three artifacts capture different shapes of requirement, and confusing them is the main reason teams resist Spec-Driven Development ("we already have Jira").
+Someone might reasonably ask: *"don't user stories already do this?"* Not really. These three artifacts capture different shapes of requirement, and conflating them is one of the reasons teams hesitate to adopt Spec-Driven Development ("we already have Jira").
 
 | Artifact          | Shape                                                                    | Time horizon                                                         |
 | ----------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------- |
@@ -140,8 +149,8 @@ A typical structure:
 A few rules of thumb:
 
 - **One spec file per user workflow** — not per ticket, not per technical component. Organize by what users *do*.
-- **Keep individual specs under ~200 lines.** If a spec grows beyond one concern, split it.
-- **Each requirement lives in exactly one spec.** When two specs touch the same requirement, the spec whose domain owns the data wins. The other spec cross-references it. This is the most common spec maintenance failure mode — two teams independently writing the same requirement and updating them inconsistently over time.
+- **Keep individual specs under ~30 acceptance criteria.** If a spec grows beyond one concern, split it.
+- **Each requirement lives in exactly one spec.** When two specs touch the same requirement, the spec whose domain owns the data wins. The other spec cross-references it. This is a common spec maintenance failure mode — two teams independently writing the same requirement and updating them inconsistently over time.
 - **Maintain a coverage map** in the README — a matrix of user roles against workflows, with explicit `**GAP**` rows where specs don't yet exist. This is the only way an index can tell you what's *missing*.
 
 ## What Goes In a Spec (and What Doesn't)
@@ -150,12 +159,12 @@ The single most useful test for whether something belongs in a product spec: **c
 
 Product specs define constraints. Technical specs define solutions.
 
-| Belongs in product spec (constraint)               | Belongs in technical spec / ADR (solution)              |
-| -------------------------------------------------- | ------------------------------------------------------- |
-| "Must integrate with BC v16 on-premises"           | "Deploy custom AL extension with PageType = API"        |
-| "Human must review before posting"                 | "Use BC's Receive and Invoice action"                   |
-| "Invoice PDF must be accessible during review"     | "Attach PDF via documentAttach endpoint at draft time"  |
-| "System must work after migration to Cloud BC"     | "Parameterize base URL, abstract auth layer"            |
+| Belongs in product spec (behavior)                                  | Belongs in technical spec / ADR (solution)                       |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| "Manager must approve any invoice over $5,000"                      | "Approval queue service with role-based routing"                 |
+| "Submitter sees the approval status in real time"                   | "Push status updates via SSE / WebSocket"                        |
+| "Approved invoices appear in the accounting system within 24 hours" | "Nightly batch sync to the accounting API"                       |
+| "Submitter can attach a PDF receipt up to 25 MB"                    | "Pre-signed S3 upload; 25 MB enforced server-side"               |
 
 If you find yourself writing API endpoints, database schemas, framework choices, or port numbers in a product spec — stop. Those are solutions, not constraints. Move them to a technical spec or an ADR.
 
@@ -195,13 +204,13 @@ A specific story showing why the status quo doesn't work. Name the user.
 
 Two sections do most of the heavy lifting and most teams skip them: **Problem** and **Users**. They force you to name the person affected and describe their pain *before* jumping into requirements. Without them, specs drift toward technical wish-lists with no human in them. **Non-Goals** are equally important — they prevent scope creep by making exclusions *explicit* rather than implied.
 
-Each acceptance criterion gets a stable ID (`AC-1`, `AC-2`, …) so you can reference it from commits, Jira tickets, and tests. When a criterion is deprecated, strikethrough it rather than deleting it: `~~**AC-3:** ...~~ [DEPRECATED: reason]`. History has value.
+Each acceptance criterion gets a stable ID (`AC-1`, `AC-2`, …) so you can reference it from commits, Jira tickets, and tests. When a criterion is deprecated, use strikethrough rather than deleting it: `~~**AC-3:** ...~~ [DEPRECATED: reason]`. History has value.
 
 ## What Makes a Good Spec
 
-A few rules of thumb that hold up across every project we've used Spec-Driven Development on. Don't over-think this — the goal is *good enough to align on*, not perfect.
+A few rules of thumb that hold up across every project we've used Spec-Driven Development on:
 
-- **No duplicate requirements.** Each requirement should live in exactly one spec. We use **MECE** as the breakdown principle when splitting specs across files — *mutually exclusive* (no two specs cover the same requirement) and *collectively exhaustive* (every user-facing behavior lives somewhere). When two specs touch the same requirement, the one whose domain owns the data wins; the other cross-references it.
+- **No duplicate requirements.** Each requirement should live in exactly one spec. We use [**MECE**](https://en.wikipedia.org/wiki/MECE_principle) as the breakdown principle when splitting specs across files — *mutually exclusive* (no two specs cover the same requirement) and *collectively exhaustive* (every user-facing behavior lives somewhere). When two specs touch the same requirement, the one whose domain owns the data wins; the other cross-references it.
 - **Plain language, testable.** Each acceptance criterion should be specific enough for a QA to write a test from it, written without implementation jargon. Vague ACs ("should work well", "perform reliably") are dead weight.
 - **No implementation details.** If the spec mentions an API endpoint, database schema, or framework choice, it has drifted into technical territory — move those to a TDD or ADR.
 - **Open Questions are a feature, not a flaw.** A spec with no open questions almost always hasn't been stress-tested by reality. Surface what you don't know.
@@ -210,7 +219,7 @@ A spec that's 70% right and updated weekly beats a 95%-right spec that goes stal
 
 ## Specs and Project Management
 
-The most common question I get: *"Does this replace Jira?"*
+The most common question we get: *"Does this replace Jira?"*
 
 Answer: it depends on your team. Two valid models, pick the one that fits.
 
@@ -223,13 +232,13 @@ Answer: it depends on your team. Two valid models, pick the one that fits.
 | **Audit trail**          | Jira history + Git history                            | Git history + PR reviews                           |
 | **Cross-team dashboards** | Jira filters and reports                             | `git log` + repo navigation                        |
 
-Most of our enterprise projects run **Specs + Jira**. Each tool does what it's best at — specs are the exhaustive requirements record; Jira is the task tracker and sprint planning surface. The `/spec` orchestrator covered in the next chapter includes a Jira sync skill that pushes spec acceptance criteria into Jira as epics and stories, so the two stay in lockstep.
+Most of our enterprise projects run **Specs + Jira**. Each tool does what it's best at — specs are the exhaustive requirements record; Jira is the task tracker and sprint planning surface. The `/spec` command covered in the next section includes a Jira sync skill that pushes spec acceptance criteria into Jira as epics and stories, so the two stay in lockstep.
 
 For smaller teams that want to drop Jira entirely, the alternative is to apply the same Spec-Driven Development pattern to tasks themselves — a `/tasks` folder of Markdown files, version-controlled alongside `/specs`. That's covered further down in [Specs Beyond Coding](#specs-beyond-coding).
 
 ## Putting It Into Practice
 
-The Spec-Driven Development process is simple enough — and AI tools have gotten so good — that you don't need any tooling beyond a `/specs` folder, the template, and the rule *"always update the spec before writing code."* If you're a small team or a solo developer, plain Claude Code (or Cursor, or Copilot) is enough — point it at the folder and ship. No orchestrator required. A single lightweight Claude skill that knows the conventions is the most you'd need.
+The Spec-Driven Development process is simple enough — and AI tools have gotten so good — that you don't need any tooling beyond a `/specs` folder, the template, and the rule *"always update the spec before writing code."* If you're a small team or a solo developer, plain Claude Code (or Cursor, or Copilot) is enough — point it at the folder and start building. No extra tooling required. A single lightweight Claude skill that knows the conventions is the most you'd need.
 
 ### The Day-to-Day Workflow
 
@@ -264,60 +273,60 @@ That's it. With modern models (late 2025 onwards), this works for most use cases
 
 The spec diff is the implementation brief.
 
-### Layering in Tooling
+### Taking it a step further
 
-That said — if you really want consistently high-quality, reliable specs, you can layer in tooling: a single Claude skill that knows the conventions, or — more powerful — multiple skills wired together behind an orchestrator.
+That said — if you want consistently high-quality, reliable specs across many teams, you can lean on Claude skills: a single one that knows the conventions, or — more powerful — a small set of skills routed through a [Claude slash command](https://code.claude.com/docs/en/commands).
 
-We've built one because we want every team to adopt this eventually. Tecknoworks runs **15 development teams**, with **3–4 currently using Spec-Driven Development** — and getting broader adoption means making the workflow easy enough that any team can pick it up. The orchestrator wires a small set of Claude skills together behind a single command: **`/spec`**.
+That's what we built at [Tecknoworks](https://tecknoworks.com), because we want every team to adopt this eventually. We have **over 15 development teams**, with **5–6 currently using Spec-Driven Development** — and getting broader adoption means making the workflow easy enough that any team can pick it up.
 
-You don't memorize subcommands or flags. You type `/spec`, optionally describe what you want in plain language, and the orchestrator figures out the right action from the project state and your intent.
+The whole thing is one slash command: **`/spec`** — a Markdown file in your project that routes to one of three specialist skills (Spec Manager, Spec Implementer, or Jira Sync) based on what you ask. Type `/spec`, describe what you want in plain language, and it picks the right skill from project state and your intent.
 
 For example:
 
-- `/spec` — inspects the project (does `/specs/` exist? are there uncommitted spec changes? any stale drafts?) and suggests the most useful next step.
-- `/spec bootstrap from this design doc` — creates `/specs/` from an existing source.
+- `/spec generate from this requirements doc` — creates a structured spec from the source, abstracting requirements into the template format.
+- `/spec bootstrap from this design doc` — creates the full `/specs/` folder from an existing source.
 - `/spec implement` — detects the changed spec via `git diff`, plans, and codes the change.
 - `/spec sync to Jira` — pushes spec acceptance criteria as epics and stories.
 
 That's the surface area. There's no framework to learn — the AI handles routing, the human stays in natural language. Underneath, three specialist skills do the actual work.
 
-![/spec orchestrator routing to three specialist skills — Spec Manager, Spec Implementer, and Jira Sync](../../assets/images/posts/spec-orchestrator.png)
+![/spec slash command routing to three specialist skills — Spec Manager, Spec Implementer, and Jira Sync](../../assets/images/posts/spec-orchestrator.png)
 
-The skills themselves are proprietary to Tecknoworks, so I can't share the full implementations. But the overview below covers the shape of the system — what each specialist skill does, and the rules that make it work in practice.
+The overview below covers the shape of the system — what each specialist skill does, and the rules that make it work in practice.
 
-### 1. The Spec Manager — Bootstrap, Create, Update, Review, Archive
+### 1. The Spec Manager Skill
 
-This skill handles the entire authoring side of the lifecycle. The most interesting mode is **bootstrap from a technical document**, which is also the place where AI most commonly fails — it tends to reproduce technical details as product requirements verbatim, producing specs that read like repackaged TDDs.
+This skill specializes in producing *good* specs and keeping them that way. It encodes the spec conventions — template, naming, MECE breakdown, abstraction level, cross-domain ownership — and applies them across the full authoring lifecycle: **bootstrap, create, update, review, archive**. Whichever mode you invoke, the same rules hold.
 
-The skill explicitly counters this with an *abstract-up* step. For each technical statement in the source, it asks: *"What is the user trying to accomplish?"* — and writes that instead.
+The trickiest mode is **bootstrap from a technical document**, which is also where AI most commonly fails — it tends to reproduce technical details as product requirements verbatim, producing specs that read like repackaged TDDs.
+
+The skill counters this with an *abstract-up* step. For each technical statement in the source, it asks: *"What is the user trying to accomplish?"* — and writes that instead.
 
 | Technical source says                          | Product spec says                                                                              |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `POST /api/v1.0/purchaseInvoices`              | "When an invoice is received, the system captures the vendor, amount, and line items"          |
 | "Use OCR to extract header fields"             | "The system automatically reads invoice header information"                                    |
-| "Deploy BC API facade on port 7048"            | Constraint: "Must integrate with BC v16 on-premises"                                           |
+| "Deploy API adapter on port 7048"              | Constraint: "Must integrate with the existing on-premises ERP"                                 |
 
 The technical details aren't lost — they get routed to a separate TDD generator skill so they live in `docs/` or an ADR, not in the product spec.
 
 The skill also enforces a **three-question test** for whether something even qualifies as a product spec domain:
 
-1. Does a specific user interact with this? *(If no → technical spec)*
+1. Does a user depend on the outcome of this? *(If no → technical spec)*
 2. Can you describe it without specifying protocols or implementation? *(If no → technical spec)*
 3. Would a non-technical stakeholder need to validate this? *(If no → technical spec)*
 
-`bc-api-facade` is a technical component (no user interacts with it) — it goes in `docs/`. `invoice-review-queue` is a user workflow (Shauna reviews invoices there) — it gets a product spec.
+`auth-middleware` is a technical component (no user interacts with it) — it goes in `docs/`. `invoice-review-queue` is a user workflow (the invoice reviewer works there) — it gets a product spec.
 
-### 2. The Spec Implementer — Daily Developer Loop
+### 2. The Spec Implementer Skill
 
-The whole loop is dead simple from a developer's perspective:
+This skill specializes in turning spec changes into working code. The developer's interface stays minimal — requirements arrive in any format, you update the spec, you tell Claude to implement.
 
-1. New requirements arrive (transcript, email, ticket — any format).
-2. You update the spec.
-3. You tell Claude to implement.
+Under the hood the skill runs a more disciplined loop: load the full spec for context, detect what changed via `git diff`, explore the codebase for relevant patterns, plan the change (lightweight for small updates, explicit for cross-cutting ones), implement incrementally following existing conventions, then verify each acceptance criterion against the result before committing with a reference back to the spec.
 
-That's it. Under the hood the skill reads the full spec, runs `git diff` to see what changed, plans, codes, and verifies each acceptance criterion against the result — but as a developer, you only ever interact with steps 1–3. If something can't be implemented exactly as the spec describes, the skill flags it back to the PM rather than guessing. Spec drift dies here.
+The rule that keeps the spec and code in lockstep: **never deviate from the spec silently.** If something can't be implemented exactly as the spec describes, the skill flags it back rather than guessing — surfacing the conflict as a Risks & Open Question on the spec for human decision. Spec drift dies here.
 
-### 3. The Jira Sync — Bidirectional Bridge
+### 3. The Jira Sync Skill
 
 This is the optional skill that keeps specs and Jira honest if your org uses both. Three modes:
 
@@ -363,9 +372,47 @@ A few sync rules that prevent the most common failure modes:
 - **Never overwrite Jira metadata.** Assignee, sprint, status, story points are sacred — sync only adds, never silently mutates.
 - **Never auto-update story text.** If a criterion changed, flag it for human review rather than silently rewriting the Jira story.
 
+### A worked example: `/spec` end-to-end
+
+Here's what a small feature actually looks like running through the three skills via `/spec`.
+
+**Requirements arrive.** In practice the input is usually a longer artifact — a requirements document, a meeting transcript, a feature brief — not a one-line message. The typical move is to paste the whole thing into the spec generator and let the Spec Manager Skill abstract it up. For illustration, imagine the source boils down to something like this from a finance stakeholder:
+
+> We need an invoice review queue. Maya in AP is re-keying 80–120 PDFs a day. We want auto-extraction with human review, low-confidence fields flagged, and invoices over $5K need a second approval from Tariq. Must integrate with our ERP, and approved invoices should appear there within 24 hours.
+
+In a real engagement the source would be much richer — pages of context, edge cases, prior decisions, constraints scattered across sections. That richness is exactly what a spec absorbs and structures.
+
+**Generate the spec.** Point `/spec` at the source:
+
+```text
+/spec generate from these requirements: [paste the requirements doc or transcript]
+```
+
+The Spec Manager Skill creates `/specs/invoice-review.md` with the full template — Problem, Users (Maya, Tariq), Goals, Non-Goals, acceptance criteria abstracted from the source, Constraints, and any Open Questions where the source was silent (e.g. the confidence threshold).
+
+**Review and validate.** The developer reads the generated spec, refines anything that drifted (over-specific phrasing, missing edge cases, technical details that snuck into a product spec), and then validates with the PM as a PR diff. The PM edits a few criteria, signs off. The diff *is* the contract.
+
+**Implement.**
+
+```text
+/spec implement
+```
+
+The Spec Implementer Skill produces the code — extraction service, side-by-side review UI, confidence-flag pipeline, decision log, two-stage approval for ≥ $5K, batch sync to ERP, search and filter — verifying each acceptance criterion against the result before commit.
+
+**Sync to Jira (optional).**
+
+```text
+/spec sync to Jira
+```
+
+The Jira Sync Skill pushes the spec as an epic with eight stories, labeled `spec:invoice-review` for traceability.
+
+That's the full loop — natural-language requirement → spec → implementation → tickets. Three commands, one shared artifact (`/specs/invoice-review.md`), and the team keeps the diff-is-the-contract review surface throughout.
+
 ## Specs Beyond Coding
 
-The compression that AI brought to coding doesn't stop at code. Anything downstream of the spec — tests, tasks, documentation — can be regenerated and kept current the same way. Once the spec is the source of truth, everything that traces back to it benefits from the same shift: humans write the spec, AI handles the mechanical translation into the downstream artifact.
+The gains AI brought to coding don't stop at code. Anything downstream of the spec — tests, tasks, documentation — can be regenerated and kept current the same way. Once the spec is the source of truth, everything that traces back to it benefits from the same shift: humans write the spec, AI handles the mechanical translation into the downstream artifact.
 
 Two applications I've seen pay off the most in practice are QA test case generation and task management.
 
@@ -393,45 +440,23 @@ Why teams move to this:
 
 For organizations that need Jira for reporting, time tracking, or compliance, this won't replace it — see [Specs and Project Management](#specs-and-project-management) above. But for teams whose primary goal is *move fast and ship*, the `/tasks` folder pattern eliminates an entire layer of tooling friction — the same way `/specs` did for requirements.
 
-## What we've seen in practice
-
-We've now deployed Spec-Driven Development across **eight real client projects**, including an engagement with a top-three global management consultancy. The most surprising pattern: **PMs themselves take over the spec-writing**, not just developers.
-
-On that consultancy project, the lead stakeholder installed Claude Code himself in week two. From that point on, after every meeting, *he* updated the specs from the transcript — no developer translation step, no Jira tickets, no requirements-clarification meetings. We dropped Jira entirely. The spec was the contract; the diff was the conversation.
-
-His words: *"It feels like a revolution in product management and software development."*
-
-His estimate: **roughly 3x faster delivery** — driven by collapsing the full requirements loop. What used to be daily clarification meetings, Jira tickets, developer translation, and back-and-forth review became a single spec edit feeding the AI directly into a PR.
-
-Across the eight projects, the consistent pattern is **around 50% efficiency gains on requirements-to-merged-PR cycles** vs. the same teams' baseline before adopting it — biggest wins on long-lived, evolving production software.
-
-One anecdote that crystallized the case for me: on a separate long-running platform, a single permissioning change once generated *three days* of back-and-forth — contradictory expectations spread across older tickets, no authoritative source for current behavior. The fix was a spec: capture the rules, surface the contradictions, get sign-off, delegate implementation. The same kind of change, today, takes hours.
-
-## Why vibe-coding breaks at production scale
-
-Earlier I drew a line between vibe-coded prototypes — where Spec-Driven Development is overhead — and production software, where it's a force multiplier. Three failure modes hit at production scale that prototypes never see:
-
-- **Regression risk compounds.** Without a single, current, exhaustive record of expected behavior, every change is a gamble — and "we'll catch it in QA" quietly becomes the only acceptance criterion still holding.
-- **Communication friction explodes.** What's new vs. what already exists vs. what was deprecated becomes a daily debate. Half the sprint is gone before anyone writes code.
-- **Onboarding becomes archaeology.** New joiners piece together what the system does today from Jira, tribal knowledge, old PRs, and reading code — slowly, and incompletely. The senior engineer becomes a permanent dependency.
-
-For greenfield, none of this matters. For evolving production code, it's the daily reality — and it's where AI-accelerated coding *stops compounding* unless you fix the requirements layer too.
-
 ## Where to Go From Here
 
 If you take one thing away from this guide: **stop throwing away your prompts.** The prompt is your spec. Capture it once, version-control it, and let the AI regenerate the code from it as the spec evolves.
 
+Two natural entry points: **write the spec for a new feature** and let the AI generate from it, or **bootstrap a spec from existing code** using the Spec Manager Skill's bootstrap mode. Either works — pick whichever fits the codebase you're in.
+
 Concretely, here's what I'd do this week:
 
-1. **Pick one feature** in your codebase — preferably one that's actively changing.
-2. **Bootstrap a single spec file** for it, using the template above. Use AI to do the heavy lifting; review for abstraction-level mistakes (no API endpoints, no schemas, no framework names).
-3. **Get PM sign-off** on that one spec. The diff *is* the contract.
-4. **Implement the next change to that feature spec-first** — update the spec, then point the AI at the diff. Compare the experience to your old workflow.
-5. If it clicks, expand to a second spec. If not, you've spent an afternoon learning where it doesn't fit your team.
+1. **Pick a small feature** — new, or an existing one that's actively changing.
+2. **Write or bootstrap its spec** using the template above — user workflow, acceptance criteria, constraints, non-goals.
+3. **Get PM sign-off.** The diff *is* the contract.
+4. **Point the AI at the spec.** For a new feature, let it generate the implementation. For an existing one, implement the next change spec-first by updating the spec, then pointing the AI at the diff.
+5. **When more changes arrive, keep updating the spec first.** Compare the experience to your old workflow.
 
-The full guide — including the Claude skill orchestrator, the spec manager, the implementer, and the Jira sync — runs across every AI engagement we've shipped in the last year. Specs aren't extra work. They're the work you were already doing, captured once instead of repeatedly reinvented.
+If it clicks, expand to a second spec. Either path is doable in an afternoon for one well-scoped feature.
 
-The bottleneck isn't the code anymore. Let's stop pretending it is.
+Specs aren't extra work. They're the work you were already doing, captured once instead of repeatedly reinvented.
 
 ---
 

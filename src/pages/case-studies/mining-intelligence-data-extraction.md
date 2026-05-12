@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/AboutLayout.astro
-title: "Mining Intelligence Company Replaces Manual Data Extraction with AI"
+title: "Replacing Manual PDF Extraction with Agentic AI: 80% Reduction, Two Weeks to Production"
 ---
 
 > Originally published on the [Tecknoworks website](https://tecknoworks.com/cases/mining-intelligence-ai-data-extraction/), May 2026.
