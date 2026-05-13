@@ -1,7 +1,7 @@
 ---
 author: Evgeni Rusev
 pubDatetime: 2026-05-10T12:00:00Z
-title: "Spec-Driven Development: A Comprehensive Guide"
+title: "Spec-Driven Development: A Practical Guide for AI-Accelerated Teams"
 slug: spec-driven-development-guide
 featured: true
 draft: false
