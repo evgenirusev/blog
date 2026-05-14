@@ -6,6 +6,26 @@ wide: true
 
 A selection of production AI engagements I've led.
 
+<a href="/case-studies/mining-ai-data-classification" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
+  <img
+    src="/images/case-studies/mining-ai-data-classification.png"
+    alt="AI data classification platform for mining — multilingual classification, human-in-the-loop review, and analytics dashboards"
+    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    loading="lazy"
+  />
+  <div class="flex-1 min-w-0">
+    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+      Reducing Manual Work by 80%: AI Data Classification in Mining
+    </h2>
+    <p class="mt-3 text-sm opacity-80">
+      <strong>Client:</strong> Top-three global management consultancy. <strong>Industry:</strong> Mining intelligence.
+    </p>
+    <p class="mt-3">
+      Built a production-grade AI classification platform from scratch — multilingual data handling, 94% accuracy across 129 cost categories and ~160 equipment delay types, human-in-the-loop review. Days of manual classification cut to minutes.
+    </p>
+  </div>
+</a>
+
 <a href="/case-studies/mining-intelligence-data-extraction" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
     src="/images/case-studies/mining-intelligence-data-extraction.png"
