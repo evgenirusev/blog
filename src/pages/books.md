@@ -7,7 +7,7 @@ Books are one of the main ways I learn. These are some that have stuck with me a
 
 I'll add categories as the list grows.
 
-## Decision-making and problem-solving
+## Thinking and problem-solving
 
 - **The Great Mental Models** (Vols 1–4) — Shane Parrish
 - **Poor Charlie's Almanack: The Essential Wit and Wisdom of Charles T. Munger** — Charles T. Munger (ed. Peter Kaufman)
