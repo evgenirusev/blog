@@ -11,6 +11,7 @@ I'll add categories as the list grows.
 
 - **The Great Mental Models** (Vols 1–4) — Shane Parrish
 - **Poor Charlie's Almanack: The Essential Wit and Wisdom of Charles T. Munger** — Charles T. Munger (ed. Peter Kaufman)
+- **Seeking Wisdom: From Darwin to Munger** — Peter Bevelin
 - **Deep Simplicity: Bringing Order to Chaos and Complexity** — John Gribbin
 - **Bulletproof Problem Solving: The One Skill That Changes Everything** — Charles Conn & Robert McLean
 - **The Pyramid Principle: Logic in Writing and Thinking** — Barbara Minto
