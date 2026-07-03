@@ -6,6 +6,26 @@ wide: true
 
 A selection of production AI engagements I've led.
 
+<a href="/case-studies/pain-points-to-funded-roadmap" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
+  <img
+    src="/images/case-studies/pain-points-to-funded-roadmap.png"
+    alt="From pain points to roadmap — AI and data transformation assessment infographic with phased roadmap and ~80% finance automation reduction"
+    class="w-full h-44 object-contain rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    loading="lazy"
+  />
+  <div class="flex-1 min-w-0">
+    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+      31 Pain Points to a Funded Roadmap: Scaling Without Doubling the Team
+    </h2>
+    <p class="mt-3 text-sm opacity-80">
+      <strong>Client:</strong> Mid-market Irish manufacturer. <strong>Industry:</strong> CPG, frozen foods.
+    </p>
+    <p class="mt-3">
+      A two-week AI &amp; data transformation assessment turned a growth ambition into a funded, board-ready roadmap — 31 ranked pain points, 16 prioritised use cases, 3 decision frameworks. First build (AP/AR automation) live in production with ~80% less finance processing time.
+    </p>
+  </div>
+</a>
+
 <a href="/case-studies/mining-ai-data-classification" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
     src="/images/case-studies/mining-ai-data-classification.png"
