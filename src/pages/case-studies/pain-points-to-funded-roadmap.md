@@ -95,7 +95,9 @@ The first build from the roadmap is live: AP/AR automation in production on the 
 | Accounts Payable | ~20–25 hrs/week | ~4–5 hrs/week | ~80% |
 | Accounts Receivable | ~20–28 hrs/week | ~4–6 hrs/week | ~80% |
 
-This is not a pilot or a projection — it is an operational system the finance team runs day to day, trained hands-on and reviewing every entry before anything posts.
+The hours are only part of it: around 50 manual rules — retailer-specific formatting quirks, matching logic, exception handling — were streamlined and encoded into the system, and errors are down roughly 90%, with no rekeying and systematic validation on every document.
+
+This is not a pilot or a projection — it is an operational system the finance team runs day to day, trained hands-on and reviewing every entry before anything posts. I've written a full deep dive on how this was built — from SME interviews and as-is process maps to redesign, prototyping, and production — in [Automating 80% of Finance AP/AR with AI](/case-studies/automating-finance-ap-ar-with-ai).
 
 ## What's Possible Now
 
