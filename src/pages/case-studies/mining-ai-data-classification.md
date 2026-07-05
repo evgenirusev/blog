@@ -88,3 +88,7 @@ Every organization that collects operational data across multiple sites or regio
 The AI classification model was one piece. The production platform around it — the workflow, the validation, the human review, the multilingual support, the analytics engine — is what made it usable at scale.
 
 The AI was the easy part. The trust layer around it is what made the math work.
+
+## Drowning in Manual Data Work?
+
+If your teams are hand-standardizing operational data across sites, languages, or formats — and the cleanup is eating the time the analysis should get — I'm happy to talk it through. This is the kind of work I lead at [Tecknoworks](https://tecknoworks.com), and a short conversation is usually enough to tell whether AI classification with a proper trust layer makes sense for your data. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/), email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com), or contact [Tecknoworks](https://tecknoworks.com/contact/) directly.

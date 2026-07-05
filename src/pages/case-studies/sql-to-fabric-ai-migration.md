@@ -166,3 +166,7 @@ The instinct on a migration like this is to scale up the team. AI changes that m
 The tier breakdown is what made the automation mix sensible — full automation where it was safe, structured pair-review where it wasn't, and senior architecture time concentrated on the 10% that actually needed it.
 
 This pattern shows up in most large-scale legacy migrations. The real win isn't *AI translates code*. It's *AI translates the easy 90%, so humans can focus on the hard 10%* — which is where the architecture lives anyway.
+
+## Staring Down a Multi-Year Migration?
+
+If you're facing a legacy migration with an estimate measured in years, AI changes that math — but only with the right methodology around it. This is the kind of work I lead at [Tecknoworks](https://tecknoworks.com), and a short conversation is usually enough to tell whether an AI-accelerated approach fits your codebase. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/), email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com), or contact [Tecknoworks](https://tecknoworks.com/contact/) directly.

@@ -116,3 +116,7 @@ The platform was built end-to-end — from product inception through market laun
 - **CI/CD:** Azure DevOps pipelines, multi-environment provisioning via Terraform
 
 The same code path supported three different usage modes — founder self-service, lawyer-supervised, and investor read-only. That meant strong domain modeling, clean separation of legal logic from UI, and permissions that lived in the domain model rather than scattered through if-statements that break at audit time.
+
+## Building a Platform Like This?
+
+If you're taking a product from inception to production — or adding an AI layer to one that's already live — I'm happy to talk it through. This is the kind of work I lead at [Tecknoworks](https://tecknoworks.com), and a short conversation is usually enough to tell whether the approach fits what you're building. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/), email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com), or contact [Tecknoworks](https://tecknoworks.com/contact/) directly.

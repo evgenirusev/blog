@@ -83,3 +83,7 @@ This pattern shows up everywhere. Organizations invest in AI capabilities that p
 The question is rarely whether the model is good enough. It usually is. The question is whether the production infrastructure exists to make it trustworthy at scale.
 
 The AI was the easy part. Building the trust layer around it is what made the math work.
+
+## Have a Model That Isn't a Product Yet?
+
+If your AI performs well in isolation but stalls on the way to production — validation, traceability, integration with the systems people actually use — I'm happy to talk it through. This is the kind of work I lead at [Tecknoworks](https://tecknoworks.com), and a short conversation is usually enough to tell where the gap is. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/), email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com), or contact [Tecknoworks](https://tecknoworks.com/contact/) directly.

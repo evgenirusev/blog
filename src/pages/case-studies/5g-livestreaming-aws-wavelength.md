@@ -88,3 +88,7 @@ The architectural decision driving the latency win: run as much of the delivery 
 - **S3** — media asset storage and recordings
 - **Lambda** — stream lifecycle events (start/stop/health/error)
 - **CloudFormation** — multi-carrier, multi-zone IaC
+
+## Building Something Latency-Critical?
+
+If you're pushing workloads to the edge — live video, real-time interaction, anything where every millisecond shows — I'm happy to talk it through. This is the kind of work I lead at [Tecknoworks](https://tecknoworks.com), and a short conversation is usually enough to tell whether an edge architecture makes sense for your use case. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/), email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com), or contact [Tecknoworks](https://tecknoworks.com/contact/) directly.
