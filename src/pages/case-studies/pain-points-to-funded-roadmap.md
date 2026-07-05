@@ -105,4 +105,4 @@ Microsoft Azure, Microsoft Fabric, Power BI, Python, React, Next.js, FastAPI
 
 ## Facing a Similar Ceiling?
 
-If your growth plan is running into the same wall — processes that scale linearly with revenue, data scattered across spreadsheets, tools your teams never adopted — this is exactly what the [Tecknoworks](https://tecknoworks.com) AI & Data Transformation Assessment is built for: two weeks, a severity-ranked map of what is holding you back, and a sequenced roadmap you can fund. Talk to Tecknoworks about where to start.
+If your growth plan is running into the same wall — processes that scale linearly with revenue, data scattered across spreadsheets, tools your teams never adopted — I'm happy to talk it through. This is the kind of engagement I lead day to day, and a short conversation is usually enough to tell whether an assessment like this makes sense for you. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/) or email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com).
