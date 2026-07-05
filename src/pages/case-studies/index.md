@@ -35,7 +35,7 @@ A selection of production AI engagements I've led.
   />
   <div class="flex-1 min-w-0">
     <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
-      AI Business Transformation: From 31 Pain Points to a Funded Roadmap
+      AI Business Transformation: Doubling the Business Without Doubling the Team
     </h2>
     <p class="mt-3 text-sm opacity-80">
       <strong>Client:</strong> Mid-market Irish manufacturer. <strong>Industry:</strong> CPG, frozen foods.
