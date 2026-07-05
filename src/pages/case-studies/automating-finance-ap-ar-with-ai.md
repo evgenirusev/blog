@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/AboutLayout.astro
-title: "Automating 80% of Finance AP/AR with AI: From Process Maps to Production"
+title: "Automating 80% of Finance AP/AR with AI"
 ---
 
 ![AP/AR automation on Azure — invoices, remittances, and retailer EDI flow through capture, matching, routing, and exception queues into human-reviewed posting in Business Central](../../assets/images/posts/automating-finance-ap-ar-with-ai.png)
