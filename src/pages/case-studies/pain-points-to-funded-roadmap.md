@@ -52,7 +52,11 @@ Tecknoworks structured the engagement so that each phase earned the next: a disc
 
 A structured two-week AI and data transformation assessment. The methodology was the deliverable. The team ran SME interviews across 8 functional areas, including finance, supply chain, commercial, IT, leadership, and quality. It documented and severity-ranked 31 pain points, then mapped and prioritised 16 use cases by impact, investment, and timeline.
 
+![The approach we took — 8 stakeholder interviews, 31 pain points documented, 16 use cases prioritised, 3 custom frameworks, 13 preliminary proposals](../../assets/images/posts/pain-points-approach-we-took.png)
+
 Three reusable decision frameworks were built for the client: Build-vs-Buy-vs-Keep-Manual, Process Redesign (do not automate a broken process), and a 6-stage implementation framework with human-in-the-loop governance. Alongside the frameworks, a multi-year financial model projected the cost and return of each initiative, backing every decision with numbers. The outcome was a funded, sequenced plan that put the highest-value moves first.
+
+![Use case prioritization — critical, high, and medium priority use cases sequenced by impact, effort, and timeline](../../assets/images/posts/pain-points-use-case-prioritization.png)
 
 ### Phase 2: Finance Automation and Data Discovery — delivered
 
@@ -105,4 +109,4 @@ Microsoft Azure, Microsoft Fabric, Power BI, Python, React, Next.js, FastAPI
 
 ## Facing a Similar Ceiling?
 
-If your growth plan is running into the same wall — processes that scale linearly with revenue, data scattered across spreadsheets, tools your teams never adopted — I'm happy to talk it through. This is the kind of engagement I lead day to day, and a short conversation is usually enough to tell whether an assessment like this makes sense for you. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/) or email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com).
+If your growth plan is running into the same wall — processes that scale linearly with revenue, data scattered across spreadsheets, tools your teams never adopted — I'm happy to talk it through. This is the kind of engagement I lead day to day at [Tecknoworks](https://tecknoworks.com), and a short conversation is usually enough to tell whether an assessment like this makes sense for you. Reach out on [LinkedIn](https://www.linkedin.com/in/evgeni-rusev-24636017b/), email me at [evgeni.n.rusev@gmail.com](mailto:evgeni.n.rusev@gmail.com), or contact [Tecknoworks](https://tecknoworks.com/contact/) directly.

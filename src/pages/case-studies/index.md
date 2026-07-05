@@ -6,6 +6,26 @@ wide: true
 
 A selection of production AI engagements I've led.
 
+<a href="/case-studies/automating-finance-ap-ar-with-ai" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
+  <img
+    src="/images/case-studies/automating-finance-ap-ar-with-ai.png"
+    alt="AP/AR automation on Azure — invoices, remittances, and retailer EDI flow through capture, matching, routing, and exception queues into human-reviewed posting in Business Central"
+    class="w-full h-44 object-contain rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    loading="lazy"
+  />
+  <div class="flex-1 min-w-0">
+    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+      Automating 80% of Finance AP/AR with AI: From Process Maps to Production
+    </h2>
+    <p class="mt-3 text-sm opacity-80">
+      <strong>Client:</strong> Mid-market Irish manufacturer. <strong>Industry:</strong> CPG, frozen foods.
+    </p>
+    <p class="mt-3">
+      Zooming in on the first build from the transformation roadmap: SME interviews, as-is/to-be process maps, redesign before automation, and a human-in-the-loop AP/AR system in production — ~80% of manual work automated, ~90% fewer errors, 50 manual rules streamlined.
+    </p>
+  </div>
+</a>
+
 <a href="/case-studies/pain-points-to-funded-roadmap" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
     src="/images/case-studies/pain-points-to-funded-roadmap.png"
