@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/AboutLayout.astro
-title: "31 Pain Points to a Funded Roadmap: How an Irish Manufacturer Mapped Its Path to Double Without Doubling Its Team"
+title: "AI Business Transformation: From 31 Pain Points to a Funded Roadmap"
 ---
 
 ![From pain points to roadmap — a structured AI and data assessment turns 31 pain points into 16 use cases, 3 frameworks, and an ~80% reduction in manual finance work](../../assets/images/posts/pain-points-to-funded-roadmap.png)
