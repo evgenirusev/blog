@@ -10,7 +10,7 @@ A selection of production AI engagements I've led.
   <img
     src="/images/case-studies/automating-finance-ap-ar-with-ai.png"
     alt="AP/AR automation on Azure — invoices, remittances, and retailer EDI flow through capture, matching, routing, and exception queues into human-reviewed posting in Business Central"
-    class="w-full h-44 object-contain rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    class="w-full h-44 object-contain rounded-md sm:w-72 sm:h-auto sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
