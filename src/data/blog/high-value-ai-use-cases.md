@@ -21,9 +21,9 @@ ogImage: "../../assets/images/posts/high-value-ai-use-cases.png"
 
 *We evaluate a lot of AI use-cases at [Tecknoworks](https://tecknoworks.com). These are the ones that keep coming up across industries and actually deliver business value once in production — with a short visual demo of each below.*
 
-We've evaluated well over a hundred use-cases across various domains — finance and legal, manufacturing, healthcare, logistics. Most are situational: they solve one company's problem and don't travel far. But a smaller set keeps coming up everywhere — the same shapes of problem, industry after industry, that generalize and consistently bring a return once they're in production.
+Across finance, legal, manufacturing, healthcare, and logistics, most use-cases are situational — they solve one company's problem and don't travel far.
 
-That's this list: none of it tied to a single industry, each a working demo you can watch run below. Treat it as a menu, not a ranking — if one looks like something your team does by hand today, that's where to start.
+The ones below are the exception: the same handful of shapes that recur in industry after industry, which is what makes them worth building. Treat the list as a menu, not a ranking — if one looks like something your team already does by hand, that's where to start.
 
 ## Table of contents
 
