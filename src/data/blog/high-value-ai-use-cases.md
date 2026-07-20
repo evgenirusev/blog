@@ -1,7 +1,7 @@
 ---
 author: Evgeni Rusev
 pubDatetime: 2026-07-19T09:00:00Z
-title: "The AI Use-Case Handbook: 16 Demos of What's Possible"
+title: "The AI Use-Case Handbook: 16 Demos of What Actually Works"
 slug: high-value-ai-use-cases
 featured: true
 draft: false
