@@ -1,7 +1,7 @@
 ---
 author: Evgeni Rusev
 pubDatetime: 2026-07-19T09:00:00Z
-title: "16 AI Use-Cases We Keep Seeing That Actually Deliver Business Value (Demos Included)"
+title: "The AI Use-Case Handbook: 16 Demos of What's Possible"
 slug: high-value-ai-use-cases
 featured: true
 draft: false
