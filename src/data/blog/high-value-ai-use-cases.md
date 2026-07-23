@@ -46,7 +46,7 @@ The bottleneck on most reporting isn't the analysis — it's the queue. Every "q
 
 This is the one genuinely live model in the set. You ask in plain English — *"which regions grew fastest last quarter?"* — and it writes the SQL, runs it against the real database, and picks a chart for the answer. Nobody built that report in advance; the query didn't exist until you asked.
 
-<video src="/images/posts/ai-opportunities/ask-your-data.mp4" poster="/images/posts/ai-opportunities/ask-your-data-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Ask Your Data — a plain-English question turned into SQL and answered with the right chart, across bar, pie and line charts" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/ask-your-data.mp4" poster="/images/posts/ai-opportunities/ask-your-data-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Ask Your Data — a plain-English question turned into SQL and answered with the right chart, across bar, pie and line charts" style="width:100%;height:auto;aspect-ratio:1400/1174;border-radius:0.5rem;background:#0f172a;"></video>
 
 What makes it safe is that the SQL is right there on screen, and the model can only read from the database, never write to it. An analyst can check the query; the system can look at anything and change nothing. That's what lets you hand it to non-technical staff.
 
@@ -58,7 +58,7 @@ A number on a dashboard is only as good as your ability to explain it. When fina
 
 Ask about any datapoint and it works backwards through the data model — finds the measure, the formula behind it, the source tables it draws on — and lays out the full lineage, down to the row-by-row breakdown that rebuilds the number.
 
-<video src="/images/posts/ai-opportunities/data-discovery.mp4" poster="/images/posts/ai-opportunities/data-discovery-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Data Discovery — a metric is traced back through the Fabric data model to its formula, source tables, and a row-by-row breakdown that reconstructs the number to a 99.9% match" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/data-discovery.mp4" poster="/images/posts/ai-opportunities/data-discovery-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Data Discovery — a metric is traced back through the Fabric data model to its formula, source tables, and a row-by-row breakdown that reconstructs the number to a 99.9% match" style="width:100%;height:auto;aspect-ratio:1400/1080;border-radius:0.5rem;background:#0f172a;"></video>
 
 It shows the actual formula and the source tables, then reconciles its own reconstruction against the reported figure — here, a 99.9% match. The provenance *is* the answer, not a footnote to it.
 
@@ -70,7 +70,7 @@ Your answers already exist. They're just spread across wikis, PDFs, and policy d
 
 Ask a question here and the answer comes back with its sources attached — numbered citations you click to land on the exact passage in the original document.
 
-<video src="/images/posts/ai-opportunities/assistant-citations.mp4" poster="/images/posts/ai-opportunities/assistant-citations-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Knowledge Base — an answer streams in with inline [1][2] citations, and clicking one highlights the exact source passage" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/assistant-citations.mp4" poster="/images/posts/ai-opportunities/assistant-citations-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Knowledge Base — an answer streams in with inline [1][2] citations, and clicking one highlights the exact source passage" style="width:100%;height:auto;aspect-ratio:1400/586;border-radius:0.5rem;background:#0f172a;"></video>
 
 It pulls the relevant passages first and answers only from those, so every claim traces back to something you can read yourself. For anything where a wrong answer costs you — compliance, policy, support — that's the whole point.
 
@@ -82,7 +82,7 @@ Support teams answer the same questions over and over. Senior agents lose their 
 
 The copilot reads an incoming ticket, classifies it, finds a cited answer, and drafts the reply. Routine questions it can close on its own; anything unclear goes to a person, with the draft and a summary already attached instead of a blank screen.
 
-<video src="/images/posts/ai-opportunities/support-copilot.mp4" poster="/images/posts/ai-opportunities/support-copilot-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Support Copilot — a ticket is classified, answered from the knowledge base with citations, drafted, and auto-resolved as the deflection rate climbs" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/support-copilot.mp4" poster="/images/posts/ai-opportunities/support-copilot-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Support Copilot — a ticket is classified, answered from the knowledge base with citations, drafted, and auto-resolved as the deflection rate climbs" style="width:100%;height:auto;aspect-ratio:1400/608;border-radius:0.5rem;background:#0f172a;"></video>
 
 Two things keep it in check: every drafted answer carries its citations, and nothing goes out on a sensitive ticket without a person approving it. The easy tickets get handled; the hard ones reach someone faster, with a head start.
 
@@ -94,7 +94,7 @@ Keeping up with your market — competitor moves, regulatory shifts, the industr
 
 Kick it off and a set of agents scan the sources — news, filings, competitor pages, forums — group what they find into signals, score each one for impact, and assemble the weekly brief. Open any insight and it expands into a timeline and the sources behind it; ask a follow-up and it answers from the same material.
 
-<video src="/images/posts/ai-opportunities/market-intelligence.mp4" poster="/images/posts/ai-opportunities/market-intelligence-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Market Intelligence — agents scan sources into a weekly brief; an insight drills into a timeline and sources, and a follow-up question is answered" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/market-intelligence.mp4" poster="/images/posts/ai-opportunities/market-intelligence-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Market Intelligence — agents scan sources into a weekly brief; an insight drills into a timeline and sources, and a follow-up question is answered" style="width:100%;height:auto;aspect-ratio:1400/640;border-radius:0.5rem;background:#0f172a;"></video>
 
 Every insight links back to the sources it came from, so a claim is one click from the filing or article that backs it — not an anonymous "the market is shifting."
 
@@ -110,7 +110,7 @@ Someone in your company is retyping numbers off a PDF right now. It's slow, erro
 
 Drop in an invoice, a form, or a lab report, and the fields come off the page into a structured record — each with a confidence score.
 
-<video src="/images/posts/ai-opportunities/document-understanding.mp4" poster="/images/posts/ai-opportunities/document-understanding-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Document Data Extraction — fields on an invoice highlight and populate a structured panel, each with a per-field confidence badge" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/document-understanding.mp4" poster="/images/posts/ai-opportunities/document-understanding-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Document Data Extraction — fields on an invoice highlight and populate a structured panel, each with a per-field confidence badge" style="width:100%;height:auto;aspect-ratio:1400/534;border-radius:0.5rem;background:#0f172a;"></video>
 
 The confidence score does the real work. High-confidence fields fill in on their own; low-confidence ones get flagged for a person instead of going in wrong. And every field links back to the exact spot on the page it came from. The job shifts from *typing* to *checking*.
 
@@ -122,7 +122,7 @@ Extraction pulls fields from one document. Onboarding is the batch version — a
 
 Drop in the batch and the pipeline runs end to end — ingest, OCR, normalize, reconcile — into one structured record. Where two sources conflict (a contract says $250k, an email says $248k), it flags the field instead of quietly picking one.
 
-<video src="/images/posts/ai-opportunities/legal-onboarding.mp4" poster="/images/posts/ai-opportunities/legal-onboarding-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Document-to-data onboarding — a batch of mixed-format documents is ingested, OCR'd, normalized and reconciled into one structured record, with a conflicting value flagged for review" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/legal-onboarding.mp4" poster="/images/posts/ai-opportunities/legal-onboarding-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Document-to-data onboarding — a batch of mixed-format documents is ingested, OCR'd, normalized and reconciled into one structured record, with a conflicting value flagged for review" style="width:100%;height:auto;aspect-ratio:1400/968;border-radius:0.5rem;background:#0f172a;"></video>
 
 Every field traces back to the document it came from, and cross-source conflicts get surfaced for a person rather than settled by a coin flip. The reviewer approves; roughly 40 minutes of keying becomes seconds.
 
@@ -134,7 +134,7 @@ Manual first-pass contract review is slow and inconsistent, and it's risky — a
 
 Point it at an incoming contract and it checks each clause against your playbook — your positions, your risk tolerance — flagging matches, deviations, and missing terms. Open a deviation and there's a suggested redline waiting.
 
-<video src="/images/posts/ai-opportunities/contract-review.mp4" poster="/images/posts/ai-opportunities/contract-review-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Contract Review — each clause is checked against a playbook, deviations are flagged, and a suggested redline is drafted" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/contract-review.mp4" poster="/images/posts/ai-opportunities/contract-review-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Contract Review — each clause is checked against a playbook, deviations are flagged, and a suggested redline is drafted" style="width:100%;height:auto;aspect-ratio:1400/620;border-radius:0.5rem;background:#0f172a;"></video>
 
 Because the playbook holds *your* standards, the review reflects what your business actually cares about, not a generic idea of fair. It drafts; a lawyer approves. The reading is automated, the judgment stays human.
 
@@ -146,7 +146,7 @@ The follow-up after a call is the part that usually doesn't get done. Notes go u
 
 This one works from audio. A recording becomes a transcript, and the transcript becomes structure: a summary, action items with owners, flagged risks, and updates written back to the CRM.
 
-<video src="/images/posts/ai-opportunities/meeting-intelligence.mp4" poster="/images/posts/ai-opportunities/meeting-intelligence-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Meeting & Call Intelligence — a call recording becomes a transcript, then a summary with owner-assigned action items, risks, and CRM updates" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/meeting-intelligence.mp4" poster="/images/posts/ai-opportunities/meeting-intelligence-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Meeting & Call Intelligence — a call recording becomes a transcript, then a summary with owner-assigned action items, risks, and CRM updates" style="width:100%;height:auto;aspect-ratio:1400/600;border-radius:0.5rem;background:#0f172a;"></video>
 
 The summary isn't the point — anyone can generate a recap. The value is what gets written downstream: the action items and CRM updates that otherwise never get entered. All of it ties back to the transcript, so you can check it.
 
@@ -158,7 +158,7 @@ Every company has a heap of messy, inconsistent values — support tags, expense
 
 Point it at the raw values and it maps each one to a standard category with a confidence score, across languages, flagging the low-confidence ones for review and leaving the rest analytics-ready.
 
-<video src="/images/posts/ai-opportunities/classification.mp4" poster="/images/posts/ai-opportunities/classification-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Data Classification & Mapping — messy multilingual values are mapped onto one standard taxonomy with confidence scores, low-confidence rows flagged for review" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/classification.mp4" poster="/images/posts/ai-opportunities/classification-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Data Classification & Mapping — messy multilingual values are mapped onto one standard taxonomy with confidence scores, low-confidence rows flagged for review" style="width:100%;height:auto;aspect-ratio:1400/514;border-radius:0.5rem;background:#0f172a;"></video>
 
 Same idea as extraction: the uncertain rows get flagged for a human instead of guessed at, and every mapping carries its confidence. What comes out the other side is one taxonomy instead of six languages' worth of free text.
 
@@ -174,7 +174,7 @@ By the time churn shows up in your numbers, the customer is usually already gone
 
 The model scores every account, and it shows the reasons behind each score: usage dropping off, a support escalation, a renewal date that came and went. Approve the suggested retention offer and the risk score drops in front of you while the revenue-at-risk total re-counts.
 
-<video src="/images/posts/ai-opportunities/customer-churn.mp4" poster="/images/posts/ai-opportunities/customer-churn-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Customer Churn Prediction — an at-risk subscriber's churn score is explained by ranked driver bars; approving a retention offer drops the risk and re-counts revenue-at-risk" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/customer-churn.mp4" poster="/images/posts/ai-opportunities/customer-churn-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Customer Churn Prediction — an at-risk subscriber's churn score is explained by ranked driver bars; approving a retention offer drops the risk and re-counts revenue-at-risk" style="width:100%;height:auto;aspect-ratio:1400/580;border-radius:0.5rem;background:#0f172a;"></video>
 
 The reasons are what make it usable. A bare "72% likely to churn" tells you nothing to do; knowing *why* tells you which lever to pull. It's a prediction someone can actually own.
 
@@ -186,7 +186,7 @@ Planning tends to run on stale spreadsheets and gut feel, with no quick way to a
 
 Pick a scenario or drag a lever and the forecast redraws live, inside a band that widens or narrows with the assumptions. A target line sits across it with a plain verdict: on track, or short.
 
-<video src="/images/posts/ai-opportunities/forecasting.mp4" poster="/images/posts/ai-opportunities/forecasting-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Forecasting & Scenarios — switching scenarios and levers redraws the forecast line, confidence band, and target verdict live" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/forecasting.mp4" poster="/images/posts/ai-opportunities/forecasting-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Forecasting & Scenarios — switching scenarios and levers redraws the forecast line, confidence band, and target verdict live" style="width:100%;height:auto;aspect-ratio:1400/530;border-radius:0.5rem;background:#0f172a;"></video>
 
 The band is the honest bit — it shows a range instead of pretending the future is one number. With a baseline and a target next to it, the chart stops being decoration and becomes a decision.
 
@@ -202,7 +202,7 @@ This is the highest-value use-case on the list, and the hardest to get right. Hi
 
 Run one through and the system handles the whole chain: capture, match, validate, code, post. A clean item goes straight through to the ERP, payment scheduled, untouched. An unclear one stops and goes to a person, with everything it already worked out attached.
 
-<video src="/images/posts/ai-opportunities/process-automation.mp4" poster="/images/posts/ai-opportunities/process-automation-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Process Automation — an invoice clears end-to-end (capture, post to ERP, schedule payment) with only exceptions routed to a person" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/process-automation.mp4" poster="/images/posts/ai-opportunities/process-automation-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Process Automation — an invoice clears end-to-end (capture, post to ERP, schedule payment) with only exceptions routed to a person" style="width:100%;height:auto;aspect-ratio:1400/596;border-radius:0.5rem;background:#0f172a;"></video>
 
 Every step is logged, so you can reconstruct any run after the fact. Straight-through on the routine path, people on the real exceptions — that's what gets a process to somewhere around 80% hands-off. You start with one process, measure how much runs untouched, and expand from there.
 
@@ -214,7 +214,7 @@ Phone lines are expensive and unforgiving. Callers wait on hold, simple requests
 
 The agent takes the call, holds an actual conversation, and finishes the task — here, finding the caller in the system and booking an appointment — then confirms it by text. The transcript runs live, and the call ends with a booked outcome instead of "we'll get back to you."
 
-<video src="/images/posts/ai-opportunities/voice-agent.mp4" poster="/images/posts/ai-opportunities/voice-agent-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Voice Agent — an inbound call is handled end to end with a live transcript, ending in a booked appointment and a text confirmation" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/voice-agent.mp4" poster="/images/posts/ai-opportunities/voice-agent-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Voice Agent — an inbound call is handled end to end with a live transcript, ending in a booked appointment and a text confirmation" style="width:100%;height:auto;aspect-ratio:1400/526;border-radius:0.5rem;background:#0f172a;"></video>
 
 It handles the routine calls on its own and hands off to a person the moment one goes outside its lane. Every call is transcribed, so there's a record of exactly what was said and agreed.
 
@@ -226,7 +226,7 @@ When a regulation changes, the work is large and mostly invisible: figure out wh
 
 Feed it a change and it maps the impact — which documents are affected and what has to move — drafts the clause-level redlines, traces the knock-on effects to products and training, and routes each update to its owner. Open a proposed change and you get a before/after redline next to the specific rule it's answering.
 
-<video src="/images/posts/ai-opportunities/regulatory-change.mp4" poster="/images/posts/ai-opportunities/regulatory-change-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Regulatory Change Management — a rule change is assessed for impact across documents, products and training, with a before/after redline drafted and routed to an owner" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/regulatory-change.mp4" poster="/images/posts/ai-opportunities/regulatory-change-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Regulatory Change Management — a rule change is assessed for impact across documents, products and training, with a before/after redline drafted and routed to an owner" style="width:100%;height:auto;aspect-ratio:1400/660;border-radius:0.5rem;background:#0f172a;"></video>
 
 Every proposed edit shows the before, the after, and the article driving it — and nothing is applied on its own; an owner signs off on each one.
 
@@ -238,7 +238,7 @@ A lot of work still comes down to someone looking at something — a camera feed
 
 Point a model at the same feed and it watches every frame. The demo below is a safety example — a live site feed with detection boxes on each worker; the moment someone steps into a restricted zone without a hard hat, an alert fires, as it happens rather than on tomorrow's review.
 
-<video src="/images/posts/ai-opportunities/safety-vision.mp4" poster="/images/posts/ai-opportunities/safety-vision-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Visual AI — a live camera boxes each worker's PPE and fires an alert when a hard hat is missing, dropping the compliance gauge" style="width:100%;height:auto;border-radius:0.5rem;"></video>
+<video src="/images/posts/ai-opportunities/safety-vision.mp4" poster="/images/posts/ai-opportunities/safety-vision-poster.jpg" autoplay loop muted playsinline preload="none" aria-label="Visual AI — a live camera boxes each worker's PPE and fires an alert when a hard hat is missing, dropping the compliance gauge" style="width:100%;height:auto;aspect-ratio:1400/520;border-radius:0.5rem;background:#0f172a;"></video>
 
 Every detection is timestamped and logged on its own, which turns "someone should have been watching" into an actual record. And it runs on the cameras and images you already have.
 
