@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://evgenirusev.com/", // TODO: update once domain is connected
   author: "Evgeni Rusev",
   profile: "https://evgenirusev.com/",
-  desc: "AI Practice Lead. I help companies move AI from pilot to production. Writing about AI engineering, agent systems, and what actually works in the field.",
+  desc: "Solution Architect at Tecknoworks. I design applied AI and software solutions that make it to production. Writing about AI-native engineering, agent systems, and what actually works in the field.",
   title: "Evgeni Rusev",
   ogImage: "astropaper-og.jpg", // TODO: replace with custom OG image
   lightAndDarkMode: true,

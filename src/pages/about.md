@@ -4,9 +4,11 @@ title: "About"
 showAvatar: true
 ---
 
-I'm Evgeni Rusev — AI Practice Lead at [Tecknoworks](https://tecknoworks.com), a boutique Microsoft Gold Partner. I lead AI engagements with companies across legal tech, manufacturing, mining, and finance.
+I'm Evgeni Rusev — a forward-deployed Solution Architect at [Tecknoworks](https://tecknoworks.com), a boutique Microsoft Gold Partner. I work with clients across legal tech, manufacturing, mining, and insurance to design and deliver applied AI and software solutions, translating business goals, operating realities and technical constraints into architectures that scale. That means building new capabilities, modernizing legacy platforms, or integrating with established enterprise environments.
 
-I help organizations move AI from pilot to production — the 80% beyond the model: integration, data quality, governance, observability, and the engineering discipline that makes AI work outside a notebook.
+I lead the architecture end to end, from solution design and technology selection through implementation oversight, with a focus on security, production readiness, and long-term maintainability. I also lead the adoption of AI-driven SDLC practices, internally and with clients, through workshops, training and hands-on enablement.
+
+Before this I was AI Practice Lead, running a 15-person team that took applied AI from pilot to production — the 80% beyond the model: integration, data quality, governance, observability, and the engineering discipline that makes AI work outside a notebook.
 
 ## What I write about
 
