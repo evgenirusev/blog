@@ -23,9 +23,9 @@ export const FEATURED_WORK: FeaturedWork[] = [
   },
   {
     href: "/case-studies/pain-points-to-funded-roadmap/",
-    title: "From 31 Pain Points to AI in Production",
+    title: "Business Transformation: 31 Pain Points to AI in Production",
     kind: "Case study",
-    summary: "From 31 pain points to a funded roadmap, and roughly 80% less manual finance work in production.",
+    summary: "A two-week assessment into a funded roadmap, and roughly 80% less manual finance work in production.",
     image: painPoints,
   },
   {
