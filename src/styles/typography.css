@@ -7,10 +7,12 @@
     font-size: 1.0625rem;
     line-height: 1.75;
 
-    /* Reading measure: text blocks stay at ~70 characters per line, while figures,
-       tables, code and embedded media keep the full column width. */
-    > :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6, hr, dl) {
-      max-width: 42rem;
+    /* Reading measure: text blocks stay at ~75 characters per line and sit centred
+       in the column, while figures, tables, code and embedded media break out to
+       the full column width on both sides. */
+    > :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6, hr, dl, aside) {
+      max-width: var(--measure);
+      margin-inline: auto;
     }
     > p:has(> img, > video, > picture) {
       max-width: none;

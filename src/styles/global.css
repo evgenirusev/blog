@@ -21,6 +21,10 @@ html[data-theme="dark"] {
   --border: var(--brand-plum);
 }
 
+:root {
+  --measure: 42rem;
+}
+
 @theme inline {
   /* Inter for reading; the monospace face is kept for chrome (nav, dates, tags) and code. */
   --font-app: var(--font-inter);
