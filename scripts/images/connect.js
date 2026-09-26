@@ -10,6 +10,8 @@
 //                  fromAt / toAt: 0–1 position along the bottom / top edge (default 0.5)
 //           "elbow" right edge of `from` → along a horizontal line → rounded corner → down into the
 //                  top of `to` (a bus that drops into several targets). `y` overrides the bus height.
+//           "u"   bottom of `from` → down → across → up into the bottom of `to`, with
+//                  rounded corners (a clear "go back" loop). `drop` sets the depth.
 //           "bb"  bottom of `from` → down `drop` px → bottom of `to` (a return loop)
 //           "cc"  centre to centre, clipped to both boxes (hub-and-spoke)
 //   dashed: true for dependency / feedback / optional paths
@@ -88,6 +90,12 @@ window.drawLinks = function () {
       const y1 = link.y ?? a.cy, x1 = a.r, x2 = b.l + (b.r - b.l) * (link.toAt ?? 0.5), y2 = b.t - 7, r = 18;
       d = `M${x1} ${y1} H${x2 - r} Q${x2} ${y1} ${x2} ${y1 + r} V${y2}`;
       mid = [(x1 + x2) / 2, y1];
+    } else if (link.path === "u") {
+      const drop = link.drop ?? 44, r = 14;
+      const y = Math.max(a.b, b.b) + drop;
+      const x1 = a.cx, x2 = b.cx, dir = x2 < x1 ? -1 : 1;
+      d = `M${x1} ${a.b + 6} V${y - r} Q${x1} ${y} ${x1 + dir * r} ${y} H${x2 - dir * r} Q${x2} ${y} ${x2} ${y - r} V${b.b + 10}`;
+      mid = [(x1 + x2) / 2, y];
     } else if (link.path === "bb") {
       const drop = link.drop ?? 70;
       const y = Math.max(a.b, b.b) + drop;
@@ -109,7 +117,7 @@ window.drawLinks = function () {
     p.setAttribute("stroke", color);
     p.setAttribute("stroke-width", link.width ?? "2.25");
     p.setAttribute("stroke-linecap", "round");
-    if (link.dashed) p.setAttribute("stroke-dasharray", "2 7");
+    if (link.dashed) p.setAttribute("stroke-dasharray", "7 6");
     if (link.arrow !== false) p.setAttribute("marker-end", `url(#${marker(color)})`);
     svg.append(p);
 
