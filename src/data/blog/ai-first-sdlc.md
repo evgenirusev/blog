@@ -267,10 +267,15 @@ description: >
 | Glossary     | What the domain's nouns mean, including roles    |
 | Use Cases    | What each role can accomplish                    |
 | Domain Rules | The invariants that constrain them               |
+| …etc.        | States, Obligations, External systems, …         |
+|              | only when the domain actually needs them         |
 
-Whatever the sections, they must be MECE: each answers a different
-question, and the same fact never appears in two of them.
+The spine is a default, not a form to fill in. Whatever the sections,
+they must be MECE: each answers a different question, and the same
+fact never appears in two of them.
 ```
+
+The structure is a starting point, not a template to follow to the letter. Adapt it to your project: a domain with a real lifecycle might need a States section, a regulated one an Obligations section, and a small one might need little more than use cases and rules. What matters is that the specs stay MECE and capture the requirements at a good enough level of abstraction: what the system must do and the rules it must obey, without drifting into how it's built.
 
 And the scenario manager, which ties every scenario back to the rules it proves:
 
