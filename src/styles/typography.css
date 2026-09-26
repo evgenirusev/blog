@@ -4,6 +4,17 @@
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
     @apply prose;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+
+    /* Reading measure: text blocks stay at ~70 characters per line, while figures,
+       tables, code and embedded media keep the full column width. */
+    > :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6, hr, dl) {
+      max-width: 42rem;
+    }
+    > p:has(> img, > video, > picture) {
+      max-width: none;
+    }
 
     h1,
     h2,
