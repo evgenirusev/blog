@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.cols{position:absolute;left:64px;right:64px;top:188px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.p{height:360px;display:flex;flex-direction:column;gap:10px;padding:24px 24px}
+.p .num{font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:700;letter-spacing:.1em;color:var(--c)}
+.p .icon{width:40px;height:40px}
+.p .label{font-size:24px}
+.p .note{font-size:17px;line-height:1.4}
+.p ul{list-style:none;display:flex;flex-direction:column;gap:7px;font-size:16px;color:var(--ink);margin-top:4px}
+.p li{display:flex;gap:10px}
+.p li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--c);margin-top:8px}
+.closes{margin-top:auto;padding-top:12px;border-top:1px solid var(--divider);font-size:16px;font-weight:800;color:var(--c)}
+</style></head><body data-size="1200x600"><div class="frame">
+<div class="title">Three pillars, <span class="accent">one operating model.</span></div>
+<div class="subtitle">Each one covers what the other two can't.</div>
+<div class="cols">
+ <div class="card p" id="p1" style="--c:var(--accent)"><div class="num">01</div><span class="icon accent"><i data-lucide="folder-git-2"></i></span><div class="label">Project Brain</div><div class="note">Where the intent lives, captured once.</div>
+  <ul><li>Product specs</li><li>Transcripts &amp; decisions</li><li>Domain rules code never states</li></ul><div class="closes">Intent stops being re-derived</div></div>
+ <div class="card p tint-info" id="p2" style="--c:var(--info)"><div class="num">02</div><span class="icon info"><i data-lucide="file-check"></i></span><div class="label">Living Specs</div><div class="note">Executing against the spec, from the repo.</div>
+  <ul><li>The spec diff is the contract</li><li>PM signs off before code</li><li>Referenced, not re-written</li></ul><div class="closes">Nothing gets built off-spec</div></div>
+ <div class="card p" id="p3" style="--c:var(--success)"><div class="num">03</div><span class="icon success"><i data-lucide="repeat"></i></span><div class="label">Agentic Loops</div><div class="note">Chained agents, always against the spec.</div>
+  <ul><li>Implement the spec diff</li><li>Security &amp; code review</li><li>Verify acceptance criteria</li></ul><div class="closes">Execution stops being manual</div></div>
+</div></div>
+
+</body></html>

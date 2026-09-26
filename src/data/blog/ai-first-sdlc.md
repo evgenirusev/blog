@@ -18,21 +18,23 @@ description: "AI made writing code fast, but capturing intent is still slow. The
 
 ![AI-First SDLC — three pillars in one cycle: the Project Brain captures intent once, Living Specs are the source of truth, Agentic Loops implement, test and review, and learnings flow back into the brain](../../assets/images/posts/ai-first-sdlc.png)
 
-*Feature development stopped being about writing code. It became about managing context. This is the operating model we run on at [Tecknoworks](https://tecknoworks.com).*
+*Software engineering stopped being about writing code. It became about managing context.*
 
-If you write software today, you've already seen AI speed up development a lot. **But** it hasn't sped up *capturing the intent*, and that work isn't streamlined across the company. Every team still reconstructs what the system does, and what it should do, in its own way, one meeting at a time.
+In September I presented the AI-First SDLC at [DevTalks Cluj](https://www.devtalks.ro/cluj#speakers), and afterwards I got more requests for the slides than I expected. That's what prompted this post. It's the approach I teach in workshops for companies, a few of them Fortune 500s, and it's how we build software at [Tecknoworks](https://tecknoworks.com): of our roughly 12 software engineering teams, 8 have fully adopted it, and the rest are on the way.
 
-This post covers the SDLC we adopted to fix both problems. It speeds up development further, keeps teams and projects consistent, and leaves everyone better aligned and less frustrated. It builds on my earlier [Spec-Driven Development guide](/posts/spec-driven-development-guide/). That post covered the specs. This one covers the whole operating model around them.
+If you write software today, you've already seen AI speed up coding a lot. **But** it hasn't sped up *capturing the intent*, and that work isn't streamlined across the company. Every team still reconstructs what the system does, and what it should do, in its own way, one meeting at a time.
+
+This post covers the SDLC we adopted to fix both problems. It speeds up delivery further, keeps teams and projects consistent, and leaves everyone better aligned and less frustrated.
 
 ## Table of contents
 
-## What Has Changed: Development Collapsed
+## What Has Changed: Implementation Collapsed
 
-Take a traditional sprint. Roughly 30% of it goes to working out the intent (the current state, the future state, and getting the team aligned). Half goes to development, and the remaining 20% goes to testing, deployment and maintenance.
+Take a traditional sprint. Roughly 30% of it goes to working out the intent (the current state, the future state, and getting the team aligned). Half goes to implementation, writing and changing the code, and the remaining 20% goes to testing, deployment and maintenance.
 
-With AI-accelerated code generation, the development and testing slices shrink to about 10% each. That frees up half the sprint. **But the intent-and-alignment slice, still 30%, hasn't moved at all.**
+With AI-accelerated code generation, the implementation and testing slices shrink to about 10% each. That frees up half the sprint. **But the intent-and-alignment slice, still 30%, hasn't moved at all.**
 
-![Share of one sprint: traditional (30% intent, 50% development, 20% test) versus AI code generation (30% intent, 10% dev, 10% test, 50% reclaimed)](../../assets/images/posts/ai-first-sdlc/sprint-today.png)
+![Share of one sprint: traditional (30% intent and team alignment, 50% implementation, 20% test and deploy) versus AI code generation (30% intent, 10% code, 10% test, 50% reclaimed)](../../assets/images/posts/ai-first-sdlc/sprint-today.png)
 
 Code generation and requirements capture have to speed up *together*. If requirements stay the bottleneck, they eat into the gains from faster code. Speed up both and the gains compound, because each one reinforces the other.
 
@@ -40,12 +42,11 @@ Code generation and requirements capture have to speed up *together*. If require
 
 ### What it takes to build something new
 
-Every feature moves the product from one state to another, and the model needs to see both:
+This is the key mental model behind the whole approach. Every feature moves the product from **the current state** (how it behaves today) to **the future state** (how it should behave once this ships), and the model needs to see both.
 
-- **The current state:** how the product behaves today.
-- **The future state:** how it should behave once this ships.
+![Every feature is a move between two states: the current state and the future state. The gap between them is the intent, which is what you hand the model](../../assets/images/posts/ai-first-sdlc/current-future-state.png)
 
-We call the gap between them **the intent**: what's meant to change, given the new requirements. That's exactly what you hand the model. Almost any feature or bug can now be implemented in a single prompt. So the job is no longer writing the code. It's building the intent reliably, every time.
+We call the gap between them **the intent**: what's meant to change, given the new requirements. Almost any feature or bug can now be implemented in a single prompt. So the job is no longer writing the code. It's constructing the intent reliably, every time.
 
 ### You can't get the current state from the code
 
@@ -61,6 +62,7 @@ There's also a practical problem. Ask Claude how a feature works in a complex pr
 
 To ship anything, the AI needs the requirements currently running in production and the future state. Today that context is scattered across PMs' heads, Slack and Teams threads, Jira tickets, Confluence pages and meeting notes. So every person pieces it together by hand, meeting after meeting.
 
+![Idea to shipped code today, a chain of five handoffs: research, requirements and alignment, Jira epics and stories, understanding the current state, implementation, with a loop back whenever something new is learned](../../assets/images/posts/ai-first-sdlc/handoff-chain.png)
 
 The traditional flow goes like this. You gather requirements, write them up as stories and epics, then start exploring the current state in the codebase. There you find the requirements don't match what's actually there, or the story needs reframing to balance business value against technical debt. So you go back and forth with product or dev to sort it out.
 
@@ -92,7 +94,7 @@ Without durable, versioned, well-structured artifacts that define the intent, te
 
 ## The Approach We Adopted
 
-**AI SDLC** is a way of developing software where a machine-readable spec defines how the system behaves and serves as the single source of truth. The starting point is the same as before. The difference is that alignment now produces a durable spec instead of scattered stories.
+The **AI-First SDLC** is a way of developing software where a machine-readable spec defines how the system behaves and serves as the single source of truth. The starting point is the same as before. The difference is that alignment now produces a durable spec instead of scattered stories.
 
 ![Research, then dev and PM alignment, then the Project Brain (knowledge base generating the living spec), then agentic loops — with learnings flowing back into the spec](../../assets/images/posts/ai-first-sdlc/ai-sdlc-flow.png)
 
@@ -103,6 +105,8 @@ The key change: when you learn something new, you still align with the PM, but t
 ### Three pillars, one operating model
 
 This isn't a single technique. It's an end-to-end way of working, and each pillar covers what the others can't.
+
+![Three pillars, one operating model: Project Brain (intent captured once), Living Specs (nothing built off-spec) and Agentic Loops (execution stops being manual)](../../assets/images/posts/ai-first-sdlc/three-pillars.png)
 
 
 1. **Project Brain:** where the intent lives. It holds the product specs plus the context behind them (transcripts, emails, decisions and their reasons, domain rules the code never states), captured once. *The intent stops being re-derived.*
@@ -337,10 +341,10 @@ It starts paying off around three to six months in, when the intent outgrows wha
 
 ## So What?
 
-### Every symptom maps to one part of the AI SDLC
+### Every symptom maps to one part of the AI-First SDLC
 
 
-| Today | What fixes it | With the AI SDLC |
+| Today | What fixes it | With the AI-First SDLC |
 |---|---|---|
 | No single source of truth | Living Spec in the Project Brain | One durable, versioned source of truth |
 | Requirements archaeology | Living Spec (current state) | You read the current state instead of digging it up |
@@ -375,8 +379,7 @@ Six things we got wrong first, so you don't have to:
 
 AI has already sped up how we build. The real value now is in **how we manage context**.
 
-The AI SDLC puts the right structure in place to manage that context and keep it consistent across every team. Does that mean Claude can just take over everything? No. You still have to get your hands on it and build real understanding yourself, not hand it off blind.
+The AI-First SDLC puts the right structure in place to manage that context and keep it consistent across every team. Does that mean Claude can just take over everything? No. You still have to get your hands on it and build real understanding yourself, not hand it off blind.
 
 **Start with one project. Prove it. Then scale it.**
 
-*For the mechanics of the specs themselves (structure, what goes in and what doesn't, and the spec-manager, implementer and Jira-sync skills), see the [Spec-Driven Development guide](/posts/spec-driven-development-guide/).*

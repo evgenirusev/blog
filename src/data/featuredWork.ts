@@ -1,5 +1,5 @@
-// "Selected work" on the home page: posts or case studies, each with the one
-// fact that proves it. Images go through Astro's optimizer via these imports.
+// "Selected work" on the home page: posts or case studies, each with a kind
+// label and a one-line summary. Images go through Astro's optimizer via these imports.
 import type { ImageMetadata } from "astro";
 import aiFirstSdlc from "@/assets/images/posts/ai-first-sdlc.png";
 import secondBrain from "@/assets/images/posts/second-brain-obsidian-claude-code.webp";
@@ -8,35 +8,31 @@ import painPoints from "@/assets/images/posts/pain-points-to-funded-roadmap.png"
 export type FeaturedWork = {
   href: string;
   title: string;
-  context: string;
-  metric: string;
-  metricLabel: string;
+  kind: string;
+  summary: string;
   image: ImageMetadata;
 };
 
 export const FEATURED_WORK: FeaturedWork[] = [
   {
     href: "/posts/ai-first-sdlc/",
-    title: "AI-First SDLC: Transforming Software Engineering",
-    context: "Operating model · Tecknoworks",
-    metric: "70%",
-    metricLabel: "of the sprint reclaimed",
+    title: "The AI-First SDLC",
+    kind: "Operating model",
+    summary: "The approach 8 of our 12 engineering teams now run on, presented at DevTalks Cluj.",
     image: aiFirstSdlc,
   },
   {
     href: "/case-studies/pain-points-to-funded-roadmap/",
-    title: "AI Business Transformation: From 31 Pain Points to AI in Production",
-    context: "Case study · Mid-market Irish manufacturer",
-    metric: "~80%",
-    metricLabel: "less manual finance work, in production",
+    title: "From 31 Pain Points to AI in Production",
+    kind: "Case study",
+    summary: "From 31 pain points to a funded roadmap, and roughly 80% less manual finance work in production.",
     image: painPoints,
   },
   {
     href: "/posts/second-brain-obsidian-claude-code/",
-    title: "How I Built My Second Brain with Obsidian + Claude Code",
-    context: "Personal knowledge system",
-    metric: "1 afternoon",
-    metricLabel: "from manual notes to an AI-maintained wiki",
+    title: "A Second Brain with Obsidian + Claude Code",
+    kind: "Personal system",
+    summary: "An AI-maintained knowledge base in Obsidian, with Claude Code as the structuring engine.",
     image: secondBrain,
   },
 ];

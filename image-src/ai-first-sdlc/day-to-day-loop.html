@@ -1,19 +1,22 @@
 <!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
-.steps{position:absolute;left:64px;right:64px;top:196px;display:flex;justify-content:space-between}
-.st{width:184px;display:flex;flex-direction:column;gap:10px;padding:18px 18px}
+.band{position:absolute;top:186px;height:36px;border-radius:10px;display:flex;align-items:center;padding:0 14px;font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.st{position:absolute;top:236px;width:184px;height:190px;display:flex;flex-direction:column;gap:10px;padding:18px 18px}
 .st .label{font-size:20px}
-.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:var(--surface);background:var(--c)}
+.st .note{font-size:16px}
+.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;background:var(--c)}
 .top{display:flex;justify-content:space-between;align-items:center}
-</style></head><body data-size="1200x520"><div class="frame">
+</style></head><body data-size="1200x560"><div class="frame">
 <div class="title">The day-to-day <span class="accent">loop.</span></div>
 <div class="subtitle">All three pillars, in the order you hit them.</div>
-<div class="steps">
- <div class="card st" id="a" style="--c:var(--accent)"><div class="top"><span class="num">1</span><span class="icon accent"><i data-lucide="mail"></i></span></div><div class="label">Requirement arrives</div><div class="note">Email, ticket, call</div></div>
- <div class="card st" id="b" style="--c:var(--accent)"><div class="top"><span class="num">2</span><span class="icon accent"><i data-lucide="folder-git-2"></i></span></div><div class="label">Into the knowledge base</div><div class="note">Saved once</div></div>
- <div class="card st" id="c" style="--c:var(--info)"><div class="top"><span class="num">3</span><span class="icon info"><i data-lucide="file-pen"></i></span></div><div class="label">Update the spec</div><div class="note">AI structures it</div></div>
- <div class="card st" id="d" style="--c:var(--info)"><div class="top"><span class="num">4</span><span class="icon info"><i data-lucide="git-compare"></i></span></div><div class="label">PM reviews the diff</div><div class="note">Five minutes, not a meeting</div></div>
- <div class="card st tint-success" id="e" style="--c:var(--success)"><div class="top"><span class="num">5</span><span class="icon success"><i data-lucide="repeat"></i></span></div><div class="label">Agentic loops</div><div class="note">Implement, review, verify</div></div>
-</div></div>
+<div class="band" style="left:64px;width:404px;background:var(--accent-tint);color:var(--accent-deep)">Project Brain</div>
+<div class="band" style="left:504px;width:404px;background:var(--info-tint);color:var(--info-deep)">Living Specs</div>
+<div class="band" style="left:944px;width:192px;background:var(--success-tint);color:var(--success-deep)">Agentic Loops</div>
+<div class="card st" id="a" style="left:64px;--c:var(--accent)"><div class="top"><span class="num">1</span><span class="icon accent"><i data-lucide="mail"></i></span></div><div class="label">Requirement arrives</div><div class="note">Email, ticket, call</div></div>
+<div class="card st" id="b" style="left:284px;--c:var(--accent)"><div class="top"><span class="num">2</span><span class="icon accent"><i data-lucide="folder-git-2"></i></span></div><div class="label">Into the knowledge base</div><div class="note">The transcript, saved once</div></div>
+<div class="card st" id="c" style="left:504px;--c:var(--info)"><div class="top"><span class="num">3</span><span class="icon info"><i data-lucide="file-pen"></i></span></div><div class="label">Update the spec</div><div class="note">AI structures the raw input</div></div>
+<div class="card st" id="d" style="left:724px;--c:var(--info)"><div class="top"><span class="num">4</span><span class="icon info"><i data-lucide="git-compare"></i></span></div><div class="label">PM reviews the diff</div><div class="note">Five minutes, not a meeting</div></div>
+<div class="card st tint-success" id="e" style="left:944px;width:192px;--c:var(--success)"><div class="top"><span class="num">5</span><span class="icon success"><i data-lucide="repeat"></i></span></div><div class="label">Implement, review, verify</div><div class="note">Chained agents, against the spec</div></div>
+</div>
 <script>LINKS=[{from:"a",to:"b"},{from:"b",to:"c"},{from:"c",to:"d"},{from:"d",to:"e"},
-{from:"e",to:"a",path:"bb",dashed:true,drop:60,color:"var(--accent)",label:"…and the loop repeats, every change"}];</script>
+{from:"e",to:"a",path:"bb",dashed:true,drop:44,color:"var(--accent)",label:"every change, every time"}];</script>
 </body></html>

@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.states{position:absolute;left:64px;right:64px;top:196px;display:grid;grid-template-columns:1fr 60px 1fr;align-items:center}
+.st{padding:26px 28px;display:flex;flex-direction:column;gap:8px}
+.st .label{font-size:26px}
+.st .note{font-size:18px}
+.mid{display:flex;justify-content:center}
+.mid .icon{width:34px;height:34px}
+.gap{position:absolute;left:64px;right:64px;top:388px;display:flex;align-items:center;gap:16px;padding:24px 28px;border-radius:16px;color:#fff;background:linear-gradient(90deg,var(--title),var(--plum) 55%,var(--accent))}
+.gap .icon{width:30px;height:30px}
+.gap .icon svg{stroke:#fff}
+.gap b{font-size:24px;font-weight:900}
+.gap span{font-size:19px;font-weight:600;opacity:.95}
+.then{position:absolute;left:64px;right:64px;top:500px;display:grid;grid-template-columns:110px 1fr;align-items:center;padding:20px 28px}
+.then .eyebrow{color:var(--accent);font-weight:800}
+.then p{font-size:19px;color:var(--muted);line-height:1.4}
+.then p b{color:var(--title);font-weight:800}
+.then p em{font-style:normal;color:var(--accent-deep);font-weight:700}
+</style></head><body data-size="1200x640"><div class="frame">
+<div class="title">Every feature is a move <span class="accent">between two states.</span></div>
+<div class="subtitle">The model needs to see both.</div>
+<div class="states">
+ <div class="card st"><div class="eyebrow">Where you are</div><div class="label">The current state</div><div class="note">How the product behaves today.</div></div>
+ <div class="mid"><span class="icon info"><i data-lucide="arrow-right"></i></span></div>
+ <div class="card st tint-info"><div class="eyebrow" style="color:var(--info)">Where you're going</div><div class="label">The future state</div><div class="note">How it should behave once this ships.</div></div>
+</div>
+<div class="gap"><span class="icon"><i data-lucide="send"></i></span><div><b>We call that gap the intent.</b> <span>What's meant to change, given the new requirements: exactly what you hand the model.</span></div></div>
+<div class="card then"><div class="eyebrow">And then</div><p><b>Almost any feature or bug can be implemented in one prompt.</b> So the job is no longer writing the code. It's <em>constructing the intent</em>, reliably, every time.</p></div>
+</div></body></html>

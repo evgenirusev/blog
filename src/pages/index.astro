@@ -78,12 +78,11 @@ const secondaryButton =
                   class="aspect-video w-full border-b border-border object-cover"
                 />
                 <div class="flex flex-1 flex-col p-5">
-                  <p class="text-3xl font-extrabold tracking-tight text-accent">{cs.metric}</p>
-                  <p class="mt-1 text-sm opacity-80">{cs.metricLabel}</p>
-                  <h3 class="mt-4 font-semibold leading-snug tracking-tight decoration-dashed underline-offset-4 group-hover:underline">
+                  <p class="font-mono text-xs tracking-widest uppercase opacity-70">{cs.kind}</p>
+                  <h3 class="mt-2 text-lg leading-snug font-semibold tracking-tight decoration-dashed underline-offset-4 group-hover:text-accent group-hover:underline">
                     {cs.title}
                   </h3>
-                  <p class="mt-auto pt-3 font-mono text-xs opacity-70">{cs.context}</p>
+                  <p class="mt-2 text-sm leading-relaxed opacity-80">{cs.summary}</p>
                 </div>
               </a>
             </li>
