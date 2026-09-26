@@ -1,0 +1,29 @@
+/*
+ * Brand palette: the single source of truth for colour across the site and the blog images.
+ * Imported by src/styles/global.css (site) and scripts/images/theme.css (diagram renderer).
+ * Base colours are Tecknoworks brand; the *-text variants are tuned to pass WCAG AA (4.5:1)
+ * as text on the light / dark site backgrounds.
+ */
+:root {
+  /* Tecknoworks base palette */
+  --brand-deep-purple: #320063;
+  --brand-plum: #7d1c4b;
+  --brand-magenta: #ea2775;
+  --brand-coral: #ea8170;
+  --brand-dark-gray: #515455;
+
+  /* Derived */
+  --brand-purple: #6a3fb0;          /* mid purple for structure, connectors, icons */
+  --brand-magenta-text: #c2185b;    /* magenta as text on light (5.8:1) */
+  --brand-pink-text: #f06a9e;       /* magenta as text on dark (6.3:1) */
+  --brand-night: #1a1226;           /* dark background, deep purple-black */
+
+  /* Tints */
+  --brand-lilac-50: #fcfafd;
+  --brand-lilac-100: #f5eff8;
+  --brand-lilac-200: #ece3f0;
+  --brand-magenta-tint: #fce4ee;
+  --brand-purple-tint: #eee7f8;
+  --brand-coral-tint: #fce8e4;
+  --brand-plum-tint: #f5e4ec;
+}

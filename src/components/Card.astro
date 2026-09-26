@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 import { slugifyStr } from "@/utils/slugify";
 import { getPath } from "@/utils/getPath";
 import Datetime from "./Datetime.astro";
@@ -15,15 +16,16 @@ const { title, description, ogImage: initOgImage, ...props } = data;
 
 const postPath = getPath(id, filePath);
 
-// Resolve thumbnail URL — manual ogImage > dynamic OG image > none
+// Thumbnail: a local ogImage goes through Astro's optimizer (resized with a proper filter,
+// served as WebP at the displayed size). A string ogImage or the dynamic OG image falls back to <img>.
+const thumbAsset = initOgImage && typeof initOgImage === "object" ? initOgImage : undefined;
 let thumbUrl: string | undefined;
 if (typeof initOgImage === "string") {
   thumbUrl = initOgImage;
-} else if (initOgImage && typeof initOgImage === "object" && "src" in initOgImage) {
-  thumbUrl = (initOgImage as { src: string }).src;
-} else if (SITE.dynamicOgImage) {
+} else if (!thumbAsset && SITE.dynamicOgImage) {
   thumbUrl = `${postPath}/index.png`;
 }
+const thumbClass = "w-full h-40 sm:w-48 sm:h-28 object-cover rounded border border-border flex-shrink-0";
 ---
 
 <li class="my-6">
@@ -31,13 +33,18 @@ if (typeof initOgImage === "string") {
     href={postPath}
     class="group flex flex-col gap-3 sm:flex-row sm:gap-4 sm:items-start"
   >
-    {thumbUrl && (
-      <img
-        src={thumbUrl}
+    {thumbAsset ? (
+      <Image
+        src={thumbAsset}
         alt=""
-        class="w-full h-40 sm:w-48 sm:h-28 object-cover rounded border border-border flex-shrink-0"
+        widths={[384, 768, 1200]}
+        sizes="(min-width: 640px) 192px, 100vw"
+        quality={85}
+        class={thumbClass}
         loading="lazy"
       />
+    ) : thumbUrl && (
+      <img src={thumbUrl} alt="" class={thumbClass} loading="lazy" />
     )}
     <div class="flex-1 min-w-0">
       <Heading
