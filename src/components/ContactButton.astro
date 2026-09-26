@@ -1,0 +1,46 @@
+---
+// "Get in touch" that works without a configured mail app: it still opens
+// mailto where one exists, and always copies the address and says so.
+type Props = { class?: string; label?: string };
+const { class: className = "", label = "Get in touch" } = Astro.props;
+const EMAIL = "evgeni.n.rusev@gmail.com";
+---
+
+<span class="relative inline-flex">
+<a
+  href={`mailto:${EMAIL}`}
+  data-contact-email={EMAIL}
+  class:list={[
+    "inline-flex items-center rounded-lg bg-accent px-5 py-2.5 font-semibold text-background hover:opacity-90 focus-visible:outline-offset-2",
+    className,
+  ]}
+>
+  <span data-contact-label>{label}</span>
+</a>
+<span
+  data-contact-status
+  role="status"
+  aria-live="polite"
+  class="pointer-events-none absolute top-full left-0 mt-2 font-mono text-xs whitespace-nowrap opacity-80"
+></span>
+</span>
+
+<script>
+  function wireContactButtons() {
+    document.querySelectorAll<HTMLAnchorElement>("a[data-contact-email]").forEach(link => {
+      if (link.dataset.wired) return;
+      link.dataset.wired = "1";
+      link.addEventListener("click", async () => {
+        const email = link.dataset.contactEmail!;
+        const status = link.parentElement?.querySelector<HTMLElement>("[data-contact-status]") ?? null;
+        try {
+          await navigator.clipboard.writeText(email);
+          if (status) status.textContent = `Email copied: ${email}`;
+        } catch {
+          if (status) status.textContent = email;
+        }
+      });
+    });
+  }
+  document.addEventListener("astro:page-load", wireContactButtons);
+</script>

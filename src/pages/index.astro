@@ -9,9 +9,9 @@ import ProfileAvatar from "@/components/ProfileAvatar.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
-import { FEATURED_CASE_STUDIES } from "@/data/featuredCaseStudies";
-
-const CONTACT_HREF = "mailto:evgeni.n.rusev@gmail.com";
+import { Image } from "astro:assets";
+import ContactButton from "@/components/ContactButton.astro";
+import { FEATURED_WORK } from "@/data/featuredWork";
 
 const posts = await getCollection("blog");
 // One list, newest first: featured posts no longer get a separate section.
@@ -20,8 +20,6 @@ const latestPosts = getSortedPosts(posts).slice(0, SITE.postPerIndex + 2);
 const sectionHeading = "font-mono text-sm tracking-widest uppercase opacity-70";
 const moreLink =
   "inline-flex items-center gap-1 font-mono text-sm underline decoration-dashed underline-offset-4 hover:text-accent";
-const primaryButton =
-  "inline-flex items-center rounded-lg bg-accent px-5 py-2.5 font-semibold text-background hover:opacity-90 focus-visible:outline-offset-2";
 const secondaryButton =
   "inline-flex items-center gap-1 rounded-lg border border-border px-5 py-2.5 font-semibold hover:border-accent hover:text-accent";
 ---
@@ -46,12 +44,12 @@ const secondaryButton =
             actually works in the field.
           </p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
-            <a href={CONTACT_HREF} class={primaryButton}>Get in touch</a>
+            <ContactButton />
             <a href="/case-studies/" class={secondaryButton}>
               See case studies <IconArrowRight class="inline-block size-5 rtl:-rotate-180" />
             </a>
           </div>
-          <div class="mt-6"><Socials /></div>
+          <div class="mt-10"><Socials /></div>
         </div>
         <ProfileAvatar />
       </div>
@@ -66,18 +64,17 @@ const secondaryButton =
       </div>
       <ul class="mt-6 grid gap-6 sm:grid-cols-3">
         {
-          FEATURED_CASE_STUDIES.map(cs => (
+          FEATURED_WORK.map(cs => (
             <li>
               <a
-                href={`/case-studies/${cs.slug}/`}
+                href={cs.href}
                 class="group flex h-full flex-col overflow-hidden rounded-xl border border-border transition-colors hover:border-accent"
               >
-                <img
-                  src={`/images/case-studies/${cs.slug}.webp`}
+                <Image
+                  src={cs.image}
                   alt=""
-                  width="960"
-                  height="540"
-                  loading="lazy"
+                  widths={[480, 960]}
+                  sizes="(min-width: 640px) 290px, 100vw"
                   class="aspect-video w-full border-b border-border object-cover"
                 />
                 <div class="flex flex-1 flex-col p-5">
@@ -86,7 +83,7 @@ const secondaryButton =
                   <h3 class="mt-4 font-semibold leading-snug tracking-tight decoration-dashed underline-offset-4 group-hover:underline">
                     {cs.title}
                   </h3>
-                  <p class="mt-auto pt-3 font-mono text-xs opacity-70">{cs.client}</p>
+                  <p class="mt-auto pt-3 font-mono text-xs opacity-70">{cs.context}</p>
                 </div>
               </a>
             </li>
@@ -113,7 +110,10 @@ const secondaryButton =
         I'm happy to compare notes, whether you're scoping a first use case or trying to get a
         stalled pilot over the line.
       </p>
-      <a href={CONTACT_HREF} class:list={[primaryButton, "mt-5"]}>Get in touch</a>
+      <div class="mt-5 flex flex-wrap items-center gap-3">
+        <ContactButton />
+        <a href="https://www.linkedin.com/in/evgeni-rusev-24636017b/" target="_blank" rel="noopener" class={secondaryButton}>Message me on LinkedIn</a>
+      </div>
     </section>
   </main>
   <Footer />

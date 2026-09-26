@@ -1,6 +1,6 @@
 ---
 // End-of-article prompt for readers who are evaluating whether to get in touch.
-const CONTACT_HREF = "mailto:evgeni.n.rusev@gmail.com";
+import ContactButton from "./ContactButton.astro";
 ---
 
 <aside data-pagefind-ignore class="my-10 max-w-[42rem] rounded-xl border border-border px-6 py-6">
@@ -8,10 +8,7 @@ const CONTACT_HREF = "mailto:evgeni.n.rusev@gmail.com";
   <p class="mt-1 opacity-90">
     I help teams take AI from pilot to production. Happy to compare notes on your case.
   </p>
-  <a
-    href={CONTACT_HREF}
-    class="mt-4 inline-flex items-center rounded-lg bg-accent px-5 py-2.5 font-semibold text-background hover:opacity-90"
-  >
-    Get in touch
-  </a>
+  <div class="mt-4 flex flex-wrap items-center gap-3">
+    <ContactButton />
+  </div>
 </aside>
