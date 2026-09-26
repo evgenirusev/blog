@@ -11,22 +11,17 @@
 .k .label{font-size:21px}
 .k .note{font-size:16px}
 .x{position:absolute;font-size:24px;color:var(--gray);font-weight:700}
-</style></head><body data-size="1200x640"><div class="frame">
+</style></head><body data-size="1200x560"><div class="frame">
 <div class="title">One captured source, <span class="accent">not scattered stories.</span></div>
 <div class="subtitle">Alignment lands in the spec, so PMs, devs and AI read the same thing.</div>
 
-<div class="tag" style="top:176px;color:var(--muted)">Today</div>
-<div class="card st muted" id="t1" style="position:absolute;left:64px;top:200px;height:70px;width:150px;flex-direction:row;align-items:center;gap:10px"><span class="icon" style="width:24px;height:24px"><i data-lucide="users"></i></span><div class="label" style="font-size:17px">Align</div></div>
-<div class="card st muted" id="t2" style="position:absolute;left:250px;top:200px;height:70px;width:190px;flex-direction:row;align-items:center;gap:10px"><span class="icon" style="width:24px;height:24px"><i data-lucide="ticket"></i></span><div class="label" style="font-size:17px">Tickets &amp; memory</div></div>
-<div class="x" style="left:456px;top:216px">✕ lost at every handoff</div>
 
-<div class="tag" style="top:296px;color:var(--accent)">With the AI-First SDLC</div>
-<div class="card st" id="a" style="position:absolute;left:64px;top:366px;width:150px"><span class="icon"><i data-lucide="users"></i></span><div class="label">Align</div><div class="note">Dev &amp; PM agree</div></div>
-<div class="brain" id="brain" style="left:260px;top:320px;width:620px;height:210px"><div class="bt">Project Brain</div></div>
-<div class="card k tint-accent" id="kb" style="left:284px;top:372px"><span class="icon accent"><i data-lucide="folder-git-2"></i></span><div class="label">Knowledge base</div><div class="note">Transcripts, decisions, rules</div></div>
-<div class="card k tint-info" id="sp" style="left:626px;top:372px"><span class="icon info"><i data-lucide="file-check"></i></span><div class="label">Living spec</div><div class="note">Current state, PM sign-off</div></div>
-<div class="card st tint-success" id="loop" style="position:absolute;left:966px;top:366px;width:170px"><span class="icon success"><i data-lucide="repeat"></i></span><div class="label">Agentic loops</div><div class="note">Implement, test, review</div></div>
+<div class="card st" id="a" style="position:absolute;left:64px;top:252px;width:150px"><span class="icon"><i data-lucide="users"></i></span><div class="label">Align</div><div class="note">Dev &amp; PM agree</div></div>
+<div class="brain" id="brain" style="left:260px;top:206px;width:620px;height:210px"><div class="bt">Project Brain</div></div>
+<div class="card k tint-accent" id="kb" style="left:284px;top:258px"><span class="icon accent"><i data-lucide="folder-git-2"></i></span><div class="label">Knowledge base</div><div class="note">Transcripts, decisions, rules</div></div>
+<div class="card k tint-info" id="sp" style="left:626px;top:258px"><span class="icon info"><i data-lucide="file-check"></i></span><div class="label">Living spec</div><div class="note">Current state, PM sign-off</div></div>
+<div class="card st tint-success" id="loop" style="position:absolute;left:966px;top:252px;width:170px"><span class="icon success"><i data-lucide="repeat"></i></span><div class="label">Agentic loops</div><div class="note">Implement, test, review</div></div>
 </div>
-<script>LINKS=[{from:"t1",to:"t2",color:"var(--gray)",dashed:true},{from:"a",to:"brain"},{from:"kb",to:"sp",label:"generates"},{from:"brain",to:"loop"},
-{from:"loop",to:"a",path:"u",dashed:true,drop:60,color:"var(--accent)",label:"learnings flow back into the spec"}];</script>
+<script>LINKS=[{from:"a",to:"brain"},{from:"kb",to:"sp",label:"generates"},{from:"brain",to:"loop"},
+{from:"loop",to:"a",path:"u",dashed:true,drop:104,color:"var(--accent)",label:"learnings flow back into the spec"}];</script>
 </body></html>

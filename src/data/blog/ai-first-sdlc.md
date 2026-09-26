@@ -42,7 +42,7 @@ Code generation and requirements capture have to speed up *together*. If require
 
 ### What it takes to build something new
 
-This is the key mental model behind the whole approach. Every feature moves the product from **the current state** (how it behaves today) to **the future state** (how it should behave once this ships), and the model needs to see both.
+This is the mental model that guides the philosophy behind the approach. Every feature moves the product from **the current state** (how it behaves today) to **the future state** (how it should behave once this ships), and the model needs to see both.
 
 ![Every feature is a move between two states: the current state and the future state. The gap between them is the intent, which is what you hand the model](../../assets/images/posts/ai-first-sdlc/current-future-state.png)
 
@@ -64,7 +64,7 @@ There's also a practical problem. Ask Claude how a feature works in a complex pr
 
 To ship anything, the AI needs the requirements currently running in production and the future state. Today that context is scattered across PMs' heads, Slack and Teams threads, Jira tickets, Confluence pages and meeting notes. So every person pieces it together by hand, meeting after meeting.
 
-![Idea to shipped code today, a chain of five handoffs: research, requirements and alignment, Jira epics and stories, understanding the current state, implementation, with a loop back whenever something new is learned](../../assets/images/posts/ai-first-sdlc/handoff-chain.png)
+![The traditional SDLC, idea to shipped code as a chain of five handoffs: research, requirements and alignment, Jira epics and stories, understanding the current state, implementation, with a loop back whenever something new is learned](../../assets/images/posts/ai-first-sdlc/handoff-chain.png)
 
 The traditional flow goes like this. You gather requirements, write them up as stories and epics, then start exploring the current state in the codebase. There you find the requirements don't match what's actually there, or the story needs reframing to balance business value against technical debt. So you go back and forth with product or dev to sort it out.
 
