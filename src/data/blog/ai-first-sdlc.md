@@ -48,7 +48,9 @@ This is the key mental model behind the whole approach. Every feature moves the 
 
 ![Every feature is a move between two states: the current state and the future state. The gap between them is the intent, which is what you hand the model](../../assets/images/posts/ai-first-sdlc/current-future-state.png)
 
-We call the gap between them **the intent**: what's meant to change, given the new requirements. Almost any feature or bug can now be implemented in a single prompt. So the job is no longer writing the code. It's constructing the intent reliably, every time.
+We call the gap between them **the intent**: what's meant to change, given the new requirements. That's exactly what you hand the model.
+
+And then, **almost any feature or bug can be implemented in a single prompt.** So the job is no longer writing the code. It's *constructing the intent*, reliably, every time.
 
 ### You can't get the current state from the code
 
