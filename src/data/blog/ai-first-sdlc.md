@@ -1,7 +1,7 @@
 ---
 author: Evgeni Rusev
 pubDatetime: 2026-09-26T09:00:00Z
-title: "AI-First SDLC: Transforming Software Engineering"
+title: "The AI-First SDLC: A Practical Guide for Software Engineering Teams"
 slug: ai-first-sdlc
 featured: true
 draft: false
