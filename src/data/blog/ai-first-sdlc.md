@@ -34,7 +34,7 @@ Take a traditional sprint. Roughly 30% of it goes to working out the intent (the
 
 With AI-accelerated code generation, the implementation and testing slices shrink to about 10% each. That frees up half the sprint. **But the intent-and-alignment slice, still 30%, hasn't moved at all.**
 
-![Share of one sprint: traditional (30% intent and team alignment, 50% implementation, 20% test and deploy) versus AI code generation (30% intent, 10% code, 10% test, 50% reclaimed)](../../assets/images/posts/ai-first-sdlc/sprint-today.png)
+![Share of one sprint: traditional (30% intent and team alignment, 50% implementation, 20% test and deploy) versus AI code generation (30% intent, 10% implementation, 10% test, 50% reclaimed)](../../assets/images/posts/ai-first-sdlc/sprint-today.png)
 
 Code generation and requirements capture have to speed up *together*. If requirements stay the bottleneck, they eat into the gains from faster code. Speed up both and the gains compound, because each one reinforces the other.
 
