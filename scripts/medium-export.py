@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a Medium-importable copy of a post.
 
-    python3 scripts/medium-export.py <slug> [table-image-dir]
+    python3 scripts/medium-export.py <slug> [table-image-dir] [out-name]
 
 Reads the built page (dist/posts/<slug>/index.html, so run `pnpm build` first) and writes
 public/medium/<slug>/index.html: plain headings, paragraphs, lists, <pre> code and absolute
@@ -19,17 +19,19 @@ SITE = "https://evgenirusev.com"
 root = Path(__file__).resolve().parent.parent
 slug = sys.argv[1]
 table_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else None
+# Medium caches an import by URL, so a re-import needs a new path: pass a name like "<slug>-v3".
+out_name = sys.argv[3] if len(sys.argv) > 3 else slug
 
 html = (root / "dist/posts" / slug / "index.html").read_text()
 page = BeautifulSoup(html, "html.parser")
 title = page.find("h1").get_text(strip=True)
 article = page.find("article", id="article")
 
-out_dir = root / "public/medium" / slug
+out_dir = root / "public/medium" / out_name
 if out_dir.exists():
     shutil.rmtree(out_dir)
 out_dir.mkdir(parents=True)
-public_base = f"{SITE}/medium/{slug}"
+public_base = f"{SITE}/medium/{out_name}"
 
 # Images: map each optimized /_astro/<name>.<hash>.webp back to its source PNG.
 assets = root / "src/assets/images/posts"
@@ -59,11 +61,28 @@ if tables:
 # Code blocks -> plain <pre> text.
 for pre in article.find_all("pre"):
     text = "\n".join(l.get_text() for l in pre.select(".line")) or pre.get_text()
+    # Medium's importer collapses newlines inside <pre>; explicit <br> survives.
     new = page.new_tag("pre")
-    new.string = text.rstrip()
+    for i, line in enumerate(text.rstrip().split("\n")):
+        if i:
+            new.append(page.new_tag("br"))
+        new.append(line)
     pre.replace_with(new)
 for btn in article.select("button"):
     btn.decompose()
+
+# Bullet lists whose items lead with a bold phrase: Medium's importer silently drops some
+# of them, so write each item as its own paragraph. Numbered lists import fine.
+def bullets_to_paragraphs():
+    for ul in article.find_all("ul"):
+        items = ul.find_all("li", recursive=False)
+        if items and all(li.find("strong") for li in items):
+            for li in items:
+                para = page.new_tag("p")
+                for child in list(li.contents):
+                    para.append(child)
+                ul.insert_before(para)
+            ul.decompose()
 
 # Drop the in-page table of contents and heading anchor links.
 for h in article.find_all(["h2", "h3"]):
@@ -76,6 +95,8 @@ if toc:
 for d in article.find_all("details"):
     if "table of contents" in d.get_text(" ", strip=True).lower()[:80]:
         d.decompose()
+
+bullets_to_paragraphs()
 
 # Strip presentation attributes Medium ignores anyway.
 for el in article.find_all(True):
@@ -95,4 +116,4 @@ doc = f"""<!doctype html>
 </article></body></html>
 """
 (out_dir / "index.html").write_text(doc)
-print(f"wrote public/medium/{slug}/index.html with {len(list(out_dir.glob('*.png')))} images")
+print(f"wrote public/medium/{out_name}/index.html with {len(list(out_dir.glob('*.png')))} images")
