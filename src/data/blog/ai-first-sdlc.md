@@ -240,6 +240,8 @@ The specs are the single source of truth: product specs for behavior, scenarios 
 
 ![The specs — product, scenarios, technical — feed code, tests, QA cases and docs, plus optional tasks and Jira sync](../../assets/images/posts/ai-first-sdlc/everything-flows-from-spec.png)
 
+Once the specs exist, the rest links back to them. Each scenario states which use case and which domain rules it covers (the `Covers: R7` line in the example above), so you can see at a glance which rules are tested and which aren't. Tasks come from the same place: a new or changed domain rule, or a scenario that isn't built yet, becomes a task you assign to someone on the team. That keeps the work plan traceable to the intent instead of to a ticket someone wrote from memory.
+
 People sometimes object that specs just move the maintenance burden from code to something equally hard to maintain. In our experience they don't. Well-structured natural language is easier to keep in sync than code, which is easy to misread even when it *looks like* it does one thing.
 
 ## What It Looks Like in Practice
@@ -320,10 +322,21 @@ One project, five steps. Prove it there, then scale it.
 1. **Pick a project.** New or existing, one is enough to prove the value.
 2. **Create the Project Brain:** the private, internal and project knowledge bases, the code, and a `CLAUDE.md`.
 3. **Feed it the context:** docs, transcripts, tickets, emails, everything you already have.
-4. **Write specs per domain.** Keep them MECE and do one domain at a time. On existing code, bootstrap the specs and let the PM confirm them.
+4. **Write the specs.** Keep them MECE and do one area at a time. On existing code, bootstrap the specs and let the PM confirm them.
 5. **Implement** against the specs, with the guardrails running.
 
 Name an accountable owner, and keep the brain alive: every learning goes back into the spec.
+
+### Getting teams to adopt it
+
+Every team's project is different. Most work on existing codebases with years of context behind them, so a single rollout plan won't fit everyone. What worked for us:
+
+- **Start with your technical leaders.** Run a first workshop with them, collect their objections, and iterate on the approach until you land on a version that works for your organization. Roll it out once there's consensus, not before.
+- **Assign accountable people and set a clear expectation:** adopt it, even gradually, and if you can't, explain why. The reasons are the useful part. Each one tells you exactly where the team needs guidance to make adoption frictionless.
+- **Enforce spec updates with guardrails, not reminders.** For example, a check that runs on every pull request (in SonarQube or your CI pipeline) and flags a change that didn't update the spec, or a spec whose structure broke.
+- **Give the specs an owner.** Someone in the team, usually the lead, is responsible for keeping the specs MECE, either by reviewing them or by setting up guardrails that check it.
+- **Keep the knowledge base fed.** Transcripts and other resources only help if they actually land in the Project Brain. Automate the capture where you can, and where you can't, appoint someone to keep it up to date.
+- **Be clear that specs don't replace understanding.** Engineers still need to understand the requirements and the code. The specs make that understanding durable and shareable; they don't do it for you.
 
 ### It fits wherever your project starts
 
@@ -370,7 +383,7 @@ Back to the sprint we started with. AI on code alone freed up 50% of it. Capturi
 
 Six things we got wrong first, so you don't have to:
 
-- **Specs must be MECE:** mutually exclusive and collectively exhaustive, split by domain. It's the same principle as bounded contexts in domain-driven design. Overlap is where contradictions breed.
+- **Specs must be MECE:** mutually exclusive and collectively exhaustive, so every rule has exactly one home and nothing is left without one. Splitting by domain, the same idea as bounded contexts in domain-driven design, is one common way to get there. Splitting by product area or user journey works too, as long as the pieces don't overlap. Overlap is where contradictions breed.
 - **Keep specs concise.** Claude Code connects the dots on its own. Over-specifying slows everyone down and ages badly.
 - **Let the front-end code be the spec for UI/UX.** Don't describe screens inside specs. Beyond a few core principles, that becomes unmaintainable fast.
 - **Don't make the spec complete; make it non-duplicated.** Our first format held flows, UI, test cases and acceptance criteria all in one place. It grew too big to keep in sync, and autonomy dropped. Every duplicated fact is one more thing you have to keep in sync.
