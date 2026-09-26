@@ -16,6 +16,7 @@ I'll add categories as the list grows.
 - **Bulletproof Problem Solving: The One Skill That Changes Everything** — Charles Conn & Robert McLean
 - **The Pyramid Principle: Logic in Writing and Thinking** — Barbara Minto
 - **Thinking in Systems: A Primer** — Donella Meadows
+- **Thinking, Fast and Slow** — Daniel Kahneman
 
 ## Books that have influenced my life
 
