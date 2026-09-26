@@ -244,6 +244,53 @@ Once the specs exist, the rest links back to them. Each scenario states which us
 
 People sometimes object that specs just move the maintenance burden from code to something equally hard to maintain. In our experience they don't. Well-structured natural language is easier to keep in sync than code, which is easy to misread even when it *looks like* it does one thing.
 
+### Skills that keep the specs in shape
+
+Two Claude Code skills do most of the spec work: `/sdlc-spec-manager` for product specs and `/sdlc-scenario-manager` for scenarios. You hand them a transcript, a codebase or a changed spec, and they create or update the files in the right structure. Just as importantly, they encode the rules, so every spec on every project ends up shaped the same way.
+
+Here's the core of the spec manager's definition:
+
+```markdown
+---
+name: sdlc-spec-manager
+description: >
+  Manage living product spec files as the source of truth for what a system's
+  domains are — their vocabulary, what users can accomplish in them, and the
+  rules that constrain them. Bootstrap specs from codebases, transcripts,
+  design docs or scattered requirements. Create, update and review specs.
+---
+
+## The spine
+| Section      | Answers                                          |
+|--------------|--------------------------------------------------|
+| Context      | Why this domain exists, whose problem it solves  |
+| Glossary     | What the domain's nouns mean, including roles    |
+| Use Cases    | What each role can accomplish                    |
+| Domain Rules | The invariants that constrain them               |
+
+Whatever the sections, they must be MECE: each answers a different
+question, and the same fact never appears in two of them.
+```
+
+And the scenario manager, which ties every scenario back to the rules it proves:
+
+```markdown
+---
+name: sdlc-scenario-manager
+description: >
+  Create and maintain acceptance scenarios: step-by-step behaviour a QA can
+  run and an agent can automate, traced back to the spec rules they prove.
+---
+
+One scenario file per spec file, same name:
+  specs/spaces.md  ↔  scenarios/spaces.md
+
+Every [built] or [partial] rule is cited by at least one scenario,
+or exempted with a reason.
+```
+
+Both skills also have a **review mode**, and that's where they work as guardrails. The spec manager grades each spec on completeness, altitude (is it drifting into implementation detail?), substance, consistency and MECE, and navigability, as `strong`, `adequate`, `thin` or `broken`. A `broken` grade blocks implementation of that capability. It also runs cross-spec checks: a term defined differently in two specs, a rule owned by two specs, a spec missing from the index. The scenario manager checks coverage: which rules no scenario proves, which scenarios cite rules that no longer exist, and which were dropped without a reason. Run them after every spec change, or on every pull request, and a broken structure gets flagged before anyone builds on it.
+
 ## What It Looks Like in Practice
 
 ### The day-to-day loop
@@ -257,6 +304,10 @@ This is how you actually hit the three pillars, in order:
 3. **The spec gets updated.** Acceptance criteria get stable IDs, and AI helps structure the raw input.
 4. **The PM reviews the spec diff** and confirms it captures the intent.
 5. **Agentic loops** implement, review and verify against the spec, as a chain.
+
+### Agentic loops: implementation as a repeatable chain
+
+The specs say *what* to build. Agentic loops are how the building gets streamlined. Instead of every engineer prompting their own way from a blank chat, the implementation runs as the same chain of steps every time: update the spec, review the diff, plan, implement, then run the guardrails and loop until they pass. Each step is a skill, so the team shares one way of working, and each improvement to a skill improves everyone's output.
 
 Here's what it looks like in the terminal after a refinement session, once the transcript has landed in the Project Brain:
 
@@ -335,6 +386,7 @@ Every team's project is different. Most work on existing codebases with years of
 - **Assign accountable people and set a clear expectation:** adopt it, even gradually, and if you can't, explain why. The reasons are the useful part. Each one tells you exactly where the team needs guidance to make adoption frictionless.
 - **(Optional) Enforce spec updates with guardrails, not reminders.** If people tend to forget to update the specs, add a check that runs on every pull request (in SonarQube or your CI pipeline) and flags a change that didn't update the spec, or a spec whose structure broke.
 - **Give the specs an owner.** Someone in the team, usually the lead, is responsible for keeping the specs MECE, either by reviewing them or by setting up guardrails that check it.
+- **Build the skills together.** Every two weeks we run a Claude skill-crafting session, with live agentic coding demos of how people actually work. The patterns that hold up become skills, built with Anthropic's [skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) skill and then adopted across the team. Over time, everyone settles into the same streamlined way of working.
 - **Keep the knowledge base fed.** Transcripts and other resources only help if they actually land in the Project Brain. Automate the capture where you can, and where you can't, appoint someone to keep it up to date.
 - **Be clear that specs don't replace understanding.** Engineers still need to understand the requirements and the code. The specs make that understanding durable and shareable; they don't do it for you.
 
