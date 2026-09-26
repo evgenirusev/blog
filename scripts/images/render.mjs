@@ -35,15 +35,20 @@ const page = await browser.newPage({ deviceScaleFactor: 2 });
 
 for (const file of files) {
   await page.goto(pathToFileURL(join(srcDir, file)).href, { waitUntil: "networkidle" });
-  const [w, h] = await page.evaluate(() =>
-    (document.body.dataset.size || "1200x675").split("x").map(Number)
+  let [w, h] = await page.evaluate(() =>
+    (document.body.dataset.size || "1200x675").split("x").map(v => (v === "auto" ? 0 : Number(v)))
   );
-  await page.setViewportSize({ width: w, height: h });
+  await page.setViewportSize({ width: w, height: h || 2000 });
   // Lucide: <i data-lucide="name"></i> → inline SVG, if the page loaded it.
   await page.evaluate(() => window.lucide?.createIcons());
   await page.evaluate(() => document.fonts.ready);
   // connect.js: draw connectors once boxes are at their final size.
   await page.evaluate(() => window.drawLinks?.());
+  // data-size="1200xauto": fit the height to the content (plus the frame's bottom padding).
+  if (!h) {
+    h = await page.evaluate(() => Math.ceil(document.querySelector(".frame").getBoundingClientRect().bottom));
+    await page.setViewportSize({ width: w, height: h });
+  }
 
   // Catch the usual layout failures before anyone looks at the PNG.
   const problems = await page.evaluate(() => {
