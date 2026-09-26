@@ -9,6 +9,7 @@ type Props = { class?: string; label?: string };
 
 const { class: className = "", label = "Get in touch" } = Astro.props;
 const EMAIL = "evgeni.n.rusev@gmail.com";
+const WORK_EMAIL = "evgeni.rusev@tecknoworks.com";
 const LINKEDIN = "https://www.linkedin.com/in/evgeni-rusev-24636017b/";
 const GMAIL = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
 const item =
@@ -25,13 +26,22 @@ const item =
     {label}
   </summary>
   <div
-    class="absolute top-full left-0 z-20 mt-2 w-72 rounded-xl border border-border bg-background p-2 shadow-lg"
+    class="absolute top-full left-0 z-20 mt-2 w-80 rounded-xl border border-border bg-background p-2 shadow-lg"
     role="menu"
   >
-    <p class="px-3 pt-1.5 pb-2 font-mono text-xs opacity-70">{EMAIL}</p>
-    <button type="button" data-copy={EMAIL} class={item} role="menuitem">
-      <svg aria-hidden="true" class="size-5 shrink-0 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span data-copy-label>Copy email address</span>
-    </button>
+    {[
+      { email: EMAIL, label: "Copy personal email" },
+      { email: WORK_EMAIL, label: "Copy Tecknoworks email" },
+    ].map(({ email, label: text }) => (
+      <button type="button" data-copy={email} data-copy-text={text} class={item} role="menuitem">
+        <svg aria-hidden="true" class="size-5 shrink-0 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span class="flex flex-col">
+          <span data-copy-label>{text}</span>
+          <span class="font-mono text-xs opacity-60">{email}</span>
+        </span>
+      </button>
+    ))}
+    <div class="my-1 border-t border-border"></div>
     <a href={GMAIL} target="_blank" rel="noopener" class={item} role="menuitem">
       <IconMail aria-hidden="true" class="size-5 shrink-0 opacity-80" />Write in Gmail
     </a>
@@ -46,16 +56,17 @@ const item =
     document.querySelectorAll<HTMLDetailsElement>("details[data-contact]").forEach(d => {
       if (d.dataset.wired) return;
       d.dataset.wired = "1";
-      const copy = d.querySelector<HTMLButtonElement>("[data-copy]");
-      const label = d.querySelector<HTMLElement>("[data-copy-label]");
-      copy?.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(copy.dataset.copy!);
-          if (label) label.textContent = "Copied!";
-        } catch {
-          if (label) label.textContent = copy.dataset.copy!;
-        }
-        setTimeout(() => label && (label.textContent = "Copy email address"), 2000);
+      d.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach(copy => {
+        const label = copy.querySelector<HTMLElement>("[data-copy-label]");
+        copy.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(copy.dataset.copy!);
+            if (label) label.textContent = "Copied!";
+          } catch {
+            if (label) label.textContent = copy.dataset.copy!;
+          }
+          setTimeout(() => label && (label.textContent = copy.dataset.copyText!), 2000);
+        });
       });
     });
   }
