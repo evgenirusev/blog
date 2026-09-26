@@ -29,5 +29,6 @@ I'll add categories as the list grows.
 - **The Power of Now** — Eckhart Tolle
 - **Meditations** — Marcus Aurelius
 - **Beyond Good and Evil** — Friedrich Nietzsche
+- **Thus Spoke Zarathustra** — Friedrich Nietzsche
 - **The Selfish Gene** — Richard Dawkins
 - **Buddha's Brain** — Rick Hanson
