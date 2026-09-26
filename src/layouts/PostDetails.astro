@@ -96,7 +96,6 @@ const nextPost =
     ]}
     data-pagefind-body
   >
-    <div class="mx-auto max-w-(--measure)">
     <h1
       transition:name={slugifyStr(title.replaceAll(".", "-"))}
       class="mt-2 inline-block text-3xl font-bold tracking-tight sm:text-4xl"
@@ -114,7 +113,6 @@ const nextPost =
       >
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
-    </div>
     <article
       id="article"
       class="app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
@@ -124,7 +122,7 @@ const nextPost =
 
     {floatingToc && <FloatingToc />}
 
-    <div class="mx-auto max-w-(--measure)"><ContactCta /></div>
+    <ContactCta />
 
     <hr class="my-8 border-dashed" />
 
