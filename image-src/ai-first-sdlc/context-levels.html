@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.cols{position:absolute;left:64px;right:64px;top:196px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.lv{display:flex;flex-direction:column;gap:10px;padding:24px 22px 22px;height:350px}
+.who{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600;padding:6px 0 14px;border-bottom:1px solid var(--divider)}
+.who .icon{width:28px;height:28px}
+ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:17px;padding-top:4px}
+li{display:flex;gap:12px}
+li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--c);margin-top:9px}
+code{margin-top:auto;font:600 16px ui-monospace,Menlo,monospace;color:var(--muted);background:var(--canvas-alt);padding:7px 10px;border-radius:8px;align-self:flex-start}
+</style></head><body data-size="1200x600"><div class="frame">
+<div class="title">Three levels of <span class="accent">context.</span></div>
+<div class="subtitle">Who needs to see it decides where it lives.</div>
+<div class="cols">
+ <div class="card lv" style="--c:var(--gray)"><div class="eyebrow">Level 1</div><div class="label">Private</div>
+  <div class="who" style="color:var(--muted)"><span class="icon"><i data-lucide="user"></i></span>Only you</div>
+  <ul><li>Notes &amp; scratch prompts</li><li>Half-formed thinking</li><li>Git-ignored, never shared</li></ul>
+  <code>private-knowledgebase/</code></div>
+ <div class="card lv" style="--c:var(--info)"><div class="eyebrow" style="color:var(--info)">Level 2</div><div class="label">Internal</div>
+  <div class="who" style="color:var(--info)"><span class="icon info"><i data-lucide="users"></i></span>The delivery team</div>
+  <ul><li>Decisions &amp; ADRs</li><li>Standards, conventions, skills</li><li>Reasoning kept in-house</li></ul>
+  <code>internal-knowledgebase/</code></div>
+ <div class="card lv" style="--c:var(--success)"><div class="eyebrow" style="color:var(--success)">Level 3</div><div class="label">External</div>
+  <div class="who" style="color:var(--success)"><span class="icon success"><i data-lucide="building-2"></i></span>Team + client</div>
+  <ul><li>Product specs &amp; domain rules</li><li>Scenarios &amp; acceptance criteria</li><li>What the client signs off</li></ul>
+  <code>project-knowledgebase/</code></div>
+</div></div></body></html>

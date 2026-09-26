@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.src{position:absolute;width:290px;display:grid;grid-template-columns:36px 1fr;gap:2px 14px;align-items:center}
+.src .note{grid-column:2}
+.q{position:absolute;left:430px;top:330px;width:340px;text-align:center;padding:26px 24px;border:2px solid var(--accent)}
+.q .label{font-size:25px;line-height:1.2}
+.q .note{margin-top:8px}
+</style></head><body data-size="1200x620"><div class="frame">
+<div class="title">The intent lives <span class="accent">nowhere.</span></div>
+<div class="subtitle">So nobody reads it. Everyone reconstructs it.</div>
+<div class="card src" id="s1" style="left:64px;top:196px"><span class="icon"><i data-lucide="users"></i></span><div class="label">PO &amp; dev minds</div><div class="note">Rules, unwritten</div></div>
+<div class="card src" id="s2" style="left:64px;top:336px"><span class="icon"><i data-lucide="message-square"></i></span><div class="label">Slack / Teams</div><div class="note">Decisions, unrecorded</div></div>
+<div class="card src" id="s3" style="left:64px;top:476px"><span class="icon"><i data-lucide="ticket"></i></span><div class="label">Jira tickets</div><div class="note">Fragments, per sprint</div></div>
+<div class="card src" id="s4" style="left:846px;top:196px"><span class="icon"><i data-lucide="file-text"></i></span><div class="label">Confluence</div><div class="note">Written once, now stale</div></div>
+<div class="card src" id="s5" style="left:846px;top:336px"><span class="icon"><i data-lucide="code"></i></span><div class="label">The code</div><div class="note">What it does, not why</div></div>
+<div class="card src" id="s6" style="left:846px;top:476px"><span class="icon"><i data-lucide="list-checks"></i></span><div class="label">QA memory</div><div class="note">Edge cases, unwritten</div></div>
+<div class="card q" id="q"><div class="label">What does it do today, and what should it do?</div><div class="note">Asked again, every feature</div></div>
+</div>
+<script>LINKS=["s1","s2","s3","s4","s5","s6"].map(id=>({from:"q",to:id,path:"cc",dashed:true,color:"var(--gray)"}));</script>
+</body></html>

@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.spec{position:absolute;left:64px;top:230px;width:330px;padding:26px 26px 22px;border:2px solid var(--accent);display:flex;flex-direction:column;gap:14px}
+.spec .item{display:flex;gap:12px;align-items:center;font-size:20px;font-weight:600;color:var(--title)}
+.spec .icon{width:30px;height:30px}
+.out{position:absolute;left:630px;top:190px;width:506px;display:flex;flex-direction:column;gap:10px}
+.pill{display:flex;align-items:center;gap:14px;padding:11px 18px}
+.pill .icon{width:28px;height:28px}
+.pill .label{width:100px;font-size:19px}
+.pill .note{font-size:17px}
+.opt{margin-left:auto;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--gray);border:1px solid var(--divider);border-radius:99px;padding:2px 8px}
+</style></head><body data-size="1200x620"><div class="frame">
+<div class="title">Everything flows <span class="accent">from the spec.</span></div>
+<div class="subtitle">Change the spec, and what's downstream is regenerated.</div>
+<div class="card spec" id="spec"><div class="eyebrow" style="color:var(--accent)">Source of truth</div>
+ <div class="item"><span class="icon"><i data-lucide="file-text"></i></span>Product specs</div>
+ <div class="item"><span class="icon"><i data-lucide="route"></i></span>Scenarios</div>
+ <div class="item"><span class="icon"><i data-lucide="layers"></i></span>Technical specs</div>
+ <div class="note" style="padding-top:12px;border-top:1px solid var(--divider)">Reviewed, signed off, versioned</div></div>
+<div class="out">
+ <div class="card pill" id="o1"><span class="icon info"><i data-lucide="code"></i></span><div class="label">Code</div><div class="note">Built against the ACs</div></div>
+ <div class="card pill" id="o2"><span class="icon info"><i data-lucide="flask-conical"></i></span><div class="label">Tests</div><div class="note">Each AC becomes a check</div></div>
+ <div class="card pill" id="o3"><span class="icon success"><i data-lucide="clipboard-check"></i></span><div class="label">QA cases</div><div class="note">Given / When / Then</div></div>
+ <div class="card pill" id="o4"><span class="icon"><i data-lucide="book-open"></i></span><div class="label">Docs</div><div class="note">Regenerated, never stale</div></div>
+ <div class="card pill" id="o5"><span class="icon"><i data-lucide="list-checks"></i></span><div class="label">Tasks</div><div class="note">Split from the diff</div><span class="opt">OPTIONAL</span></div>
+ <div class="card pill" id="o6"><span class="icon"><i data-lucide="kanban"></i></span><div class="label">Jira</div><div class="note">Synced from the spec</div><span class="opt">OPTIONAL</span></div>
+</div></div>
+<script>LINKS=[1,2,3,4,5,6].map(i=>({from:"spec",to:"o"+i,dashed:i>4}));</script>
+</body></html>

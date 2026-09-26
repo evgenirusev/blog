@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.flow{position:absolute;left:64px;right:64px;top:210px;display:flex;align-items:center;justify-content:space-between}
+.card{display:flex;flex-direction:column;gap:8px}
+.step{width:158px}
+.brain{position:relative;padding:48px 20px 20px;display:flex;gap:44px;border:2px dashed var(--info);background:transparent}
+.brain .tag{position:absolute;top:14px;left:20px;font-size:16px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--info)}
+.brain .card{width:176px}
+</style></head><body data-size="1200x560"><div class="frame">
+<div class="title">One captured source, <span class="accent">not scattered stories.</span></div>
+<div class="subtitle">PMs, devs and AI all work from the same living spec.</div>
+<div class="flow">
+ <div class="card step" id="a"><span class="icon"><i data-lucide="search"></i></span><div class="label">Research</div><div class="note">The need, gathered</div></div>
+ <div class="card step" id="b"><span class="icon accent"><i data-lucide="users"></i></span><div class="label">Dev &amp; PM alignment</div><div class="note">Agree the intent</div></div>
+ <div class="zone brain" id="brain"><div class="tag">Project Brain</div>
+  <div class="card tint-accent" id="c"><span class="icon"><i data-lucide="folder-git-2"></i></span><div class="label">Knowledge base</div><div class="note">Transcripts, decisions, rules</div></div>
+  <div class="card tint-info" id="d"><span class="icon info"><i data-lucide="file-check"></i></span><div class="label">Living spec</div><div class="note">Current state, PM sign-off</div></div>
+ </div>
+ <div class="card step tint-success" id="e"><span class="icon success"><i data-lucide="repeat"></i></span><div class="label">Agentic loops</div><div class="note">Implement, test, review</div></div>
+</div></div>
+<script>LINKS=[{from:"a",to:"b"},{from:"b",to:"brain"},{from:"c",to:"d"},{from:"brain",to:"e"},
+{from:"e",to:"b",path:"bb",dashed:true,color:"var(--accent)",drop:80,label:"Learn something new → align with the PM → into the spec"}];</script>
+</body></html>
