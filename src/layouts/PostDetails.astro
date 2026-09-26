@@ -7,7 +7,7 @@ import Tag from "@/components/Tag.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
-import BackButton from "@/components/BackButton.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import FloatingToc from "@/components/FloatingToc.astro";
 import { getPath } from "@/utils/getPath";
@@ -86,19 +86,18 @@ const nextPost =
 
 <Layout {...layoutProps}>
   <Header />
-  <BackButton />
+  <Breadcrumb />
   <main
     id="main-content"
     class:list={[
       "app-layout pb-12",
-      { "mt-8": !SITE.showBackButton },
       { "with-floating-toc": floatingToc },
     ]}
     data-pagefind-body
   >
     <h1
       transition:name={slugifyStr(title.replaceAll(".", "-"))}
-      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+      class="mt-2 inline-block text-3xl font-bold tracking-tight sm:text-4xl"
     >
       {title}
     </h1>

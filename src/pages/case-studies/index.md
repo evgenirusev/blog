@@ -14,7 +14,7 @@ A selection of production AI engagements I've led.
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
-    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+    <h2 class="text-xl font-bold tracking-tight group-hover:text-accent group-hover:underline decoration-dashed underline-offset-4">
       Automating 80% of Finance AP/AR with AI
     </h2>
     <p class="mt-3 text-sm opacity-80">
@@ -34,7 +34,7 @@ A selection of production AI engagements I've led.
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
-    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+    <h2 class="text-xl font-bold tracking-tight group-hover:text-accent group-hover:underline decoration-dashed underline-offset-4">
       AI Business Transformation: From 31 Pain Points to AI in Production
     </h2>
     <p class="mt-3 text-sm opacity-80">
@@ -54,7 +54,7 @@ A selection of production AI engagements I've led.
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
-    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+    <h2 class="text-xl font-bold tracking-tight group-hover:text-accent group-hover:underline decoration-dashed underline-offset-4">
       Reducing Manual Work by 80%: AI Data Classification in Mining
     </h2>
     <p class="mt-3 text-sm opacity-80">
@@ -74,7 +74,7 @@ A selection of production AI engagements I've led.
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
-    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+    <h2 class="text-xl font-bold tracking-tight group-hover:text-accent group-hover:underline decoration-dashed underline-offset-4">
       Replacing Manual PDF Extraction with Agentic AI: 80% Reduction, Two Weeks to Production
     </h2>
     <p class="mt-3 text-sm opacity-80">
@@ -94,7 +94,7 @@ A selection of production AI engagements I've led.
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
-    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+    <h2 class="text-xl font-bold tracking-tight group-hover:text-accent group-hover:underline decoration-dashed underline-offset-4">
       Modernizing a Legacy Analytics Stack with AI: From 2 Years to 6 Months
     </h2>
     <p class="mt-3 text-sm opacity-80">
@@ -114,7 +114,7 @@ A selection of production AI engagements I've led.
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
-    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+    <h2 class="text-xl font-bold tracking-tight group-hover:text-accent group-hover:underline decoration-dashed underline-offset-4">
       Legal OS for Startups: From Foundation to AI Layer
     </h2>
     <p class="mt-3 text-sm opacity-80">
@@ -134,7 +134,7 @@ A selection of production AI engagements I've led.
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
-    <h2 class="text-xl font-bold text-accent group-hover:underline decoration-dashed underline-offset-4">
+    <h2 class="text-xl font-bold tracking-tight group-hover:text-accent group-hover:underline decoration-dashed underline-offset-4">
       5G Edge Livestreaming for Live Sports
     </h2>
     <p class="mt-3 text-sm opacity-80">

@@ -1,54 +1,52 @@
 ---
-// Remove current url path and remove trailing slash if exists
-const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
+// Breadcrumb trail from the URL, with readable labels instead of raw slugs.
+// Detail pages (a single post or case study) end at their section — the page's
+// own <h1> already names it, so repeating the slug here is noise.
+const LABELS: Record<string, string> = {
+  posts: "Posts",
+  "case-studies": "Case Studies",
+  tags: "Tags",
+  books: "Books",
+  about: "About",
+  archives: "Archives",
+  search: "Search",
+};
+const DETAIL_SECTIONS = new Set(["posts", "case-studies"]);
 
-// Get url array from path
-// eg: /tags/tailwindcss => ['tags', 'tailwindcss']
-const breadcrumbList = currentUrlPath.split("/").slice(1);
+const segments = Astro.url.pathname.replace(/\/+$/, "").split("/").slice(1);
 
-// if breadcrumb is Home > Posts > 1 <etc>
-// replace Posts with Posts (page number)
-if (breadcrumbList[0] === "posts") {
-  breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
-}
-
-// if breadcrumb is Home > Tags > [tag] > [page] <etc>
-// replace [tag] > [page] with [tag] (page number)
-if (breadcrumbList[0] === "tags" && !isNaN(Number(breadcrumbList[2]))) {
-  breadcrumbList.splice(
-    1,
-    3,
-    `${breadcrumbList[1]} ${Number(breadcrumbList[2]) === 1 ? "" : "(page " + breadcrumbList[2] + ")"}`
-  );
-}
+type Crumb = { label: string; href: string };
+const crumbs: Crumb[] = [];
+let path = "";
+segments.forEach((segment, i) => {
+  path += `/${segment}`;
+  const isLast = i === segments.length - 1;
+  const isPage = /^\d+$/.test(segment);
+  const isDetail = isLast && i > 0 && !isPage && DETAIL_SECTIONS.has(segments[i - 1]);
+  if (isDetail) return;
+  const label = isPage ? `Page ${segment}` : (LABELS[segment] ?? decodeURIComponent(segment));
+  crumbs.push({ label, href: `${path}/` });
+});
+// On a detail page every crumb is an ancestor, so all of them are links.
+const endsOnDetail = crumbs.length < segments.length;
 ---
 
 <nav class="app-layout mt-8 mb-1 font-mono text-sm" aria-label="breadcrumb">
-  <ul
-    class="font-light [&>li]:inline [&>li:not(:last-child)>a]:hover:opacity-100"
-  >
+  <ul class="font-light [&>li]:inline">
     <li>
-      <a href="/" class="opacity-80">Home</a>
-      <span aria-hidden="true" class="opacity-80">&raquo;</span>
+      <a href="/" class="opacity-80 hover:opacity-100">Home</a>
+      {crumbs.length > 0 && <span aria-hidden="true" class="opacity-80">&raquo;</span>}
     </li>
     {
-      breadcrumbList.map((breadcrumb, index) =>
-        index + 1 === breadcrumbList.length ? (
+      crumbs.map((crumb, index) =>
+        index === crumbs.length - 1 && !endsOnDetail ? (
           <li>
-            <span
-              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
-              aria-current="page"
-            >
-              {/* make the last part lowercase in Home > Tags > some-tag */}
-              {decodeURIComponent(breadcrumb)}
-            </span>
+            <span class="opacity-75" aria-current="page">{crumb.label}</span>
           </li>
         ) : (
           <li>
-            <a href={`/${breadcrumb}/`} class="capitalize opacity-70">
-              {breadcrumb}
-            </a>
-            <span aria-hidden="true">&raquo;</span>
+            <a href={crumb.href} class="opacity-80 hover:opacity-100">{crumb.label}</a>
+            {index < crumbs.length - 1 && <span aria-hidden="true" class="opacity-80">&raquo;</span>}
           </li>
         )
       )
