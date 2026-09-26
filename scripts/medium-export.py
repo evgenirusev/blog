@@ -7,8 +7,9 @@ Reads the built page (dist/posts/<slug>/index.html, so run `pnpm build` first) a
 public/medium/<slug>/index.html: plain headings, paragraphs, lists, <pre> code and absolute
 PNG image URLs, which is what Medium's "Import a story" tool understands. Markdown tables
 become images, in order, from table-image-dir (see image-src/medium-<slug>/). The page is
-noindex and declares the real post as canonical; also set the canonical link in Medium's
-story settings after importing.
+noindex and deliberately has no rel=canonical: Medium's importer follows it and would
+import the real (image-less) page instead. Set the canonical link to the real post in
+Medium's story settings after importing.
 """
 import re, shutil, sys
 from pathlib import Path
@@ -88,7 +89,6 @@ doc = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <title>{title}</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="{SITE}/posts/{slug}/">
 </head><body><article>
 <h1>{title}</h1>
 {body}
