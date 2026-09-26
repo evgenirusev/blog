@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.c{position:absolute;display:flex;flex-direction:column;align-items:center;text-align:center}
+.top{left:420px;width:360px}
+.skill{top:430px;width:330px;height:164px;gap:6px;padding:18px 18px}
+.skill .note{font-size:17px}
+.dest{top:652px;width:240px;flex-direction:row;justify-content:center;gap:10px;padding:12px 16px}
+.dest .label{font-size:19px;font-family:ui-monospace,Menlo,monospace;font-weight:700}
+.cmd{font:800 30px ui-monospace,Menlo,monospace;color:var(--accent)}
+</style></head><body data-size="1200x770"><div class="frame">
+<div class="title">One command, <span class="accent">three specialists.</span></div>
+<div class="subtitle">You speak in natural language. <b>/spec</b> routes to the right skill.</div>
+<div class="card c top" id="user" style="top:170px;width:560px;left:320px;flex-direction:row;justify-content:center;gap:12px;padding:14px 18px"><span class="icon"><i data-lucide="message-square"></i></span><div class="label">Developer / PM · natural language intent</div></div>
+<div class="card c top tint-accent" id="spec" style="top:282px;width:220px;left:490px;padding:16px"><div class="cmd">/spec</div></div>
+<div class="card c skill" id="s1" style="left:64px"><span class="icon info"><i data-lucide="file-pen"></i></span><div class="label">Spec Manager</div><div class="note">bootstrap · create · update · review · archive</div></div>
+<div class="card c skill" id="s2" style="left:435px"><span class="icon info"><i data-lucide="hammer"></i></span><div class="label">Spec Implementer</div><div class="note">read · diff · plan · implement · verify</div></div>
+<div class="card c skill" id="s3" style="left:806px"><span class="icon info"><i data-lucide="refresh-cw"></i></span><div class="label">Jira Sync</div><div class="note">push · pull · drift</div></div>
+<div class="card c dest" id="d1" style="left:109px"><span class="icon success" style="width:26px;height:26px"><i data-lucide="folder"></i></span><div class="label">/specs/*.md</div></div>
+<div class="card c dest" id="d2" style="left:480px"><span class="icon success" style="width:26px;height:26px"><i data-lucide="code"></i></span><div class="label">Source code</div></div>
+<div class="card c dest" id="d3" style="left:851px"><span class="icon success" style="width:26px;height:26px"><i data-lucide="kanban"></i></span><div class="label">Jira backlog</div></div>
+</div>
+<script>LINKS=[{from:"user",to:"spec",path:"down",dot:false},
+{from:"spec",to:"s1",path:"down",fromAt:0.25,color:"var(--accent)"},{from:"spec",to:"s2",path:"down",color:"var(--accent)"},{from:"spec",to:"s3",path:"down",fromAt:0.75,color:"var(--accent)"},
+{from:"s1",to:"d1",path:"down",color:"var(--success)"},{from:"s2",to:"d2",path:"down",color:"var(--success)"},{from:"s3",to:"d3",path:"down",color:"var(--success)"}];</script>
+</body></html>

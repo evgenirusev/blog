@@ -16,7 +16,7 @@ ogImage: "../../assets/images/posts/azure-devops-terraform-multi-environment.png
 description: "Step-by-step guide to setting up a multi-environment DevOps solution with CI/CD pipelines and Azure resource provisioning using Terraform and Azure DevOps."
 ---
 
-![DevOps for Azure — multi-environment provisioning with Terraform and CI/CD pipelines deploying to DEV, QA, and PROD](../../assets/images/posts/azure-devops-terraform-multi-environment.png)
+![DevOps for Azure — code flows through one CI/CD pipeline that provisions identical infrastructure into DEV, QA and PROD](../../assets/images/posts/azure-devops-terraform-multi-environment.png)
 
 > Originally published on [Medium](https://medium.com/@evgeni.n.rusev/devops-for-azure-multi-environment-provisioning-with-terraform-ci-cd-pipelines-4589a411d986), July 2024.
 
@@ -28,7 +28,7 @@ In this article, I will provide a step-by-step guide to setting up a multi-envir
 
 [*Link to source code*](https://github.com/evgenirusev/.NET-With-Azure-DevOps-Template)
 
-![Azure DevOps multi-environment architecture: source control, CI/CD, App Services, Key Vault, Azure Storage, Azure SQL, Application Insights](../../assets/images/posts/azure-devops-terraform-multi-environment-architecture.webp)
+![Azure DevOps multi-environment architecture: source control, CI/CD, App Services, Key Vault, Azure Storage, Azure SQL, Application Insights](../../assets/images/posts/azure-devops-terraform-multi-environment/architecture.png)
 
 ## Starting with the WHY
 

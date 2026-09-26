@@ -5,7 +5,7 @@ title: "Replacing Manual PDF Extraction with Agentic AI: 80% Reduction, Two Week
 
 > Originally published on the [Tecknoworks website](https://tecknoworks.com/cases/mining-intelligence-ai-data-extraction/), May 2026.
 
-![AI-powered data extraction — operational PDFs flowing through an AI layer into structured fields and analytics dashboards](../../assets/images/posts/mining-intelligence-data-extraction.png)
+![Replacing manual PDF extraction with agentic AI — a stack of PDFs goes through AI extraction and a production layer (validation, confidence, unit rules, audit) into a trusted data dashboard](../../assets/images/posts/mining-intelligence-data-extraction.png)
 
 <div class="not-prose my-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
   <div class="rounded-lg border border-border p-5 text-center">

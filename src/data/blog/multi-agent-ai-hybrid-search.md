@@ -16,7 +16,7 @@ ogImage: "../../assets/images/posts/multi-agent-ai-hybrid-search.png"
 description: "How a multi-agent orchestrator combined with LanceDB's hybrid search cut document review time by 80% — practical patterns from a Legal Tech production build, with full source code."
 ---
 
-![Multi-Agent AI with Hybrid Search — documents flow through a multi-agent orchestrator into a hybrid-search-powered review interface](../../assets/images/posts/multi-agent-ai-hybrid-search.png)
+![Multi-Agent AI with Hybrid Search — legal documents go to an orchestrator that routes to Employment, Compliance and Equity expert agents, each drawing on hybrid (keyword + vector) search, converging on one answer](../../assets/images/posts/multi-agent-ai-hybrid-search.png)
 
 > Originally published on [Medium](https://medium.com/@evgeni.n.rusev/multi-agent-ai-with-hybrid-search-cutting-document-review-time-by-80-f7367a9b1361), June 2025.
 

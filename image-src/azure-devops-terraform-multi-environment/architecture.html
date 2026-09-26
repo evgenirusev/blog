@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script>
+<style>
+.svc{position:absolute;width:300px;display:grid;grid-template-columns:36px 1fr;gap:2px 14px;align-items:center;padding:16px 18px}
+.svc .note{grid-column:2;font-size:16px}
+.rg{position:absolute;border:1.5px dashed var(--info);border-radius:22px;background:transparent}
+.rg .tag{position:absolute;top:14px;left:22px;font-size:16px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--info)}
+.rg.back{border-color:#d9cde3;background:transparent}
+.rg.back .tag{color:var(--muted)}
+</style></head><body data-size="1200x800"><div class="frame">
+<div class="title">One pipeline, <span class="accent">identical environments.</span></div>
+<div class="subtitle">Terraform provisions the same resources in every resource group.</div>
+<div class="card svc tint-accent" id="devops" style="left:450px;top:170px"><span class="icon accent"><i data-lucide="git-branch"></i></span><div class="label">Azure DevOps</div><div class="note">Source control &amp; CI/CD</div></div>
+<div class="rg back" id="qa" style="left:92px;top:292px;width:1044px;height:462px"><div class="tag">QA resource group</div></div>
+<div class="rg" id="dev" style="left:64px;top:330px;width:1044px;height:440px"><div class="tag">DEV resource group</div></div>
+<div class="card svc" id="kv" style="left:96px;top:420px"><span class="icon"><i data-lucide="key-round"></i></span><div class="label">Key Vault</div><div class="note">Keys &amp; secrets</div></div>
+<div class="card svc tint-info" id="app" style="left:436px;top:420px"><span class="icon info"><i data-lucide="globe"></i></span><div class="label">App Services</div><div class="note">Web hosting</div></div>
+<div class="card svc" id="ai" style="left:776px;top:420px"><span class="icon"><i data-lucide="activity"></i></span><div class="label">App Insights</div><div class="note">Logging &amp; monitoring</div></div>
+<div class="card svc" id="st" style="left:266px;top:610px"><span class="icon"><i data-lucide="hard-drive"></i></span><div class="label">Azure Storage</div><div class="note">Data lake storage</div></div>
+<div class="card svc" id="sql" style="left:606px;top:610px"><span class="icon"><i data-lucide="database"></i></span><div class="label">Azure SQL</div><div class="note">Relational database</div></div>
+</div>
+<script>LINKS=[{from:"devops",to:"app",path:"down",color:"var(--accent)",label:"deploys"},
+{from:"app",to:"kv",path:"cc"},{from:"app",to:"ai",path:"cc"},
+{from:"app",to:"st",path:"down",fromAt:0.3},{from:"app",to:"sql",path:"down",fromAt:0.7}];</script>
+</body></html>

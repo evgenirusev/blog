@@ -3,7 +3,7 @@ layout: ../../layouts/AboutLayout.astro
 title: "5G Edge Livestreaming for Live Sports"
 ---
 
-![5G edge livestreaming — mobile device routed through 5G edge zones to a live-sports stadium, with 800ms public-internet latency vs 200ms over the 5G edge path (4× lower)](../../assets/images/posts/5g-livestreaming-aws-wavelength.png)
+![5G Edge Livestreaming for Live Sports — a stadium feed reaching a phone in 200 ms through a 5G edge node, versus 800 ms over the public internet](../../assets/images/posts/5g-livestreaming-aws-wavelength.png)
 
 <div class="not-prose my-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
   <div class="rounded-lg border border-border p-5 text-center">

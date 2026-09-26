@@ -8,9 +8,9 @@ A selection of production AI engagements I've led.
 
 <a href="/case-studies/automating-finance-ap-ar-with-ai" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
-    src="/images/case-studies/automating-finance-ap-ar-with-ai.png"
-    alt="AP/AR automation on Azure — invoices, remittances, and retailer EDI flow through capture, matching, routing, and exception queues into human-reviewed posting in Business Central"
-    class="w-full h-44 object-contain rounded-md sm:w-72 sm:h-auto sm:self-center flex-shrink-0"
+    src="/images/case-studies/automating-finance-ap-ar-with-ai.webp"
+    alt="Automating 80% of Finance AP/AR with AI — a messy pile of invoices, remittances and retailer EDI files goes through an automated sorting machine into tidy drafts, with a reviewer approving the final one"
+    class="w-full aspect-video object-cover rounded-md border border-border sm:w-72 sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
@@ -28,9 +28,9 @@ A selection of production AI engagements I've led.
 
 <a href="/case-studies/pain-points-to-funded-roadmap" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
-    src="/images/case-studies/pain-points-to-funded-roadmap.png"
-    alt="From pain points to roadmap — AI and data transformation assessment infographic with phased roadmap and ~80% finance automation reduction"
-    class="w-full h-44 object-contain rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    src="/images/case-studies/pain-points-to-funded-roadmap.webp"
+    alt="From 31 pain points to AI in production — scattered pain points converge into 16 use cases, then 3 frameworks, then ~80% less manual finance work"
+    class="w-full aspect-video object-cover rounded-md border border-border sm:w-72 sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
@@ -48,9 +48,9 @@ A selection of production AI engagements I've led.
 
 <a href="/case-studies/mining-ai-data-classification" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
-    src="/images/case-studies/mining-ai-data-classification.png"
-    alt="AI data classification platform for mining — multilingual classification, human-in-the-loop review, and analytics dashboards"
-    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    src="/images/case-studies/mining-ai-data-classification.webp"
+    alt="AI Data Classification in Mining — multilingual spreadsheets flowing through one classifier into sorted categories"
+    class="w-full aspect-video object-cover rounded-md border border-border sm:w-72 sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
@@ -68,9 +68,9 @@ A selection of production AI engagements I've led.
 
 <a href="/case-studies/mining-intelligence-data-extraction" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
-    src="/images/case-studies/mining-intelligence-data-extraction.png"
-    alt="AI-powered data extraction — documents flowing into structured fields and analytics dashboards"
-    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    src="/images/case-studies/mining-intelligence-data-extraction.webp"
+    alt="Replacing manual PDF extraction with agentic AI — a stack of PDFs goes through AI extraction and a production layer (validation, confidence, unit rules, audit) into a trusted data dashboard"
+    class="w-full aspect-video object-cover rounded-md border border-border sm:w-72 sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
@@ -88,9 +88,9 @@ A selection of production AI engagements I've led.
 
 <a href="/case-studies/sql-to-fabric-ai-migration" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
-    src="/images/case-studies/sql-to-fabric-ai-migration.png"
+    src="/images/case-studies/sql-to-fabric-ai-migration.webp"
     alt="Modernizing legacy analytics with AI and Microsoft Fabric — migration overview and performance dashboard"
-    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch sm:object-contain flex-shrink-0"
+    class="w-full aspect-video object-cover rounded-md border border-border sm:w-72 sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
@@ -108,9 +108,9 @@ A selection of production AI engagements I've led.
 
 <a href="/case-studies/legal-saas-startups" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
-    src="/images/case-studies/legal-saas-startups.png"
-    alt="Building a Legal OS for Startups — case study infographic"
-    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    src="/images/case-studies/legal-saas-startups.webp"
+    alt="Legal OS for Startups — cap table, documents and e-sign in one platform, with an AI assistant answering "SAFE or ASA for this round?""SAFE or ASA for this round?""
+    class="w-full aspect-video object-cover rounded-md border border-border sm:w-72 sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">
@@ -128,9 +128,9 @@ A selection of production AI engagements I've led.
 
 <a href="/case-studies/5g-livestreaming-aws-wavelength" class="not-prose group my-10 flex flex-col gap-4 rounded-lg border border-border p-5 transition-colors hover:border-accent sm:flex-row sm:gap-6 sm:p-6">
   <img
-    src="/images/case-studies/5g-livestreaming-aws-wavelength.png"
-    alt="5G edge livestreaming — mobile device through 5G edge zones to stadium, 800ms vs 200ms latency comparison"
-    class="w-full h-44 object-cover rounded-md sm:w-72 sm:h-auto sm:self-stretch flex-shrink-0"
+    src="/images/case-studies/5g-livestreaming-aws-wavelength.webp"
+    alt="5G Edge Livestreaming for Live Sports — a stadium feed reaching a phone in 200 ms through a 5G edge node, versus 800 ms over the public internet"
+    class="w-full aspect-video object-cover rounded-md border border-border sm:w-72 sm:self-center flex-shrink-0"
     loading="lazy"
   />
   <div class="flex-1 min-w-0">

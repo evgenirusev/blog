@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script>
+<style>
+.lanes{position:absolute;left:64px;right:64px;top:176px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.lane{border:1px solid var(--divider);border-radius:20px;background:rgba(255,255,255,.55);padding:0 16px 16px}
+.lane h3{margin:0 -16px 16px;padding:14px 18px;border-radius:20px 20px 0 0;background:var(--info-tint);font-size:20px;font-weight:900;color:var(--title)}
+.step{position:relative;display:grid;grid-template-columns:30px 1fr;gap:4px 12px;padding:14px 14px;margin-bottom:30px;border-left:4px solid var(--c)}
+.step .icon{width:26px;height:26px}
+.step .label{font-size:18px}
+.step .note{grid-column:2;font-size:16px}
+.step:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-24px;width:2px;height:18px;background:var(--info);opacity:.55}
+.pain{grid-column:2;margin-top:6px;justify-self:start;font-size:15px;font-weight:800;color:var(--accent-deep);background:var(--accent-tint);border-radius:999px;padding:3px 11px}
+.legend{position:absolute;left:64px;bottom:40px;display:flex;gap:30px;font-size:17px;font-weight:700;color:var(--ink)}
+.legend span{display:flex;align-items:center;gap:9px}
+.legend i{width:14px;height:14px;border-radius:4px;display:block;background:var(--c)}
+.legend .p{font-size:15px;font-weight:800;color:var(--accent-deep);background:var(--accent-tint);border-radius:999px;padding:3px 11px}
+</style></head><body data-size="1200x900"><div class="frame">
+<div class="title">The process as it <span class="accent">actually ran.</span></div>
+<div class="subtitle">Finance AP/AR as-is map, with the pain points flagged.</div>
+<div class="lanes">
+ <div class="lane"><h3>Purchase invoices</h3>
+  <div class="card step" style="--c:var(--plum)"><span class="icon"><i data-lucide="mail"></i></span><div class="label">Invoices arrive by email</div><div class="note">Suppliers send PDF attachments</div></div>
+  <div class="card step" style="--c:var(--info)"><span class="icon"><i data-lucide="printer"></i></span><div class="label">Printed &amp; hand-signed</div><div class="note">Printed, signed and scanned</div></div>
+  <div class="card step" style="--c:var(--gray)"><span class="icon"><i data-lucide="keyboard"></i></span><div class="label">Keyed into ERP line by line</div><div class="note">Manual entry per line</div><div class="pain">No PO → exception path</div></div>
+  <div class="card step" style="--c:var(--info)"><span class="icon"><i data-lucide="mail-warning"></i></span><div class="label">Approval chased over email</div><div class="note">Follow-ups to approvers</div><div class="pain">Mismatched product names</div></div>
+ </div>
+ <div class="lane"><h3>Retailer EDI</h3>
+  <div class="card step" style="--c:var(--gray)"><span class="icon"><i data-lucide="file-spreadsheet"></i></span><div class="label">ERP generates CSV</div><div class="note">One extract per retailer</div></div>
+  <div class="card step" style="--c:var(--info)"><span class="icon"><i data-lucide="file-pen"></i></span><div class="label">Manual Notepad edits</div><div class="note">Retailer-specific formats and codes</div><div class="pain">Retailer-specific quirks</div></div>
+  <div class="card step" style="--c:var(--info)"><span class="icon"><i data-lucide="table"></i></span><div class="label">Visual check in Excel</div><div class="note">Eyeball the CSV for errors</div></div>
+  <div class="card step" style="--c:var(--plum)"><span class="icon"><i data-lucide="upload-cloud"></i></span><div class="label">Upload to portal / EDI</div><div class="note">Retailer portal or EDI conversion</div></div>
+ </div>
+ <div class="lane"><h3>Remittances</h3>
+  <div class="card step" style="--c:var(--plum)"><span class="icon"><i data-lucide="files"></i></span><div class="label">Multi-page PDF remittances</div><div class="note">Sent by retailers</div></div>
+  <div class="card step" style="--c:var(--info)"><span class="icon"><i data-lucide="list"></i></span><div class="label">Split across ledgers</div><div class="note">Reviewed and split line by line</div></div>
+  <div class="card step" style="--c:var(--gray)"><span class="icon"><i data-lucide="monitor"></i></span><div class="label">Manual allocation in ERP</div><div class="note">Payments matched to open items</div></div>
+ </div>
+</div>
+<div class="legend"><span style="--c:var(--info)"><i></i>Finance team</span><span style="--c:var(--plum)"><i></i>External parties</span><span style="--c:var(--gray)"><i></i>Systems</span><span class="p">Pain point</span></div>
+</div></body></html>

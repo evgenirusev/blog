@@ -3,7 +3,7 @@ layout: ../../layouts/AboutLayout.astro
 title: "Legal OS for Startups: From Foundation to AI Layer"
 ---
 
-![Building a Legal OS for Startups — the startup legal lifecycle (incorporation, fundraising, cap table, employment, compliance), an AI legal assistant, and the underlying tech (DDD architecture, Azure AI integration, 80% faster onboarding, end-to-end platform, Angular + .NET)](../../assets/images/posts/legal-saas-startups.png)
+![Legal OS for Startups — cap table, documents and e-sign in one platform, with an AI assistant answering "SAFE or ASA for this round?"](../../assets/images/posts/legal-saas-startups.png)
 
 <div class="not-prose my-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
   <div class="rounded-lg border border-border p-5 text-center">

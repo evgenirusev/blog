@@ -5,7 +5,7 @@ title: "Reducing Manual Work by 80%: AI Data Classification in Mining"
 
 > Originally published on the [Tecknoworks website](https://tecknoworks.com), May 2026.
 
-![AI data classification platform for mining — multilingual classification, human-in-the-loop review, and analytics in one workflow](../../assets/images/posts/mining-ai-data-classification.png)
+![AI Data Classification in Mining — multilingual spreadsheets flowing through one classifier into six sorted categories, with 80% less manual work and 94% accuracy](../../assets/images/posts/mining-ai-data-classification.png)
 
 <div class="not-prose my-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
   <div class="rounded-lg border border-border p-5 text-center">

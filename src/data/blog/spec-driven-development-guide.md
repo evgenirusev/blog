@@ -95,7 +95,7 @@ That's a small but important inversion. Most teams treat code as the source of t
 
 Once the spec is the source of truth, everything downstream regenerates from it: source code, tests, tasks, documentation. When the spec changes, the implementation changes — and so do the tests, the docs, and the work plan.
 
-![Spec as source of truth — Product Manager and Developer write the spec, while source code, tests, tasks, and documentation derive from it](../../assets/images/posts/spec-source-of-truth.png)
+![Spec as source of truth — Product Manager and Developer write the spec, while source code, tests, tasks, and documentation derive from it](../../assets/images/posts/spec-driven-development-guide/spec-source-of-truth.png)
 
 The same gains AI brought to coding now apply anywhere downstream of the spec — for tests, for tasks, for documentation. We'll come back to specific applications in [Specs Beyond Coding](#specs-beyond-coding).
 
@@ -290,7 +290,7 @@ For example:
 
 That's the surface area. There's no framework to learn — the AI handles routing, the human stays in natural language. Underneath, three specialist skills do the actual work.
 
-![/spec slash command routing to three specialist skills — Spec Manager, Spec Implementer, and Jira Sync](../../assets/images/posts/spec-orchestrator.png)
+![/spec slash command routing to three specialist skills — Spec Manager, Spec Implementer, and Jira Sync](../../assets/images/posts/spec-driven-development-guide/spec-orchestrator.png)
 
 The overview below covers the shape of the system — what each specialist skill does, and the rules that make it work in practice.
 

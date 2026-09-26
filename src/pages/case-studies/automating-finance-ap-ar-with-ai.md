@@ -3,7 +3,7 @@ layout: ../../layouts/AboutLayout.astro
 title: "Automating 80% of Finance AP/AR with AI"
 ---
 
-![AP/AR automation on Azure — invoices, remittances, and retailer EDI flow through capture, matching, routing, and exception queues into human-reviewed posting in Business Central](../../assets/images/posts/automating-finance-ap-ar-with-ai.png)
+![Automating 80% of Finance AP/AR with AI — a messy pile of invoices, remittances and retailer EDI files goes through an automated sorting machine into tidy drafts, with a reviewer approving the final one](../../assets/images/posts/automating-finance-ap-ar-with-ai.png)
 
 <div class="not-prose my-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
   <div class="rounded-lg border border-border p-5 text-center">
@@ -48,7 +48,7 @@ They also explained why the client's previous automation attempt had failed: an 
 
 From the interviews we built as-is process maps for each workflow — purchase invoice processing, retailer EDI submissions, and remittance allocation — with swimlanes for every actor, decision points, time estimates per step, and pain points flagged. Then we validated the maps with the SMEs, who corrected them ("oh, I forgot about the step where…") until they matched reality.
 
-![Finance AP/AR as-is process map — purchase invoices, retailer EDI, and remittances workflows with pain points flagged](../../assets/images/posts/ap-ar-as-is-process-map.png)
+![Finance AP/AR as-is process map — purchase invoices, retailer EDI, and remittances workflows with pain points flagged](../../assets/images/posts/automating-finance-ap-ar-with-ai/as-is-process-map.png)
 
 This step matters more than it looks. People describe the process they are supposed to run; the map captures the one they actually run, including the workarounds and exception paths. Those exception paths — the mismatched product names, the retailer-specific quirks, the invoices with no purchase order — became the core of the solution design.
 

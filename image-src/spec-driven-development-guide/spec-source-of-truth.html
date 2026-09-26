@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.who{position:absolute;top:172px;width:300px;display:flex;align-items:center;gap:14px}
+.spec{position:absolute;left:420px;top:372px;width:360px;padding:18px 24px;text-align:center;border:2px solid var(--accent)}
+.spec .icon{width:40px;height:40px;margin:0 auto 8px}
+.spec .label{font-size:26px}
+.out{position:absolute;top:598px;width:250px;display:flex;align-items:center;gap:12px;padding:16px 18px}
+.edge{position:absolute;top:300px;font-size:17px;font-weight:700;color:var(--info)}
+</style></head><body data-size="1200x720"><div class="frame">
+<div class="title">One spec, <span class="accent">everything downstream.</span></div>
+<div class="subtitle">Both roles write it. Everything else derives from it.</div>
+<div class="card who" id="pm" style="left:220px"><span class="icon info"><i data-lucide="user-round"></i></span><div class="label">Product Manager</div></div>
+<div class="card who" id="dev" style="left:680px"><span class="icon info"><i data-lucide="laptop"></i></span><div class="label">Developer</div></div>
+<div class="card spec tint-accent" id="spec"><span class="icon accent"><i data-lucide="file-text"></i></span><div class="label">/specs</div><div class="note">The source of truth</div></div>
+<div class="card out" id="o1" style="left:64px"><span class="icon"><i data-lucide="code"></i></span><div class="label">Source code</div></div>
+<div class="card out" id="o2" style="left:338px"><span class="icon"><i data-lucide="flask-conical"></i></span><div class="label">Tests</div></div>
+<div class="card out" id="o3" style="left:612px"><span class="icon"><i data-lucide="list-checks"></i></span><div class="label">Tasks</div></div>
+<div class="card out" id="o4" style="left:886px"><span class="icon"><i data-lucide="book-open"></i></span><div class="label">Documentation</div></div>
+</div>
+<script>LINKS=[{from:"pm",to:"spec",path:"down",toAt:0.3,label:"writes / updates"},{from:"dev",to:"spec",path:"down",toAt:0.7,label:"writes / updates"},
+...[1,2,3,4].map((i,k)=>({from:"spec",to:"o"+i,path:"down",fromAt:0.14+k*0.24,color:"var(--accent)"}))];</script>
+</body></html>
