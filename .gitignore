@@ -26,3 +26,5 @@ pnpm-debug.log*
 # pagefind
 
 public/pagefind
+# blog-images: hero candidates (the pick is copied into src/assets)
+image-src/*/hero/

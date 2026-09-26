@@ -43,5 +43,11 @@ post, and the **filename is the URL slug**. Raw HTML is allowed in Markdown (e.g
 
 ## Conventions
 
+- **Colour lives in one place: `src/styles/brand.css`.** The site maps it onto AstroPaper's
+  `--accent/--background/--foreground/--muted/--border` in `global.css` (light and dark), and the
+  blog-image renderer maps it onto role tokens in `scripts/images/theme.css`. Change the palette
+  there, never by hard-coding hex in components or diagrams. Text colours must pass WCAG AA (4.5:1).
+- Blog images (heroes + diagrams): use the `blog-images` skill (`.claude/skills/blog-images/`).
+
 - Match the existing AstroPaper + Tailwind v4 style. Verify with `pnpm build` before pushing.
 - Git: conventional commit prefixes (`feat:` / `fix:` / `docs:` / `chore:`).
