@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>The AI-First SDLC: A Practical Guide for Software Engineering Teams</title>
+<meta name="robots" content="noindex, nofollow">
+</head><body><article>
+<h1>The AI-First SDLC: A Practical Guide for Software Engineering Teams</h1>
+ <figure><img alt="AI-First SDLC — three pillars in one cycle: the Project Brain captures intent once, Living Specs are the source of truth, Agentic Loops implement, test and review, and learnings flow back into the brain" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/ai-first-sdlc.png"/></figure>
+<p><em>Software engineering stopped being about writing code. It became about managing context.</em></p>
+<p>After adopting the AI-First SDLC across 8 of our roughly 12 engineering teams at <a href="https://tecknoworks.com" rel="noopener noreferrer" target="_blank">Tecknoworks</a>, this is the operating model we landed on: what works, what doesn’t, and what it took to get teams to adopt it. It builds on the talk I gave at <a href="https://www.devtalks.ro/cluj#speakers" rel="noopener noreferrer" target="_blank">DevTalks Cluj</a> in September. I was pleasantly surprised by the turnout, the positive feedback, and how many people asked for the slides afterwards, so I decided to write this post.</p>
+<p>If you write software today, you’ve already seen AI speed up coding a lot. <strong>But</strong> it hasn’t sped up <em>capturing the intent</em>, and that work isn’t streamlined across the company. Every team still reconstructs what the system does, and what it should do, in its own way, one meeting at a time.</p>
+<p>This post covers the SDLC we adopted to fix both problems. It speeds up delivery further, keeps teams and projects consistent, and leaves everyone better aligned and less frustrated.</p>
+
+<p></p><p></p>
+<h2>What Has Changed: Implementation Collapsed</h2>
+<p>Take a traditional sprint. Roughly 30% of it goes to working out the intent (the current state, the future state, and getting the team aligned). Half goes to implementation, writing and changing the code, and the remaining 20% goes to testing, deployment and maintenance.</p>
+<p>With AI-accelerated code generation, the implementation and testing slices shrink to about 10% each. That frees up half the sprint. <strong>But the intent-and-alignment slice, still 30%, hasn’t moved at all.</strong></p>
+<figure><img alt="Share of one sprint: traditional (30% intent and team alignment, 50% implementation, 20% test and deploy) versus AI code generation (30% intent, 10% implementation, 10% test, 50% reclaimed)" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/sprint-today.png"/></figure>
+<p>Code generation and requirements capture have to speed up <em>together</em>. If requirements stay the bottleneck, they eat into the gains from faster code. Speed up both and the gains compound, because each one reinforces the other.</p>
+<h2>Where the Friction in Software Development Is Now</h2>
+<h3>What it takes to build something new</h3>
+<p>This is the mental model that guides the philosophy behind the approach. Every feature moves the product from <strong>the current state</strong> (how it behaves today) to <strong>the future state</strong> (how it should behave once this ships), and the model needs to see both.</p>
+<figure><img alt="Every feature is a move between two states: the current state and the future state. The gap between them is the intent, which is what you hand the model" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/current-future-state.png"/></figure>
+<p>We call the gap between them <strong>the intent</strong>: what’s meant to change, given the new requirements. That’s exactly what you hand the model.</p>
+<p>And then, <strong>almost any feature or bug can be implemented in a single prompt.</strong> So the job is no longer writing the code. It’s <em>constructing the intent</em>, reliably, every time.</p>
+<h3>You can’t get the current state from the code</h3>
+<blockquote>
+<p>Code is a <strong>lossy projection</strong> of intent. It records <em>what</em> was built, never <em>why</em>, what was ruled out, or what constraints shaped it.</p>
+</blockquote>
+<ul>
+<li><strong>We keep the output and throw away the thinking.</strong> The AI wrote the code, then we discarded the prompt that explained it.</li>
+<li><strong>We keep paying for the expensive step.</strong> Every new feature, developer or AI session works out the context from scratch.</li>
+<li><strong>Nothing compounds.</strong> You get a fast first demo, then the team stalls.</li>
+</ul>
+<p>There’s also a practical problem. Ask Claude how a feature works in a complex project in three separate sessions and you can get three different answers. That’s unreliable, inconsistent and slow. For a simple prototype this doesn’t matter, because Claude can read the current state straight from the code quickly and consistently. For complex, long-lived production software with many authors and months of features piling up, “just generate the code” stops scaling.</p>
+<h3>A chain of human handoffs</h3>
+<p>To ship anything, the AI needs the requirements currently running in production and the future state. Today that context is scattered across PMs’ heads, Slack and Teams threads, Jira tickets, Confluence pages and meeting notes. So every person pieces it together by hand, meeting after meeting.</p>
+<figure><img alt="The traditional SDLC, idea to shipped code as a chain of five handoffs: research, requirements and alignment, Jira epics and stories, understanding the current state, implementation, with a loop back whenever something new is learned" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/handoff-chain.png"/></figure>
+<p>The traditional flow goes like this. You gather requirements, write them up as stories and epics, then start exploring the current state in the codebase. There you find the requirements don’t match what’s actually there, or the story needs reframing to balance business value against technical debt. So you go back and forth with product or dev to sort it out.</p>
+<p>That back-and-forth happens all the time, but it rarely gets written down anywhere that lasts. It lives in people’s heads, and sometimes in a Jira ticket that goes stale. Whatever one person discovers, the next person who hits the same problem has to discover again.</p>
+<h3>The hidden cost: the intent lives nowhere</h3>
+<p>The intent isn’t defined in one place. It’s spread across layers and people. So nobody <em>reads</em> the intent. Everyone reconstructs it.</p>
+<figure><img alt="The intent lives nowhere: one question — what does it do today, and what should it do — has to be answered from PO and dev minds, Slack/Teams, Jira, Confluence, the code and QA memory" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/intent-lives-nowhere.png"/></figure>
+<p>To answer one question (<em>what does it do today, and what should it do?</em>) you end up asking the PO what the actual rule is, the ticket what was agreed, the code what it really does, the original developer why it was built this way, QA which edge cases exist, and then everyone again once it changes. No layer owns the intent, so you have to consult every layer. And the answer is only ever as good as the last conversation.</p>
+<h3>Nine symptoms of one disease</h3>
+<figure><img alt="nine symptoms" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/1-nine-symptoms.png"/></figure>
+<p>Without durable, versioned, well-structured artifacts that define the intent, teams pay an ongoing <strong>rediscovery tax</strong>. They rebuild context through meetings, tribal knowledge, analysis and rework.</p>
+<h2>The Approach We Adopted</h2>
+<p>The <strong>AI-First SDLC</strong> is a way of developing software where a machine-readable spec defines how the system behaves and serves as the single source of truth. The starting point is the same as before. The difference is that alignment now produces a durable spec instead of scattered stories.</p>
+<figure><img alt="Research, then dev and PM alignment, then the Project Brain (knowledge base generating the living spec), then agentic loops — with learnings flowing back into the spec" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/ai-sdlc-flow.png"/></figure>
+<p>Research and raw project material (transcripts, documentation, decisions, anything relevant) goes into a <strong>Project Brain</strong>. The <strong>Living Specs</strong> are generated from that knowledge base. Once the specs exist, <strong>Agentic Loops</strong> take over. These are repeatable, chained steps that implement, test and review against the spec.</p>
+<p>The key change: when you learn something new, you still align with the PM, but the outcome goes back into the spec. It doesn’t stay in one person’s head or a one-off ticket. The next person who touches that area finds an up-to-date spec instead of working it out again. That’s where knowledge starts to compound instead of leaking at every handoff.</p>
+<h3>Three pillars, one operating model</h3>
+<p>This isn’t a single technique. It’s an end-to-end way of working, and each pillar covers what the others can’t.</p>
+<figure><img alt="Three pillars, one operating model: Project Brain (intent captured once), Living Specs (nothing built off-spec) and Agentic Loops (execution stops being manual)" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/three-pillars.png"/></figure>
+<ol>
+<li><strong>Project Brain:</strong> where the intent lives. It holds the product specs plus the context behind them (transcripts, emails, decisions and their reasons, domain rules the code never states), captured once. <em>The intent stops being re-derived.</em></li>
+<li><strong>Living Specs:</strong> the discipline of executing against those specs, referenced from inside the repository. The spec diff is the contract, and the PM signs off the diff before any code is written. <em>Nothing gets built off-spec.</em></li>
+<li><strong>Agentic Loops:</strong> chained agents that implement the spec diff, run structure, security and code reviews, and verify against the acceptance criteria. <em>Execution stops being manual.</em></li>
+</ol>
+<p>Living Specs are the pillar we know best, but on their own they aren’t enough. The Brain is where the specs live, Living Specs are how you execute against them, and the Loops let all of that run without anyone carrying it by hand.</p>
+<h3>The Project Brain has three levels of context</h3>
+<p>Every project has a brain. Who needs to see a piece of context decides where it lives.</p>
+<figure><img alt="Three levels of context: private (only you), internal (the delivery team), external (team and client)" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/context-levels.png"/></figure>
+<ul>
+<li><strong>Private:</strong> each person’s own working context. It’s a gitignored folder, never shared or reviewed. It’s useful for exploratory prompts you’re not ready to share yet, like asking Claude to map the codebase or sketch the architecture in Markdown with Mermaid before you decide it’s worth keeping.</li>
+<li><strong>Internal:</strong> the team level, covering <em>how we build it</em>. This is where engineering decisions, ADRs, standards and conventions, reusable Claude skills, and reasoning we don’t put in front of the client all live.</li>
+<li><strong>External:</strong> the full team, client included, covering <em>what everyone agrees to</em>. Product specs and domain rules, scenarios and acceptance criteria, client-side transcripts, and anything the client signs off on.</li>
+</ul>
+<p>In practice it’s one repository per project, with the three levels of context, the living specs and the code side by side:</p>
+<pre>project-brain/
+├─ private-knowledgebase/     PRIVATE  — your own notes and drafts, git-ignored
+│   ├─ my-notes.md
+│   └─ README.md
+├─ internal-knowledgebase/    INTERNAL — team-only: transcripts, decisions, estimates
+│   ├─ transcripts/
+│   └─ decisions.md
+├─ project-knowledgebase/     EXTERNAL — shared with the client: specs, scenarios, ADRs
+│   ├─ specs/
+│   │   ├─ products.md
+│   │   └─ billing.md
+│   ├─ scenarios/
+│   ├─ adrs/
+│   └─ transcripts/
+├─ source-code/               the implementation, next to the intent it came from
+├─ .gitignore
+├─ CLAUDE.md                  how the brain is organised, and the rules the agent follows
+└─ README.md</pre>
+<p>A few practical notes:</p>
+<ul>
+<li><strong>Keep <code>CLAUDE.md</code> short</strong>, no more than 100–150 lines. It’s loaded into the context of every session, and it shouldn’t crowd out attention that belongs on the implementation. It describes how the team works and lists the available skills (e.g. <em>“to build a new feature, invoke this skill”</em>).</li>
+<li><strong>Split it into repos if you need to.</strong> The internal and external knowledge bases can be separate repos, so the client sees only what’s meant for them. Keeping the source code next to the specs is simplest, but separating it works too.</li>
+<li><strong>Non-technical clients</strong> who can’t clone a repo can still read the Markdown through a tool like Obsidian.</li>
+<li><strong>Generate tasks from the specs.</strong> Instead of the epics → stories → tickets hierarchy, we create GitHub issues directly from the specs. <code>CLAUDE.md</code> knows about this convention, so it checks whether a task needs to be created before work starts.</li>
+</ul>
+<h3>The specs, in four formats</h3>
+<p>Together they capture the intent. For UI/UX, the code itself is the spec.</p>
+<figure><img alt="spec formats" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/2-spec-formats.png"/></figure>
+<p><strong>Product specs</strong> are deliberately abstract. The glossary matters more than you’d expect, because stakeholders use different words for the same concept, so align the language first. Claude connects the dots on its own from a sparse, well-structured spec.</p>
+<p><strong>Scenarios</strong> are the concrete, behavioral side: think of a manual or end-to-end test case (<em>“log in as an admin, open this page, verify this list appears”</em>). You can run one as a manual QA test or feed it into something like Playwright to generate an automated test. We keep scenarios separate from product specs on purpose. Mixing the two was one of our early mistakes.</p>
+<p><strong>Technical specs</strong> hold what Claude can’t infer from general knowledge. For example: <em>“this project uses Clean Architecture, here’s where domain entities go, here’s where controllers go, here are the boundaries between layers,”</em> plus any infrastructure constraints.</p>
+<p><strong>UI/UX</strong> gets no separate spec, because a page has no deeper structure than what’s visible in its HTML and CSS. Backend logic doesn’t get the same treatment. The business logic and modularity behind it can be complex enough that Claude would have to go through far too much context to reconstruct the intent from code alone.</p>
+<p>Each spec element is numbered, can be cited, and carries a status. A product spec defines the domain:</p>
+<pre># Products
+
+## Context
+Why this domain exists.
+
+## Glossary
+Product · Variant · Price · Catalogue
+
+## Use Cases
+### List a product        [built]
+### Set pricing           [partial]
+### Retire a product      [planned]
+
+## Domain Rules
+R1  [built] a product has exactly one owning catalogue
+R7  [built] price changes never apply retroactively
+R9  [from code — unconfirmed]
+R11 [withdrawn — see R14]</pre>
+<p>A scenario proves a rule:</p>
+<pre>### SC-PRODUCTS-014 — A price change does not alter past orders
+
+Covers: R7 · Use case: Set pricing
+Status: built · Priority: P1
+Setup: sign in as a merchandiser
+
+1. Open the product priced at €40 with one completed order
+2. Change its price to €55        → toast: "Price updated"
+3. Open the completed order       → still reads €40
+4. Return to the catalogue        → shows €55 from now on</pre>
+<p>And an ADR records a decision, including the gap between the decision and what’s in the repo:</p>
+<pre># ADR-014: Event sourcing for Pricing
+
+Status: Accepted · Date: 2026-06-02
+
+## Context
+The problem requiring a decision, and the constraints in play.
+
+## Decision
+We have decided to [chosen option].
+
+## Rationale
+Why this beats the alternatives.
+
+## What isn't built yet
+The gap between this and the repo.</pre>
+<h3>Everything flows from the spec</h3>
+<p>The specs are the single source of truth: product specs for behavior, scenarios for flows, technical specs for architecture. Code, tests, QA cases, docs, task lists and Jira tracking all come after the spec and get regenerated whenever it changes.</p>
+<figure><img alt="The specs — product, scenarios, technical — feed code, tests, QA cases and docs, plus optional tasks and Jira sync" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/everything-flows-from-spec.png"/></figure>
+<p>Once the specs exist, the rest links back to them. Each scenario states which use case and which domain rules it covers (the <code>Covers: R7</code> line in the example above), so you can see at a glance which rules are tested and which aren’t. Tasks come from the same place: a new or changed domain rule, or a scenario that isn’t built yet, becomes a task you assign to someone on the team. That keeps the work plan traceable to the intent instead of to a ticket someone wrote from memory.</p>
+<p>People sometimes object that specs just move the maintenance burden from code to something equally hard to maintain. In our experience they don’t. Well-structured natural language is easier to keep in sync than code, which is easy to misread even when it <em>looks like</em> it does one thing.</p>
+<h3>Skills that keep the specs in shape</h3>
+<p>Two Claude Code skills do most of the spec work: <code>/sdlc-spec-manager</code> for product specs and <code>/sdlc-scenario-manager</code> for scenarios. You hand them a transcript, a codebase or a changed spec, and they create or update the files in the right structure. Just as importantly, they encode the rules, so every spec on every project ends up shaped the same way.</p>
+<p>Here’s the core of the spec manager’s definition:</p>
+<pre>---
+name: sdlc-spec-manager
+description: &gt;
+  Manage living product spec files as the source of truth for what a system's
+  domains are — their vocabulary, what users can accomplish in them, and the
+  rules that constrain them. Bootstrap specs from codebases, transcripts,
+  design docs or scattered requirements. Create, update and review specs.
+---
+
+## The spine
+| Section      | Answers                                          |
+|--------------|--------------------------------------------------|
+| Context      | Why this domain exists, whose problem it solves  |
+| Glossary     | What the domain's nouns mean, including roles    |
+| Use Cases    | What each role can accomplish                    |
+| Domain Rules | The invariants that constrain them               |
+| …etc.        | States, Obligations, External systems, …         |
+|              | only when the domain actually needs them         |
+
+The spine is a default, not a form to fill in. Whatever the sections,
+they must be MECE: each answers a different question, and the same
+fact never appears in two of them.</pre>
+<p>The structure is a starting point, not a template to follow to the letter. Adapt it to your project: a domain with a real lifecycle might need a States section, a regulated one an Obligations section, and a small one might need little more than use cases and rules. What matters is that the specs stay MECE and capture the requirements at a good enough level of abstraction: what the system must do and the rules it must obey, without drifting into how it’s built.</p>
+<p>And the scenario manager, which ties every scenario back to the rules it proves:</p>
+<pre>---
+name: sdlc-scenario-manager
+description: &gt;
+  Create and maintain acceptance scenarios: step-by-step behaviour a QA can
+  run and an agent can automate, traced back to the spec rules they prove.
+---
+
+One scenario file per spec file, same name:
+  specs/spaces.md  ↔  scenarios/spaces.md
+
+Every [built] or [partial] rule is cited by at least one scenario,
+or exempted with a reason.</pre>
+<p>Both skills also have a <strong>review mode</strong>, and that’s where they work as guardrails. The spec manager grades each spec on completeness, altitude (is it drifting into implementation detail?), substance, consistency and MECE, and navigability, as <code>strong</code>, <code>adequate</code>, <code>thin</code> or <code>broken</code>. A <code>broken</code> grade blocks implementation of that capability. It also runs cross-spec checks: a term defined differently in two specs, a rule owned by two specs, a spec missing from the index. The scenario manager checks coverage: which rules no scenario proves, which scenarios cite rules that no longer exist, and which were dropped without a reason. Run them after every spec change, or on every pull request, and a broken structure gets flagged before anyone builds on it.</p>
+<h2>What It Looks Like in Practice</h2>
+<h3>The day-to-day loop</h3>
+<p>This is how you actually hit the three pillars, in order:</p>
+<figure><img alt="The day-to-day loop: requirement arrives, into the knowledge base, update the spec, PM reviews the diff, agentic loops — and repeat" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/day-to-day-loop.png"/></figure>
+<ol>
+<li><strong>A requirement arrives:</strong> a client email, a ticket, meeting notes, a chat.</li>
+<li><strong>It goes into the knowledge base.</strong> Usually whoever was on the call saves the transcript.</li>
+<li><strong>The spec gets updated.</strong> Acceptance criteria get stable IDs, and AI helps structure the raw input.</li>
+<li><strong>The PM reviews the spec diff</strong> and confirms it captures the intent.</li>
+<li><strong>Agentic loops</strong> implement, review and verify against the spec, as a chain.</li>
+</ol>
+<h3>Agentic loops: implementation as a repeatable chain</h3>
+<p>The specs say <em>what</em> to build. Agentic loops are how the building gets streamlined. Instead of every engineer prompting their own way from a blank chat, the implementation runs as the same chain of steps every time: update the spec, review the diff, plan, implement, then run the guardrails and loop until they pass. Each step is a skill, so the team shares one way of working, and each improvement to a skill improves everyone’s output.</p>
+<p>Here’s what it looks like in the terminal after a refinement session, once the transcript has landed in the Project Brain:</p>
+<pre>claude code — project-northwind
+
+&gt; 1. /sdlc-spec-manager
+     Update the specs from this transcript — new/changed
+     vocabulary, use cases, domain rules.
+
+  2. Diff the specs
+     git diff previous → new spec version. The spec diff is the
+     actual contract a PM reviews; a five-minute read, not a meeting.
+
+  3. Review code + infra against the diff
+     What technical/project specs need updating or creating —
+     new ADRs for anything that changed the "how," not the "what."
+
+  4. Implement
+     Plan and implement the diff. Use /project-structure-&lt;stack&gt;
+     so new code lands in the right place the first time.
+
+  5. Run guardrails
+     /security-review, /bug-hunter, and anything else in the
+     pipeline — loop until they pass. This is the step that turns
+     a plausible diff into a merged one.</pre>
+<p>Even with good specs, we prefer planning first and then implementing over trying to one-shot it. For parallel work we run several Claude sessions side by side in tmux: one agent per domain, plus dedicated agents for infrastructure, code review and bug hunting. Each one keeps persistent context for its slice of the work and gets reset once it’s no longer needed.</p>
+<p>A few situations come up again and again:</p>
+<ul>
+<li><strong>Onboarding someone to a change.</strong> Normally that means an hour-long call plus back-and-forth with the PM, which is another round of the telephone game. Instead, point Claude at the folder. It builds a working mental model of the feature faster and more reliably than a verbal walkthrough, and each person can ask for it in whatever form suits them, such as a Mermaid diagram of the domain.</li>
+<li><strong>Being blocked on infrastructure you can’t provision yourself.</strong> Update the technical spec to note the block and describe a local mock or workaround. The whole team picks it up automatically, with no extra meeting to find out someone already raised the ticket.</li>
+<li><strong>Specs lagging behind the code.</strong> That’s fine occasionally, because you can resync them afterward. Just don’t let it become the norm. A mismatch between spec and code is a fast, visible signal that something is wrong. Without specs, you’d have to piece it together from the code, the project owner’s memory and scattered docs just to tell whether something is missing.</li>
+</ul>
+<h3>Why bugs drop</h3>
+<p>A lot of bugs come from Claude making assumptions about a large, unfamiliar module it doesn’t have enough context to process fully. The module <em>looks like</em> it does one thing but actually does something else. With an always-current picture of the current and future state to work from, most of that ambiguity goes away.</p>
+<h3>The human role doesn’t disappear</h3>
+<p>This isn’t <em>“take what the PM says, drop it in a spec, and let Claude run.”</em> The process is: listen to the PM, build your own mental model of what the feature should do and how it connects to the rest of the system, generate the spec, then actually read it back and check it matches the discussion before signing off.</p>
+<p>Early on, review carefully. As trust builds, you can give more autonomy to specific parts of the spec. If a generated spec doesn’t feel right, tell Claude what’s off. It’s genuinely good at restructuring information once it knows what the conversation actually established.</p>
+<p>Here’s a cautionary example from one of our engagements. A PM ran a call transcript through the spec manager alone and handed the developer <strong>500 new lines of spec with no context</strong>. The developer then spent most of their time just working out what had changed. Small, incremental changes are fine to hand off. Big structural changes need the engineer’s own understanding of the requirements. <strong>Don’t let anyone else fully drive the spec.</strong></p>
+<h3>The golden rule</h3>
+<blockquote>
+<p><strong>Update the spec before you write the code.</strong></p>
+</blockquote>
+<figure><img alt="golden rule" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/3-golden-rule.png"/></figure>
+<p>Don’t throw the intent away. It’s the most valuable thing you produce. Code can be regenerated, but the reasoning behind it can’t. Never discard the prompt that produced a change either: it only compounds if it’s captured back into the spec.</p>
+<h2>How to Get Started</h2>
+<p>One project, five steps. Prove it there, then scale it.</p>
+<ol>
+<li><strong>Pick a project.</strong> New or existing, one is enough to prove the value.</li>
+<li><strong>Create the Project Brain:</strong> the private, internal and project knowledge bases, the code, and a <code>CLAUDE.md</code>.</li>
+<li><strong>Feed it the context:</strong> docs, transcripts, tickets, emails, everything you already have.</li>
+<li><strong>Write the specs.</strong> Keep them MECE and do one area at a time. On existing code, bootstrap the specs and let the PM confirm them.</li>
+<li><strong>Implement</strong> against the specs, with the guardrails running.</li>
+</ol>
+<p>Name an accountable owner, and keep the brain alive: every learning goes back into the spec.</p>
+<h3>Getting teams to adopt it</h3>
+<p>Every team’s project is different. Most work on existing codebases with years of context behind them, so a single rollout plan won’t fit everyone. What worked for us:</p>
+<ul>
+<li><strong>Start with your technical leaders.</strong> Run a first workshop with them, collect their objections, and iterate on the approach until you land on a version that works for your organization. Roll it out once there’s consensus, not before.</li>
+<li><strong>Assign accountable people and set a clear expectation:</strong> adopt it, even gradually, and if you can’t, explain why. The reasons are the useful part. Each one tells you exactly where the team needs guidance to make adoption frictionless.</li>
+<li><strong>(Optional) Enforce spec updates with guardrails, not reminders.</strong> If people tend to forget to update the specs, add a check that runs on every pull request (in SonarQube or your CI pipeline) and flags a change that didn’t update the spec, or a spec whose structure broke.</li>
+<li><strong>Give the specs an owner.</strong> Someone in the team, usually the lead, is responsible for keeping the specs MECE, either by reviewing them or by setting up guardrails that check it.</li>
+<li><strong>Build the skills together.</strong> Every two weeks we run a Claude skill-crafting session, with live agentic coding demos of how people actually work. The patterns that hold up become skills, built with Anthropic’s <a href="https://github.com/anthropics/skills/tree/main/skills/skill-creator" rel="noopener noreferrer" target="_blank">skill-creator</a> skill and then adopted across the team. Over time, everyone settles into the same streamlined way of working.</li>
+<li><strong>Keep the knowledge base fed.</strong> Transcripts and other resources only help if they actually land in the Project Brain. Automate the capture where you can, and where you can’t, appoint someone to keep it up to date.</li>
+<li><strong>Be clear that specs don’t replace understanding.</strong> Engineers still need to understand the requirements and the code. The specs make that understanding durable and shareable; they don’t do it for you.</li>
+</ul>
+<p>This setup fits how we work: our teams are dynamic, and each one works in a different client environment, so a plain repo per project is enough. If you have 10–30 teams working in one cohesive environment or product, it’s probably worth building a more mature Project Brain than simple repos. We’ve heard of organizations using Confluence or similar tools for this. At that scale you’ll also need more streamlining of the process to make it work consistently across the whole company.</p>
+<h3>It fits wherever your project starts</h3>
+<ul>
+<li><strong>Already on Jira?</strong> It complements Jira, so there’s no need to replace it. If stakeholders need Jira, sync it from the specs. The spec stays the source of truth.</li>
+<li><strong>Legacy project?</strong> Build it up gradually. Start capturing the knowledge base now, and the specs grow domain by domain until it starts compounding.</li>
+<li><strong>Planning a full migration?</strong> Write the specs before the rebuild. Derive them from the legacy system, align them with the business, prototype, break the result down into specs, and kick off the rebuild once everyone agrees.</li>
+</ul>
+<h3>When you don’t need it</h3>
+<p>The structure has a cost, and below a certain size it isn’t worth paying.</p>
+<ul>
+<li><strong>Skip it for prototypes and throwaway work.</strong> You’re exploring, not maintaining, so the structure costs more than it saves.</li>
+<li><strong>Skip it for small codebases.</strong> Claude Code can work out the current state straight from the code, and it does so consistently.</li>
+<li><strong>Use it for production software that evolves.</strong> With many authors and features piling up for months, the intent no longer fits in anyone’s head, or in the code.</li>
+</ul>
+<p>It starts paying off around three to six months in, when the intent outgrows what anyone can reconstruct on their own.</p>
+<h2>So What?</h2>
+<h3>Every symptom maps to one part of the AI-First SDLC</h3>
+<figure><img alt="symptoms fixed" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/4-symptoms-fixed.png"/></figure>
+<p>And it isn’t only faster. The work is more enjoyable, with less of the back-and-forth, misalignment and frustration that come from everyone rebuilding the same picture from a different angle.</p>
+<h3>Now the slice that never moved, moves</h3>
+<p>Back to the sprint we started with. AI on code alone freed up 50% of it. Capturing the intent frees up most of the rest.</p>
+<figure><img alt="Share of one sprint: traditional, AI code generation (50% reclaimed), and the full AI-First SDLC (10% intent, 10% dev, 10% test, 70% reclaimed)" src="https://evgenirusev.com/medium/ai-first-sdlc-v2/sprint-reclaimed.png"/></figure>
+<h2>Lessons Learned</h2>
+<p>Six things we got wrong first, so you don’t have to:</p>
+<ul>
+<li><strong>Specs must be MECE:</strong> mutually exclusive and collectively exhaustive, so every rule has exactly one home and nothing is left without one. Splitting by domain, the same idea as bounded contexts in domain-driven design, is one common way to get there. Splitting by product area or user journey works too, as long as the pieces don’t overlap. Overlap is where contradictions breed.</li>
+<li><strong>Keep specs concise.</strong> Claude Code connects the dots on its own. Over-specifying slows everyone down and ages badly.</li>
+<li><strong>Let the front-end code be the spec for UI/UX.</strong> Don’t describe screens inside specs. Beyond a few core principles, that becomes unmaintainable fast.</li>
+<li><strong>Don’t make the spec complete; make it non-duplicated.</strong> Our first format held flows, UI, test cases and acceptance criteria all in one place. It grew too big to keep in sync, and autonomy dropped. Every duplicated fact is one more thing you have to keep in sync.</li>
+<li><strong>You can’t fully abstract yourself from the code.</strong> Specs are an extra layer of abstraction. You read far less code, and far more deliberately, but you still read it.</li>
+<li><strong>You need accountable people, properly trained.</strong> Named owners who know the approach, through practical, hands-on workshops, not just a document.</li>
+</ul>
+<h2>To Close</h2>
+<p>AI has already sped up how we build. The real value now is in <strong>how we manage context</strong>.</p>
+<p>The AI-First SDLC puts the right structure in place to manage that context and keep it consistent across every team. Does that mean Claude can just take over everything? No. You still have to get your hands on it and build real understanding yourself, not hand it off blind.</p>
+<p><strong>Start with one project. Prove it. Then scale it.</strong></p>
+<p>I also run this as a hands-on workshop for engineering teams, including at a few leading global strategy and management consulting firms. If it would help yours, get in touch.</p> 
+</article></body></html>
