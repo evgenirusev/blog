@@ -338,6 +338,8 @@ Every team's project is different. Most work on existing codebases with years of
 - **Keep the knowledge base fed.** Transcripts and other resources only help if they actually land in the Project Brain. Automate the capture where you can, and where you can't, appoint someone to keep it up to date.
 - **Be clear that specs don't replace understanding.** Engineers still need to understand the requirements and the code. The specs make that understanding durable and shareable; they don't do it for you.
 
+This setup fits how we work: our teams are dynamic, and each one works in a different client environment, so a plain repo per project is enough. If you have 10–30 teams working in one cohesive environment or product, it's probably worth building a more mature Project Brain than simple repos. We've heard of organizations using Confluence or similar tools for this. At that scale you'll also need more streamlining of the process to make it work consistently across the whole company.
+
 ### It fits wherever your project starts
 
 - **Already on Jira?** It complements Jira, so there's no need to replace it. If stakeholders need Jira, sync it from the specs. The spec stays the source of truth.
