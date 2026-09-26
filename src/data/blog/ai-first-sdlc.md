@@ -291,7 +291,7 @@ A few situations come up again and again:
 
 - **Onboarding someone to a change.** Normally that means an hour-long call plus back-and-forth with the PM, which is another round of the telephone game. Instead, point Claude at the folder. It builds a working mental model of the feature faster and more reliably than a verbal walkthrough, and each person can ask for it in whatever form suits them, such as a Mermaid diagram of the domain.
 - **Being blocked on infrastructure you can't provision yourself.** Update the technical spec to note the block and describe a local mock or workaround. The whole team picks it up automatically, with no extra meeting to find out someone already raised the ticket.
-- **Specs lagging behind the code.** That's not the end of the world, because you can resync them afterward. A mismatch between spec and code is a fast, visible signal that something is wrong. Without specs, you'd have to piece it together from the code, the project owner's memory and scattered docs just to tell whether something is missing.
+- **Specs lagging behind the code.** That's fine occasionally, because you can resync them afterward. Just don't let it become the norm. A mismatch between spec and code is a fast, visible signal that something is wrong. Without specs, you'd have to piece it together from the code, the project owner's memory and scattered docs just to tell whether something is missing.
 
 ### Why bugs drop
 
@@ -333,7 +333,7 @@ Every team's project is different. Most work on existing codebases with years of
 
 - **Start with your technical leaders.** Run a first workshop with them, collect their objections, and iterate on the approach until you land on a version that works for your organization. Roll it out once there's consensus, not before.
 - **Assign accountable people and set a clear expectation:** adopt it, even gradually, and if you can't, explain why. The reasons are the useful part. Each one tells you exactly where the team needs guidance to make adoption frictionless.
-- **Enforce spec updates with guardrails, not reminders.** For example, a check that runs on every pull request (in SonarQube or your CI pipeline) and flags a change that didn't update the spec, or a spec whose structure broke.
+- **(Optional) Enforce spec updates with guardrails, not reminders.** If people tend to forget to update the specs, add a check that runs on every pull request (in SonarQube or your CI pipeline) and flags a change that didn't update the spec, or a spec whose structure broke.
 - **Give the specs an owner.** Someone in the team, usually the lead, is responsible for keeping the specs MECE, either by reviewing them or by setting up guardrails that check it.
 - **Keep the knowledge base fed.** Transcripts and other resources only help if they actually land in the Project Brain. Automate the capture where you can, and where you can't, appoint someone to keep it up to date.
 - **Be clear that specs don't replace understanding.** Engineers still need to understand the requirements and the code. The specs make that understanding durable and shareable; they don't do it for you.
