@@ -20,9 +20,7 @@ description: "AI made writing code fast, but capturing intent is still slow. The
 
 *Software engineering stopped being about writing code. It became about managing context.*
 
-In September I was a speaker at [DevTalks Cluj](https://www.devtalks.ro/cluj#speakers), where I presented the AI-First SDLC. Afterwards, more people asked for the slides than I expected, and that's what prompted this post.
-
-It's how we build software at [Tecknoworks](https://tecknoworks.com), where 8 of our roughly 12 engineering teams have fully adopted it and the rest are on the way. I also teach it in workshops for other companies, including a few leading global strategy and management consulting firms.
+After rolling the AI-First SDLC out to 8 of our roughly 12 engineering teams at [Tecknoworks](https://tecknoworks.com), this is the operating model we landed on: what works, what doesn't, and what it took to get teams to adopt it. It builds on the talk I gave at [DevTalks Cluj](https://www.devtalks.ro/cluj#speakers) in September.
 
 If you write software today, you've already seen AI speed up coding a lot. **But** it hasn't sped up *capturing the intent*, and that work isn't streamlined across the company. Every team still reconstructs what the system does, and what it should do, in its own way, one meeting at a time.
 
@@ -386,4 +384,6 @@ AI has already sped up how we build. The real value now is in **how we manage co
 The AI-First SDLC puts the right structure in place to manage that context and keep it consistent across every team. Does that mean Claude can just take over everything? No. You still have to get your hands on it and build real understanding yourself, not hand it off blind.
 
 **Start with one project. Prove it. Then scale it.**
+
+I also run this as a hands-on workshop for engineering teams, including at a few leading global strategy and management consulting firms. If it would help yours, get in touch.
 
