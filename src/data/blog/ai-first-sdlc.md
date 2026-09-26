@@ -38,7 +38,7 @@ With AI-accelerated code generation, the implementation and testing slices shrin
 
 Code generation and requirements capture have to speed up *together*. If requirements stay the bottleneck, they eat into the gains from faster code. Speed up both and the gains compound, because each one reinforces the other.
 
-## Where the Friction Is Now
+## Where the Friction in Software Development Is Now
 
 ### What it takes to build something new
 
