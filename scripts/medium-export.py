@@ -49,7 +49,7 @@ for img in article.find_all("img"):
 # Tables -> pre-rendered images, in document order.
 tables = article.find_all("table")
 if tables:
-    imgs = sorted(table_dir.glob("*.png")) if table_dir else []
+    imgs = sorted(table_dir.glob("[0-9]*.png")) if table_dir else []
     if len(imgs) != len(tables):
         sys.exit(f"{len(tables)} tables but {len(imgs)} table images in {table_dir}")
     for t, p in zip(tables, imgs):
@@ -58,7 +58,20 @@ if tables:
         fig.append(page.new_tag("img", src=f"{public_base}/{p.name}", alt=p.stem.split("-", 1)[-1].replace("-", " ")))
         t.replace_with(fig)
 
-# Code blocks -> plain <pre> text.
+# Code blocks -> pre-rendered images (code-*.png) when provided: Medium's importer drops
+# or flattens many <pre> blocks. Otherwise fall back to plain <pre> text.
+code_imgs = sorted(table_dir.glob("code-*.png")) if table_dir else []
+if code_imgs:
+    pres = article.find_all("pre")
+    if len(code_imgs) != len(pres):
+        sys.exit(f"{len(pres)} code blocks but {len(code_imgs)} code images")
+    for pre, p in zip(pres, code_imgs):
+        shutil.copy(p, out_dir / p.name)
+        fig = page.new_tag("figure")
+        fig.append(page.new_tag("img", src=f"{public_base}/{p.name}", alt=p.stem.split("-", 2)[-1].replace("-", " ")))
+        (pre.find_parent("figure") or pre).replace_with(fig)
+
+# Remaining code blocks -> plain <pre> text.
 for pre in article.find_all("pre"):
     text = "\n".join(l.get_text() for l in pre.select(".line")) or pre.get_text()
     # Medium's importer collapses newlines inside <pre>; explicit <br> survives.
@@ -97,6 +110,13 @@ for d in article.find_all("details"):
         d.decompose()
 
 bullets_to_paragraphs()
+
+# A leading all-italic paragraph gets dropped by Medium's importer; make it a quote.
+first = article.find("p")
+if first and first.find("em") and first.get_text(strip=True) == first.find("em").get_text(strip=True):
+    quote = page.new_tag("blockquote")
+    quote.string = first.get_text(strip=True)
+    first.replace_with(quote)
 
 # Strip presentation attributes Medium ignores anyway.
 for el in article.find_all(True):

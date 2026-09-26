@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><style>
+.frame{padding:40px 48px;height:auto}
+.code{background:#1d1530;border-radius:18px;padding:34px 38px;box-shadow:0 10px 30px rgba(50,0,99,.18)}
+.dots{display:flex;gap:9px;margin-bottom:22px}.dots i{width:13px;height:13px;border-radius:50%;display:block}
+pre{margin:0;font:500 22px/1.55 ui-monospace,"SF Mono",Menlo,monospace;color:#efe9f7;white-space:pre-wrap;word-break:break-word}
+.c-h{color:#f490b9;font-weight:700}.c-k{color:#c4a8f0}.c-s{color:#f4a393}.c-m{color:#9a90ab}
+</style></head><body data-size="1200xauto"><div class="frame"><div class="code"><div class="dots"><i style="background:#f06a9e"></i><i style="background:#f4a393"></i><i style="background:#9a7fd4"></i></div><pre><span class="c-m">---</span>
+<span class="c-k">name:</span> sdlc-spec-manager
+<span class="c-k">description:</span> &gt;
+  Manage living product spec files as the source of truth for what a system&#x27;s
+  domains are — their vocabulary, what users can accomplish in them, and the
+  rules that constrain them. Bootstrap specs from codebases, transcripts,
+  design docs or scattered requirements. Create, update and review specs.
+<span class="c-m">---</span>
+
+<span class="c-h">## The spine</span>
+| Section      | Answers                                          |
+|--------------|--------------------------------------------------|
+| Context      | Why this domain exists, whose problem it solves  |
+| Glossary     | What the domain&#x27;s nouns mean, including roles    |
+| Use Cases    | What each role can accomplish                    |
+| Domain Rules | The invariants that constrain them               |
+| …etc.        | States, Obligations, External systems, …         |
+|              | only when the domain actually needs them         |
+
+The spine is a default, not a form to fill in. Whatever the sections,
+they must be MECE: each answers a different question, and the same
+fact never appears in two of them.</pre></div></div></body></html>

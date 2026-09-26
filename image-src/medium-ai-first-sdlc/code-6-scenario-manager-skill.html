@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><style>
+.frame{padding:40px 48px;height:auto}
+.code{background:#1d1530;border-radius:18px;padding:34px 38px;box-shadow:0 10px 30px rgba(50,0,99,.18)}
+.dots{display:flex;gap:9px;margin-bottom:22px}.dots i{width:13px;height:13px;border-radius:50%;display:block}
+pre{margin:0;font:500 22px/1.55 ui-monospace,"SF Mono",Menlo,monospace;color:#efe9f7;white-space:pre-wrap;word-break:break-word}
+.c-h{color:#f490b9;font-weight:700}.c-k{color:#c4a8f0}.c-s{color:#f4a393}.c-m{color:#9a90ab}
+</style></head><body data-size="1200xauto"><div class="frame"><div class="code"><div class="dots"><i style="background:#f06a9e"></i><i style="background:#f4a393"></i><i style="background:#9a7fd4"></i></div><pre><span class="c-m">---</span>
+<span class="c-k">name:</span> sdlc-scenario-manager
+<span class="c-k">description:</span> &gt;
+  Create and maintain acceptance scenarios: step-by-step behaviour a QA can
+  run and an agent can automate, traced back to the spec rules they prove.
+<span class="c-m">---</span>
+
+One scenario file per spec file, same name:
+  specs/spaces.md  ↔  scenarios/spaces.md
+
+Every <span class="c-s">[built]</span> or <span class="c-s">[partial]</span> rule is cited by at least one scenario,
+or exempted with a reason.</pre></div></div></body></html>

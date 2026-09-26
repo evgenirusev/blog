@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><style>
+.frame{padding:40px 48px;height:auto}
+.code{background:#1d1530;border-radius:18px;padding:34px 38px;box-shadow:0 10px 30px rgba(50,0,99,.18)}
+.dots{display:flex;gap:9px;margin-bottom:22px}.dots i{width:13px;height:13px;border-radius:50%;display:block}
+pre{margin:0;font:500 22px/1.55 ui-monospace,"SF Mono",Menlo,monospace;color:#efe9f7;white-space:pre-wrap;word-break:break-word}
+.c-h{color:#f490b9;font-weight:700}.c-k{color:#c4a8f0}.c-s{color:#f4a393}.c-m{color:#9a90ab}
+</style></head><body data-size="1200xauto"><div class="frame"><div class="code"><div class="dots"><i style="background:#f06a9e"></i><i style="background:#f4a393"></i><i style="background:#9a7fd4"></i></div><pre><span class="c-h">### SC-PRODUCTS-014 — A price change does not alter past orders</span>
+
+<span class="c-k">Covers:</span> R7 · Use case: Set pricing
+<span class="c-k">Status:</span> built · Priority: P1
+<span class="c-k">Setup:</span> sign in as a merchandiser
+
+1. Open the product priced at €40 with one completed order
+2. Change its price to €55        → toast: &quot;Price updated&quot;
+3. Open the completed order       → still reads €40
+4. Return to the catalogue        → shows €55 from now on</pre></div></div></body></html>
