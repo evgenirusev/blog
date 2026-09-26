@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb.astro";
 import Layout from "./Layout.astro";
 import ProfileAvatar from "@/components/ProfileAvatar.astro";
 import { SITE } from "@/config";
+import ContactCta from "@/components/ContactCta.astro";
 
 // `showAvatar` opts a page into the floated profile picture. The shared
 // AboutLayout is also used by Books and Case Studies, where we don't want
@@ -18,6 +19,8 @@ type Props = MarkdownLayoutProps<{
 }>;
 
 const { frontmatter } = Astro.props;
+// Individual case studies end with a contact prompt; the index and other pages don't.
+const isCaseStudy = /^\/case-studies\/[^/]+\/?$/.test(Astro.url.pathname);
 ---
 
 <Layout title={`${frontmatter.title} | ${SITE.title}`}>
@@ -37,6 +40,7 @@ const { frontmatter } = Astro.props;
         )
       }
       <slot />
+      {isCaseStudy && <ContactCta />}
     </section>
   </main>
   <Footer />

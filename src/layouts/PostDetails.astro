@@ -8,6 +8,7 @@ import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import ContactCta from "@/components/ContactCta.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import FloatingToc from "@/components/FloatingToc.astro";
 import { getPath } from "@/utils/getPath";
@@ -120,6 +121,8 @@ const nextPost =
     </article>
 
     {floatingToc && <FloatingToc />}
+
+    <ContactCta />
 
     <hr class="my-8 border-dashed" />
 
