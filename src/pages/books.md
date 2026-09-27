@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "Books"
+title: "Books That Shaped My Thinking"
 ---
 
 Books are one of the main ways I learn. These are some that have stuck with me and influenced how I think and live.
