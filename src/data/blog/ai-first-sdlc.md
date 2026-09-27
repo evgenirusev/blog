@@ -38,9 +38,9 @@ With AI-accelerated code generation, the implementation and testing slices shrin
 
 Code generation and requirements capture have to speed up *together*. If requirements stay the bottleneck, they eat into the gains from faster code. Speed up both and the gains compound, because each one reinforces the other.
 
-## The Mental Model: Current State, Future State
+## What We Mean by Intent
 
-Before we look at where the friction is, here's the mental model that guides the approach. Every feature moves the product from **the current state** (how it behaves today) to **the future state** (how it should behave once this ships), and the model needs to see both.
+Before we look at the friction, one idea the rest of this post builds on: intent. Every feature moves the product from **the current state** (how it behaves today) to **the future state** (how it should behave once this ships), and the model needs to see both.
 
 ![Every feature is a move between two states: the current state and the future state. The gap between them is the intent, which is what you hand the model](../../assets/images/posts/ai-first-sdlc/current-future-state.png)
 
