@@ -28,7 +28,7 @@ const secondaryButton =
   <Header />
   <main id="main-content" data-layout="index" class="app-layout">
     <section id="hero" class="border-b border-border pt-10 pb-12 sm:pt-14">
-      <div class="flex flex-col-reverse items-center gap-8 sm:flex-row sm:items-start sm:gap-12">
+      <div class="flex flex-col-reverse items-center gap-8 sm:flex-row sm:gap-12">
         <div class="w-full sm:flex-1">
           <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Hi, I'm Evgeni.</h1>
           <p class="mt-3 font-mono text-sm tracking-wide opacity-70">
@@ -45,6 +45,10 @@ const secondaryButton =
             Here I write about AI-first engineering, agentic AI and business transformation with AI,
             plus case studies from engagements that delivered meaningful business impact.
           </p>
+        </div>
+        <ProfileAvatar />
+      </div>
+      <div>
           <div class="mt-7 flex flex-wrap items-center gap-3">
             <ContactButton />
             <a href="/posts/" class={secondaryButton}>
@@ -55,8 +59,6 @@ const secondaryButton =
             </a>
           </div>
           <div class="mt-10"><Socials /></div>
-        </div>
-        <ProfileAvatar />
       </div>
     </section>
 
