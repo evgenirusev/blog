@@ -146,12 +146,33 @@
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
+  /* Code blocks: a dark terminal card in both themes (matches the Medium code images):
+     deep purple background, three window dots, dark-theme syntax colours. */
   .astro-code {
-    @apply flex border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
+    @apply flex text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    background: #1d1530 !important;
+    color: #efe9f7;
+    border: 0;
+    border-radius: 16px;
+    padding: 3.1rem 1.6rem 1.4rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(50, 0, 99, 0.18);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    background-image:
+      radial-gradient(circle at 1.6rem 1.5rem, #f06a9e 0.3rem, transparent 0.32rem),
+      radial-gradient(circle at 2.45rem 1.5rem, #f4a393 0.3rem, transparent 0.32rem),
+      radial-gradient(circle at 3.3rem 1.5rem, #9a7fd4 0.3rem, transparent 0.32rem) !important;
+    background-repeat: no-repeat !important;
   }
-
-  html[data-theme="dark"] .astro-code {
-    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+  .astro-code .tok-cmd,
+  .astro-code .tok-status {
+    color: #f4a393 !important;
+  }
+  .astro-code .tok-heading,
+  .astro-code .tok-heading span {
+    color: #f490b9 !important;
+    font-weight: 700;
   }
 
   /* Styles for Shiki transformers */

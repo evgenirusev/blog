@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import rehypeExternalLinks from "rehype-external-links";
+import { transformerPlainHighlight } from "./src/utils/transformers/plainHighlight.js";
 
 // Tiny inline plugin: after remark-collapse wraps the TOC in <details>,
 // open it by default so the reader doesn't have to click.
@@ -58,6 +59,7 @@ export default defineConfig({
         transformerNotationHighlight(),
         transformerNotationWordHighlight(),
         transformerNotationDiff({ matchAlgorithm: "v3" }),
+        transformerPlainHighlight(),
       ],
     },
   },

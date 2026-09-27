@@ -253,12 +253,13 @@ const nextPost =
         computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
 
       // Determine the top positioning class
-      const topClass = hasFileNameOffset
-        ? "top-(--file-name-offset)"
-        : "-top-3";
+      // Inside the dark card, level with the window dots. (--file-name-offset is set on every
+      // block by the file-name transformer, so it can't tell us whether a label exists.)
+      void hasFileNameOffset;
+      const topClass = "top-2.5";
 
       const copyButton = document.createElement("button");
-      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-white/10 border border-white/15 px-2 py-1 text-xs leading-4 text-white/85 font-medium hover:bg-white/20`;
       copyButton.innerHTML = copyButtonLabel;
       codeBlock.setAttribute("tabindex", "0");
       codeBlock.appendChild(copyButton);
