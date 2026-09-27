@@ -10,6 +10,11 @@ become images, in order, from table-image-dir (see image-src/medium-<slug>/). Th
 noindex and deliberately has no rel=canonical: Medium's importer follows it and would
 import the real (image-less) page instead. Set the canonical link to the real post in
 Medium's story settings after importing.
+
+After importing, in Medium's editor: the importer makes every heading a large heading and
+adds an empty heading after each one. Select each subsection heading and press ⌘⌥2 (small
+heading), delete the empty headings, and add a Contents list linking to
+https://medium.com/p/<story-id>#<heading name attribute> for the main sections only.
 """
 import re, shutil, sys
 from pathlib import Path
