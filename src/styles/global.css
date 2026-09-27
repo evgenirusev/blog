@@ -11,6 +11,11 @@ html[data-theme="light"] {
   --accent: var(--brand-magenta-text);
   --muted: var(--brand-lilac-200);
   --border: var(--brand-lilac-200);
+  --table-bg: #ffffff;
+  --table-border: var(--brand-lilac-200);
+  --table-head-bg: var(--brand-purple-tint);
+  --table-head-fg: var(--brand-deep-purple);
+  --table-stripe: var(--brand-lilac-50);
 }
 
 html[data-theme="dark"] {
@@ -19,6 +24,11 @@ html[data-theme="dark"] {
   --accent: var(--brand-pink-text);
   --muted: #2e2340;
   --border: var(--brand-plum);
+  --table-bg: #1f1630;
+  --table-border: #3a2b52;
+  --table-head-bg: #2e2340;
+  --table-head-fg: #e6dcf5;
+  --table-stripe: #231a36;
 }
 
 @theme inline {

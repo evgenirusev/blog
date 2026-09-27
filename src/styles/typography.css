@@ -55,17 +55,46 @@
     }
 
     table {
-      /* Wide tables scroll inside their own box on small screens instead of
-         widening the page. */
+      /* Card-style tables: rounded frame, tinted uppercase header, row dividers only,
+         bold first column. Wide tables scroll inside their own box on small screens
+         instead of widening the page. */
       @apply block max-w-full overflow-x-auto;
+      border: 1px solid var(--table-border);
+      border-radius: 14px;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--table-bg);
 
       th,
       td {
-        @apply border border-border p-2;
+        padding: 0.85rem 1.1rem;
+        vertical-align: top;
+        text-align: left;
+        border-bottom: 1px solid var(--table-border);
       }
 
       th {
-        @apply py-1.5;
+        background: var(--table-head-bg);
+        color: var(--table-head-fg);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: var(--table-stripe);
+      }
+
+      /* Row labels: only when the table has 3+ columns (a 2-column table compares
+         two peers, so neither side should look like a label). */
+      tr:has(td:nth-child(3)) td:first-child {
+        font-weight: 600;
+        color: var(--table-head-fg);
       }
 
       code {
