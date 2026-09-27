@@ -42,8 +42,9 @@ empty bands at the top and bottom of a hero; shortening a label so it changes me
 
 - `pnpm build` must pass (0 errors). It runs `astro check`, the build and Pagefind.
 - Check at 360px, 390px, 768px and 1440px for horizontal overflow, in light and dark mode.
-- After changing fonts or `astro.config.ts`, restart `pnpm dev`. If dev shows "Image not found" for a
-  deleted image, delete `.astro/` and restart: it's a stale cache, not a broken post.
+- After changing fonts, `astro.config.ts` or a Shiki transformer, restart `pnpm dev`. Rendered Markdown is
+  cached in `node_modules/.astro/` and `.astro/`: if a change to highlighting doesn't show, or dev shows
+  "Image not found" for a deleted image, delete both and restart. Cloudflare always builds from scratch.
 - **A push to `main` is production** (Cloudflare Pages). Live in about 60–80 seconds.
 
 ## 4. Case studies
