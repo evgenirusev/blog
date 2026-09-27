@@ -39,6 +39,15 @@ Rules:
 - **Keep the brief style-neutral.** Describe the metaphor, objects, sizes and text, never the rendering ("luminous", "glowing", "beam", "bright"). Those words belong in the style file. A brief with "glowing" in it makes every style glow. Check with `grep -ci "glow\|luminous\|beam" hero.md` → 0.
 - **Rotate styles across the listing** so no two neighbours share a style where it can be avoided.
 
+### Current style per hero
+
+Check this before picking a style, so neighbours in the listing don't repeat.
+
+- **Posts, newest first:** AI-First SDLC (keynote glow) · Use-Case Handbook (line art) · Spec-Driven Development (keynote glow) · Second Brain (original, keep) · Multi-Agent (line art) · Azure DevOps (light flat, HTML) · .NET DDD (line art, flat layers-and-slices)
+- **Case studies, index order:** AP/AR (soft 3D) · Pain points (line art) · Mining classification (keynote glow) · PDF extraction (line art) · SQL→Fabric (original, keep) · Legal OS (line art) · 5G (keynote glow)
+
+Update this list whenever a hero changes.
+
 ## What a hero should show
 
 The full rules are in `hero-composition.md`, which takes precedence. In short:
