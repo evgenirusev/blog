@@ -1,7 +1,7 @@
 ---
 author: Evgeni Rusev
 pubDatetime: 2026-09-26T09:00:00Z
-title: "The AI-First SDLC: A Practical Guide for Software Engineering Teams"
+title: "The AI-First SDLC: From Coding to Context Engineering"
 slug: ai-first-sdlc
 featured: true
 draft: false
@@ -13,7 +13,7 @@ tags:
   - ai-coding
   - agentic-workflows
 ogImage: "../../assets/images/posts/ai-first-sdlc.png"
-description: "AI made writing code fast, but capturing intent is still slow. The AI-First SDLC we run on: a Project Brain, Living Specs and Agentic Loops, with the lessons we learned along the way."
+description: "A practical guide to the AI-First SDLC. AI made writing code fast, but capturing intent is still slow: here's the operating model we run on, with a Project Brain, Living Specs and Agentic Loops, and the lessons we learned along the way."
 ---
 
 ![AI-First SDLC — three pillars in one cycle: the Project Brain captures intent once, Living Specs are the source of truth, Agentic Loops implement, test and review, and learnings flow back into the brain](../../assets/images/posts/ai-first-sdlc.png)
@@ -44,7 +44,7 @@ Before we look at the friction, one idea the rest of this post builds on: intent
 
 ![Every feature is a move between two states: the current state and the future state. The gap between them is the intent, which is what you hand the model](../../assets/images/posts/ai-first-sdlc/current-future-state.png)
 
-We call the gap between them **the intent**: what's meant to change, given the new requirements. That's exactly what you hand the model.
+We call the gap between them **the intent**: what's meant to change, given the new requirements. That's exactly what you hand the model. This is context engineering at the team level: the intent, captured once, becomes the context the model works from.
 
 And then, **almost any feature or bug can be implemented in a single prompt.** So the job is no longer writing the code. It's *constructing the intent*, reliably, every time.
 
