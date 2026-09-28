@@ -248,7 +248,7 @@ People sometimes object that specs just move the maintenance burden from code to
 
 Two Claude Code skills do most of the spec work: `/sdlc-spec-manager` for product specs and `/sdlc-scenario-manager` for scenarios. You hand them a transcript, a codebase or a changed spec, and they create or update the files in the right structure. Just as importantly, they encode the rules, so every spec on every project ends up shaped the same way.
 
-Here's the core of the spec manager's definition:
+Here's an excerpt from the spec manager's definition:
 
 ```markdown
 ---
@@ -273,11 +273,13 @@ description: >
 The spine is a default, not a form to fill in. Whatever the sections,
 they must be MECE: each answers a different question, and the same
 fact never appears in two of them.
+
+…
 ```
 
 The structure is a starting point, not a template to follow to the letter. Adapt it to your project: a domain with a real lifecycle might need a States section, a regulated one an Obligations section, and a small one might need little more than use cases and rules. What matters is that the specs stay MECE and capture the requirements at a good enough level of abstraction: what the system must do and the rules it must obey, without drifting into how it's built.
 
-And the scenario manager, which ties every scenario back to the rules it proves:
+And an excerpt from the scenario manager, which ties every scenario back to the rules it proves:
 
 ```markdown
 ---
@@ -292,6 +294,8 @@ One scenario file per spec file, same name:
 
 Every [built] or [partial] rule is cited by at least one scenario,
 or exempted with a reason.
+
+…
 ```
 
 Both skills also have a **review mode**, and that's where they work as guardrails. The spec manager grades each spec on completeness, altitude (is it drifting into implementation detail?), substance, consistency and MECE, and navigability, as `strong`, `adequate`, `thin` or `broken`. A `broken` grade blocks implementation of that capability. It also runs cross-spec checks: a term defined differently in two specs, a rule owned by two specs, a spec missing from the index. The scenario manager checks coverage: which rules no scenario proves, which scenarios cite rules that no longer exist, and which were dropped without a reason. Run them after every spec change, or on every pull request, and a broken structure gets flagged before anyone builds on it.
