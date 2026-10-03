@@ -69,7 +69,7 @@ Dex Horthy tells a good version of this story in his talk [Why Software Factorie
 
 The "software factory" framing is compelling, which is why it's so common. But it can be misleading, because it implies an automated factory that takes in requirements and produces what you need. AI software factories fail when no one meaningfully reviews what they produce.
 
-That's why I prefer the framing "AI-First SDLC". It sets more realistic expectations, and it's the right mental model for what's actually happening on the ground. You can call it a software factory if you like; the name matters less than the operating model underneath:
+That's why I prefer the framing "[AI-First SDLC](/posts/ai-first-sdlc/)". It sets more realistic expectations, and it's the right mental model for what's actually happening on the ground. You can call it a software factory if you like; the name matters less than the operating model underneath:
 
 <p class="callout">Human intent and design → AI-accelerated implementation → human verification and ownership.</p>
 
