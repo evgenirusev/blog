@@ -59,9 +59,23 @@ Prompt roulette feels cheaper than catching up, but it isn't. Without understand
 
 Roulette doesn't only follow a lost thread, either. It's also what happens when someone never built the understanding in the first place.
 
+### The same pattern at scale: software factories
+
+You can see the same pattern at a much larger scale in "software factories". Over the past year, many companies have built some form of software factory as a layer on top of Claude Code: agents handing work to other agents, requirements in, code out. They can get you further than Claude Code on its own. But eventually the same thing happens: nobody knows what's going on in the codebase anymore, the AI starts making bad architecture decisions, and the team has to spend weeks working out what's actually in place. It's the catch-up tax, paid in weeks instead of hours.
+
+Dex Horthy tells a good version of this story in his talk [Why Software Factories Fail](https://www.youtube.com/watch?v=Ib5GBkD555M). In July 2025 he ran a "lights-off" software factory where nobody read the code. It worked until an issue appeared that no amount of prompting could fix (prompt roulette again), the site went down, and he was digging through a codebase he'd stopped reading three months earlier. His explanation is worth the watch: coding models are trained to pass tests, and nothing in that training penalises bad architecture, whose cost only shows up months later. His fix is to turn the lights back on and plan up front.
+
+The "software factory" framing is compelling, which is why it's so common. But it can be misleading, because it implies an automated factory that takes in requirements and produces what you need. AI software factories fail when no one meaningfully reviews what they produce.
+
+That's why I prefer the framing "AI-First SDLC". It sets more realistic expectations, and it's the right mental model for what's actually happening on the ground. You can call it a software factory if you like; the name matters less than the operating model underneath:
+
+<p class="callout">Human intent and design → AI-accelerated implementation → human verification and ownership.</p>
+
+The humans never leave the loop. They own the intent at the start and the verification at the end, and the AI accelerates everything in between. More on how that works in practice [below](#an-example-specs-in-the-ai-first-sdlc).
+
 ### One cause
 
-Either way, the cause is the same: **nobody is holding a working model of the system.** Either it was handed to the AI, or it was never built. Neither is fixed by better prompts or a bigger context window.
+Whether it's one person or a whole factory, the cause is the same: **nobody is holding a working model of the system.** Either it was handed to the AI, or it was never built. Neither is fixed by better prompts or a bigger context window.
 
 ## The New High Performers
 
@@ -193,7 +207,7 @@ Where exactly that review happens depends on the project and the team. Architect
 
 The [AI-First SDLC](/posts/ai-first-sdlc/) supports this way of working by design. It creates a shared information structure, and a process around it, that make review and alignment fast. In that setup, the [Living Specs](/posts/ai-first-sdlc/#the-specs-in-four-formats) hold the intent, the domain rules, the scenarios and the decisions, at a level of detail a human can actually keep in their head. The code underneath is detail you can afford not to read line by line, because the scenarios check it against the spec.
 
-So the review moves up a level. Instead of reading a 2,000-line diff, you check whether the spec still says what the business means, and whether the scenarios that prove it pass.
+So the review moves up a level. Instead of reading a 2,000-line diff, you check whether the spec still says what the business means, and whether the scenarios that prove it pass. That's the difference from a lights-off factory: the AI still does the implementation, but you stay in control through the specs.
 
 ### Signs you've lost the plot
 
