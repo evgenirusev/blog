@@ -116,6 +116,15 @@ for d in article.find_all("details"):
 
 bullets_to_paragraphs()
 
+# Callouts (<p class="callout">, the author's own key claim): Medium has no equivalent and a
+# quote would read as someone else's words, so make the whole paragraph bold.
+for p in article.select("p.callout"):
+    strong = page.new_tag("strong")
+    for child in list(p.contents):
+        strong.append(child)
+    p.clear()
+    p.append(strong)
+
 # A leading all-italic paragraph gets dropped by Medium's importer; make it a quote.
 first = article.find("p")
 if first and first.find("em") and first.get_text(strip=True) == first.find("em").get_text(strip=True):
