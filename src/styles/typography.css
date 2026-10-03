@@ -114,6 +114,11 @@
       @apply border-s-accent/80 wrap-break-word opacity-80;
     }
 
+    /* The author's own key claim: the quote's accent bar, without quotation marks or italics. */
+    .callout {
+      @apply my-6 border-s-4 border-s-accent/80 ps-4 text-lg font-semibold text-foreground;
+    }
+
     details {
       @apply inline-block cursor-pointer text-foreground select-none [&_p]:hidden [&_ul]:my-0!;
     }

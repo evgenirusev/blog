@@ -43,7 +43,7 @@ Rules:
 
 Check this before picking a style, so neighbours in the listing don't repeat.
 
-- **Posts, newest first:** AI-First SDLC (keynote glow) · Use-Case Handbook (line art) · Spec-Driven Development (keynote glow) · Second Brain (original, keep) · Multi-Agent (line art) · Azure DevOps (light flat, HTML) · .NET DDD (line art, flat layers-and-slices)
+- **Posts, newest first:** Understanding Is the New Bottleneck (line art, map over a territory) · AI-First SDLC (keynote glow) · Use-Case Handbook (line art) · Spec-Driven Development (keynote glow) · Second Brain (original, keep) · Multi-Agent (line art) · Azure DevOps (light flat, HTML) · .NET DDD (line art, flat layers-and-slices)
 - **Case studies, index order:** AP/AR (soft 3D) · Pain points (line art) · Mining classification (keynote glow) · PDF extraction (line art) · SQL→Fabric (original, keep) · Legal OS (line art) · 5G (keynote glow)
 
 Update this list whenever a hero changes.

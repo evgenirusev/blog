@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.z{position:absolute;padding:16px 22px;z-index:-1}
+.zl{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.st{position:absolute;display:flex;flex-direction:column;gap:8px;padding:18px 20px;height:150px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;background:var(--c)}
+.q{font-style:italic}
+</style></head><body data-size="1200x720"><div class="frame">
+<div class="title">From a lot of information to <span class="accent">a solution.</span></div>
+<div class="subtitle">Understand the business first. Then look at it through lenses.</div>
+
+<div class="zone z" style="left:48px;right:48px;top:180px;height:236px"><div class="zl">1 · Assemble context, at the business level</div></div>
+<div class="card st" id="a" style="left:72px;top:236px;width:240px;--c:var(--info)"><div class="top"><span class="num">1</span><span class="icon info"><i data-lucide="book-a"></i></span></div><div class="label">Glossary</div><div class="note">Terms, synonyms, ambiguity</div></div>
+<div class="card st" id="b" style="left:340px;top:236px;width:240px;--c:var(--info)"><div class="top"><span class="num">2</span><span class="icon info"><i data-lucide="workflow"></i></span></div><div class="label">As-is processes</div><div class="note">How it works today</div></div>
+<div class="card st" id="c" style="left:608px;top:236px;width:240px;--c:var(--info)"><div class="top"><span class="num">3</span><span class="icon info"><i data-lucide="milestone"></i></span></div><div class="label">To-be processes</div><div class="note">Where it needs to get to</div></div>
+<div class="card st tint-accent" id="d" style="left:876px;top:236px;width:252px;--c:var(--accent)"><div class="top"><span class="num">4</span><span class="icon accent"><i data-lucide="git-compare"></i></span></div><div class="label">Gap analysis</div><div class="note">More or less, the project</div></div>
+
+<div class="zone z" id="z2" style="left:480px;right:48px;top:452px;height:236px"><div class="zl">2 · Connect the dots, through lenses</div></div>
+<div class="card st" id="e" style="left:504px;top:508px;width:300px"><div class="top"><div class="label">Solution architecture</div><span class="icon"><i data-lucide="layers"></i></span></div><div class="note q">What should we build?</div></div>
+<div class="card st" id="f" style="left:828px;top:508px;width:300px"><div class="top"><div class="label">Risk analysis</div><span class="icon"><i data-lucide="shield-alert"></i></span></div><div class="note q">Where have we gone wrong before?</div></div>
+<div class="card st tint-success" id="g" style="left:72px;top:508px;width:320px"><div class="top"><div class="label">The solution</div><span class="icon success"><i data-lucide="circle-check"></i></span></div><div class="note">Every decision traces back to a gap</div></div>
+</div>
+<script>LINKS=[{from:"a",to:"b"},{from:"b",to:"c"},{from:"c",to:"d"},
+{from:"d",to:"z2",path:"down",toAt:0.777,color:"var(--accent)"},
+{from:"z2",to:"g",path:"cc",color:"var(--success)"}];</script>
+</body></html>

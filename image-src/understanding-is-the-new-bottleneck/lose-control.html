@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../scripts/images/theme.css"><script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script><script src="../../scripts/images/connect.js"></script><style>
+.st{position:absolute;display:flex;flex-direction:column;gap:8px;padding:18px 20px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;background:var(--c)}
+.chain{top:250px;width:200px;height:150px}
+.fork{left:844px;width:292px;height:136px}
+.root{position:absolute;left:64px;right:64px;top:500px;height:64px;display:flex;align-items:center;gap:14px;padding:0 24px;font-size:20px;font-weight:800;color:var(--title)}
+.root .note{font-size:18px;font-weight:600}
+.loop{display:flex;align-items:flex-start;gap:8px;font-size:16px;line-height:1.25;font-weight:700;color:var(--accent-deep)}
+.loop svg{width:20px;height:20px;stroke:var(--accent)}
+</style></head><body data-size="1200x620"><div class="frame">
+<div class="title">How people lose <span class="accent">control.</span></div>
+<div class="subtitle">One cause, two ways to pay for it.</div>
+
+<div class="card st chain" id="a" style="left:64px;--c:var(--info)"><div class="top"><span class="num">1</span><span class="icon info"><i data-lucide="send"></i></span></div><div class="label">Hand it off</div><div class="note">The AI owns a large piece</div></div>
+<div class="card st chain" id="b" style="left:300px;--c:var(--info)"><div class="top"><span class="num">2</span><span class="icon info"><i data-lucide="eye-off"></i></span></div><div class="label">Lose the thread</div><div class="note">Nobody follows the changes</div></div>
+<div class="card st chain" id="c" style="left:536px;--c:var(--plum)"><div class="top"><span class="num">3</span><span class="icon"><i data-lucide="triangle-alert"></i></span></div><div class="label">It breaks</div><div class="note">Context limit, wrong call, stuck</div></div>
+
+<div class="card st fork tint-success" id="d" style="top:176px"><div class="top"><div class="label">Pay the catch-up tax</div><span class="icon success"><i data-lucide="clock"></i></span></div><div class="note">Hours or days to catch up, then back in control</div></div>
+<div class="card st fork tint-accent" id="e" style="top:336px;height:150px"><div class="top"><div class="label">Play prompt roulette</div><span class="icon accent"><i data-lucide="refresh-cw"></i></span></div><div class="note">Rephrase, retry, repeat</div><div class="loop"><i data-lucide="trending-up"></i>The tax is still owed, and growing</div></div>
+
+<div class="zone root"><span class="icon accent"><i data-lucide="map"></i></span>Root cause:<span class="note">nobody is holding a working model of the system.</span></div>
+</div>
+<script>LINKS=[{from:"a",to:"b"},{from:"b",to:"c"},{from:"c",to:"d"},{from:"c",to:"e",color:"var(--accent)"}];</script>
+</body></html>
