@@ -118,11 +118,13 @@ Hold those four, and you can let the AI move fast on everything underneath them.
 
 More and more of the work is taking in a large amount of information quickly: a new codebase, a stack of requirements documents and meeting transcripts, a big AI-generated change, a new business. The temptation is to read it all, or to skip it and jump straight into the code or the backlog. I try hard to do neither.
 
+When code is cheap, the hardest thing to understand on a project is rarely the code. It's the business the code serves: the words people use, how work actually flows, and what needs to change. That's also what the AI gets wrong most often when nobody has written it down.
+
 Instead, I use a few Claude skills I've built that distil information into its fundamental patterns: what the key concepts are, how things flow, and what matters most.
 
 ![From a lot of information to a solution: first assemble context at the business level (glossary, as-is processes, to-be processes, gap analysis), then connect the dots through lenses such as solution architecture and risk analysis](../../assets/images/posts/understanding-is-the-new-bottleneck/pipeline.png)
 
-The clearest example is a new business domain. A lot of my work is consulting, so I'm often dropped into a business I don't know yet: legal, mining, insurance, manufacturing. There, I ask for four things, in this order:
+The clearest example is joining a new project. It happens to every engineer, and in consulting it happens to me often, usually in a business I don't know yet. Before touching the code or the backlog, I ask for four things, in this order:
 
 1. **A glossary of the terminology.** Every term the business uses, what it means, and which terms mean almost the same thing. Half the confusion in a new domain is vocabulary.
 2. **As-is process maps.** How the business operates today, end to end, as a set of holistic processes: who does what, with which inputs, producing which outputs.
@@ -144,21 +146,21 @@ Stay at the business level. No technology, no solutions yet.
 
 ### What it looks like: an example
 
-To make it concrete, here's an illustrative example, a generic insurance claims process rather than a real engagement.
+To make it concrete, here's an illustrative example: you join a project for an online shop that sells clothes and ships from its own warehouse.
 
 The **glossary** usually pays for itself in the first ten minutes. Three rows from one like it:
 
 | Term | Meaning | Flag |
 |---|---|---|
-| **Claim** | A policyholder's request for payment after a loss. | Also called "case" by the claims team and "file" in the legacy system. Same thing, three names. |
-| **FNOL** | First notice of loss: the moment the insurer first hears about the loss. | The clock for service-level targets starts here. |
-| **Reserve** | The amount set aside for what the claim is expected to cost. | Not the same as the payout. Finance and claims use it differently. |
+| **Order** | What a customer buys in one checkout. | Finance calls it a "sale" and the warehouse calls it a "shipment". Same thing, three names. |
+| **SKU** | One specific product variant the warehouse stocks. | One T-shirt in three sizes is three SKUs, not one product. |
+| **Back-order** | An order accepted for something that's out of stock. | The customer has paid, but nothing ships until stock arrives. |
 
-The **as-is map** for first notice of loss might look like this:
+The **as-is map** for getting an order out of the door might look like this:
 
-![Claims, as-is: policyholder calls, call centre logs the claim, a nightly batch moves it to the claims system, a handler checks cover, then the claim is either reserved and assigned or declined. The nightly batch is the gap](../../assets/images/posts/understanding-is-the-new-bottleneck/claims-as-is.png)
+![Orders, as-is: the customer places an order, the order is saved in the shop, a nightly sync sends it to the warehouse system, the warehouse picks and packs, then the order either ships or becomes a back-order. The nightly sync is the gap](../../assets/images/posts/understanding-is-the-new-bottleneck/orders-as-is.png)
 
-The to-be map says the business wants claims triaged within minutes of the call. The **gap analysis** then surfaces the one gap that matters most: policy data only reaches the claims system in a nightly batch. That single line changes the architecture. Triage-in-minutes needs a live policy lookup, not a smarter triage model sitting on day-old data. Finding that in a process map on day two is much cheaper than finding it in a sprint review in month two.
+The to-be map says the business wants same-day dispatch for orders placed before 2pm. The **gap analysis** then surfaces the one gap that matters most: orders only reach the warehouse in a nightly sync. That single line changes the architecture. Same-day dispatch needs a real-time order feed to the warehouse, not a faster warehouse team. Finding that in a process map on day two is much cheaper than finding it in a sprint review in month two.
 
 ### The interactive walkthrough
 
@@ -186,8 +188,10 @@ Once I understand the processes and the gaps, I connect the dots by looking at t
 
 Two examples:
 
-- **Solution architecture** asks *what should we build?* It turns the process maps and the gap analysis into a practical architecture: which components, which boundaries, what integrates with what. In the claims example, the live policy lookup isn't an architect's preference. It traces straight back to a gap in a process map.
-- **Risk analysis** asks *where have we gone wrong before?* At Tecknoworks we keep a record of lessons from past projects, including the ones that went wrong. This lens checks the new solution against that record: is there anything here where we might make the same mistake again? In the claims example, if past projects underestimated an integration with a legacy system, the live policy lookup gets flagged and tested early, not discovered late.
+- **Solution architecture** asks *what should we build?* It turns the process maps and the gap analysis into a practical architecture: which components, which boundaries, what integrates with what. In the shop example, the real-time order feed isn't an architect's preference. It traces straight back to a gap in a process map.
+- **Risk analysis** asks *where have we gone wrong before?* At Tecknoworks we keep a record of lessons from past projects, including the ones that went wrong. This lens checks the new solution against that record: is there anything here where we might make the same mistake again? In the shop example, if past projects underestimated integrating with a warehouse's legacy system, the order feed gets flagged and tested early, not discovered late.
+
+Other lenses work the same way, each with its own question: cost (*what will this cost to run?*), security (*what could be abused?*), change management (*who has to work differently, and will they?*), or a set of mental models such as inversion (*what would guarantee this fails?*).
 
 The order matters. The understanding comes first and the lenses second, so every decision a lens produces has something concrete to be checked against, instead of being taken on trust.
 
@@ -195,7 +199,7 @@ The order matters. The understanding comes first and the lenses second, so every
 
 Each of these lenses is a Claude skill I've written: a reusable set of instructions for how to look at the information and what to produce. That's what makes them worth building.
 
-The first version of a skill is usually mediocre. But every time I use one, I see where it helped and where it missed something, and I refine it. A question it should have asked, a format that was hard to read, a mistake it kept making. Over months, the skills get noticeably better, and they compound: each engagement makes the next one faster, because the lessons from the last one are now built into the skill rather than living only in my head.
+The first version of a skill is usually mediocre. But every time I use one, I see where it helped and where it missed something, and I refine it. A question it should have asked, a format that was hard to read, a mistake it kept making. Over months, the skills get noticeably better, and they compound: each project makes the next one faster, because the lessons from the last one are now built into the skill rather than living only in my head.
 
 ## Verifying Efficiently: Reviewing to "Good Enough"
 
