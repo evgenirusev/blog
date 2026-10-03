@@ -23,6 +23,8 @@ His point is that as AI does more of the hands-on work on its own, more of our w
 
 I'd take it one step further: **the biggest lever we can pull to unlock further AI acceleration is how we process AI-generated information**: being far more deliberate about what we choose to understand, what to discard, and what "enough" understanding means. The new high performers maximise the AI's autonomy while completing a good-enough review as quickly and effectively as possible.
 
+Understanding isn't just a matter of effort or talent, though. It's something you can engineer: by managing what context you take in and in what form, and by putting structures in place that make a system easy to understand.
+
 This post is about what that looks like in practice: how people lose control, the skills that replace raw coding speed, how I apply them, and what it means for how teams are set up.
 
 ## Table of contents
@@ -49,7 +51,7 @@ The problem is that AI judgement gets worse as the system gets more complex. On 
 
 ### Then: pay the catch-up tax, or play prompt roulette
 
-Sooner or later it does hurt. The AI hits the limit of its context window, or makes a decision that doesn't fit, or just gets stuck. At that point there are two options.
+Then the AI hits the limit of its context window, or makes a decision that doesn't fit, or just gets stuck. At that point there are two options.
 
 The first is to pay **the catch-up tax**: spend a few hours, sometimes a few days, catching up on what was built before you can do anything useful. The time you "saved" comes back with interest.
 
@@ -88,6 +90,8 @@ In practice that breaks down into three skills, and the rest of this post takes 
 | **Assembling context** | Finding the information that matters (the business process, the constraints, the decisions already made) and giving it to the AI in a shape it can use. |
 | **Connecting the dots** | Seeing how a change in one place affects another. Holding the overall structure in your head, not every line. |
 | **Verifying efficiently** | AI output is often large. The skill is reaching confidence that it's right with the least time spent, not reading every line. |
+
+None of the three runs on effort alone. Assembling context is context management: deciding what goes in, and in what form. Connecting the dots and verifying both depend on structure: a small set of things that describe the system, written down where you and the AI can both check against them. The rest of this post covers both.
 
 This needs a change in how we measure ourselves, and it's the hardest part. Most engineers, me included, have spent years feeling productive in proportion to the code we produced. That instinct now works against us: it pushes people to keep the AI generating, because generating feels like progress.
 
