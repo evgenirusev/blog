@@ -57,7 +57,8 @@ regenerate its 960px WebP in `public/images/case-studies/` (see `SKILL.md`, "Cas
 Medium stopped issuing API tokens in 2025, so it's the **Import a story** tool, fed by a clean copy
 of the post. Done twice so far (AI-First SDLC, Understanding Is the New Bottleneck); the steps
 below are the ones that worked. An agent can do all of it through the Chrome extension, logged in
-as the owner, with the owner's go-ahead to publish.
+as the owner, with the owner's go-ahead to publish. The agent procedure, with the browser helpers
+and the guarded link recipe, is the `medium-crosspost` skill (vault: `wiki/skills/distribution/`).
 
 ### Prepare the copy
 
