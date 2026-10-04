@@ -12,10 +12,10 @@ tags:
   - claude-code
   - productivity
 ogImage: "../../assets/images/posts/understanding-is-the-new-bottleneck.png"
-description: "AI made producing work cheap. Understanding is the new bottleneck: how people lose control, the four levers to hold, and how to get up to speed on a lot of information fast."
+description: "AI made producing work cheap. Understanding is the new bottleneck: how people lose control, what to hold in your head, and how to get up to speed on a lot of information fast."
 ---
 
-![Understanding is the new bottleneck: a vast city of AI-generated code and documents, with one small magenta map on top showing just four levers: architecture, domain model, key flows and intent](../../assets/images/posts/understanding-is-the-new-bottleneck.png)
+![Understanding is the new bottleneck: a vast city of AI-generated code and documents, with one small magenta map on top showing just the levers that matter: architecture, domain model, key flows and intent](../../assets/images/posts/understanding-is-the-new-bottleneck.png)
 
 I read [a post from Andrej Karpathy](https://x.com/karpathy/status/2105819303471976479) recently, and it helped me name something I've been struggling with for the past couple of months: **understanding is the new bottleneck to high-performance work.**
 
@@ -25,7 +25,7 @@ I'd take it one step further: **the biggest lever we can pull to unlock further 
 
 Understanding isn't just a matter of effort or talent, though. It's something you can engineer: by managing what context you take in and in what form, and by putting structures in place that make a system easy to understand.
 
-This post is about what that looks like in practice: how people lose control, the skills that replace raw coding speed, how I apply them, and what it means for how teams are set up.
+This post is about what that looks like in practice: how people lose control, how to stay in control, how I do it day to day, and what it means for who performs well and how teams are set up.
 
 ## Table of contents
 
@@ -51,7 +51,7 @@ The problem is that AI judgement gets worse as the system gets more complex. On 
 
 ### Then: pay the catch-up tax, or play prompt roulette
 
-Then the AI hits the limit of its context window, or makes a decision that doesn't fit, or just gets stuck. At that point there are two options.
+Eventually the AI hits the limit of its context window, or makes a decision that doesn't fit, or just gets stuck. At that point there are two options.
 
 The first is to pay **the catch-up tax**: spend a few hours, sometimes a few days, catching up on what was built before you can do anything useful. The time you "saved" comes back with interest.
 
@@ -67,9 +67,7 @@ You can see the same pattern at a much larger scale in "software factories". Ove
 
 Dex Horthy tells a good version of this story in his talk [Why Software Factories Fail](https://www.youtube.com/watch?v=Ib5GBkD555M). In July 2025 he ran a "lights-off" software factory where nobody read the code. It worked until an issue appeared that no amount of prompting could fix (prompt roulette again), the site went down, and he was digging through a codebase he'd stopped reading three months earlier. His explanation is worth the watch: coding models are trained to pass tests, and nothing in that training penalises bad architecture, whose cost only shows up months later. His fix is to turn the lights back on and plan up front.
 
-The "software factory" framing is compelling, which is why it's so common. But it can be misleading, because it implies an automated factory that takes in requirements and produces what you need. AI software factories fail when no one meaningfully reviews what they produce.
-
-That's why I prefer the framing "[AI-First SDLC](/posts/ai-first-sdlc/)". It sets more realistic expectations, and it's the right mental model for what's actually happening on the ground. You can call it a software factory if you like; the name matters less than the operating model underneath:
+The "software factory" framing is compelling, but misleading: it implies a machine that takes in requirements and produces what you need. AI software factories fail when no one meaningfully reviews what they produce. That's why I prefer the framing "[AI-First SDLC](/posts/ai-first-sdlc/)": it sets realistic expectations and matches what actually happens on the ground. Call it a software factory if you like; the name matters less than the operating model underneath:
 
 <p class="callout">Human intent and design → AI-accelerated implementation → human verification and ownership.</p>
 
@@ -79,11 +77,26 @@ The humans never leave the loop. They own the intent at the start and the verifi
 
 Whether it's one person or a whole factory, the cause is the same: **nobody is holding a working model of the system.** Either it was handed to the AI, or it was never built. Neither is fixed by better prompts or a bigger context window.
 
-## The New High Performers
+## The Fix: Hold the Levers, Not the Code
 
-<p class="callout">The new high performers are the people who reach a working understanding of the system fastest, and stay in control of it while the AI accelerates everything else.</p>
+The fix isn't to stop delegating. It's to be deliberate about what you keep in your own head. Not everything: that's the point.
 
-In practice that breaks down into three skills, and the rest of this post takes them one at a time:
+I've often noticed that smart people can ramp up on almost any new domain remarkably quickly. Why? It comes down to the same pattern: they know which information to focus on and which to discard, and they're clear about what they know and what they don't.
+
+It reminds me of a line from *The Great Mental Models* by Shane Parrish: "A mental model is a compression of how something works." Like a map, a good mental model keeps the key information and leaves out the rest. You probably have a useful idea of how inertia works without knowing all the technical details.
+
+That's what you need of the system the AI is building with you: a compressed model of how it works, not a copy of it. You don't need to understand every line the AI writes. You do need to understand the few structures that tell you where the main levers are. Call them **the levers**:
+
+- **Architecture decisions:** how the system is split, where the boundaries are, what talks to what.
+- **The domain model:** the main entities, the rules between them, the words the business uses for them.
+- **The key flows:** how a request, an order, a document moves through the system end to end.
+- **The intent:** what each feature is supposed to do and why, written down somewhere outside the code.
+
+Hold those, and you can let the AI move fast on everything underneath them.
+
+### How you get there
+
+Building and keeping that model is a skill set, and the rest of this post takes it one part at a time:
 
 | Skill | What it means |
 |---|---|
@@ -91,40 +104,19 @@ In practice that breaks down into three skills, and the rest of this post takes 
 | **Connecting the dots** | Seeing how a change in one place affects another. Holding the overall structure in your head, not every line. |
 | **Verifying efficiently** | AI output is often large. The skill is reaching confidence that it's right with the least time spent, not reading every line. |
 
-None of the three runs on effort alone. Assembling context is context management: deciding what goes in, and in what form. Connecting the dots and verifying both depend on structure: a small set of things that describe the system, written down where you and the AI can both check against them. The rest of this post covers both.
-
-This needs a change in how we measure ourselves, and it's the hardest part. Most engineers, me included, have spent years feeling productive in proportion to the code we produced. That instinct now works against us: it pushes people to keep the AI generating, because generating feels like progress.
-
-The better measure is: **how quickly did I get to the core understanding that keeps me in control?** Once you have it, acceleration on everything else is safe. Without it, every bit of acceleration adds to a debt you'll pay later, usually as a catch-up tax.
-
-## What to Hold in Your Head: The Four Levers
-
-Before the three skills, one question: understanding *what*, exactly? Not everything. That's the point.
-
-I've often noticed that smart people can ramp up on almost any new domain remarkably quickly. Why? It comes down to the same pattern: they know which information to focus on and which to discard, and they're clear about what they know and what they don't.
-
-It reminds me of a line from *The Great Mental Models* by Shane Parrish: "A mental model is a compression of how something works." Like a map, a good mental model keeps the key information and leaves out the rest. You probably have a useful idea of how inertia works without knowing all the technical details.
-
-That's what you need of the system the AI is building with you: a compressed model of how it works, not a copy of it. You don't need to understand every line the AI writes. You do need to understand the few structures that tell you where the main levers are. Call them **the four levers**:
-
-1. **Architecture decisions:** how the system is split, where the boundaries are, what talks to what.
-2. **The domain model:** the main entities, the rules between them, the words the business uses for them.
-3. **The key flows:** how a request, an order, a document moves through the system end to end.
-4. **The intent:** what each feature is supposed to do and why, written down somewhere outside the code.
-
-Hold those four, and you can let the AI move fast on everything underneath them.
+None of this runs on effort alone. Assembling context is context management: deciding what goes in, and in what form. Connecting the dots and verifying both depend on structure: a small set of things that describe the system, written down where you and the AI can both check against them.
 
 ## Assembling Context: How I Get Up to Speed on a Lot of Information Fast
 
-More and more of the work is taking in a large amount of information quickly: a new codebase, a stack of requirements documents and meeting transcripts, a big AI-generated change, a new business. The temptation is to read it all, or to skip it and jump straight into the code or the backlog. I try hard to do neither.
-
 When code is cheap, the hardest thing to understand on a project is rarely the code. It's the business the code serves: the words people use, how work actually flows, and what needs to change. That's also what the AI gets wrong most often when nobody has written it down.
+
+And more and more of the work is taking in a large amount of information quickly: a new codebase, a stack of requirements documents and meeting transcripts, a big AI-generated change, a new business. The temptation is to read it all, or to skip it and jump straight into the code or the backlog. I try hard to do neither.
 
 Instead, I use a few Claude skills I've built that distil information into its fundamental patterns: what the key concepts are, how things flow, and what matters most.
 
-![From a lot of information to a solution: first assemble context at the business level (glossary, as-is processes, to-be processes, gap analysis), then connect the dots through lenses such as solution architecture and risk analysis](../../assets/images/posts/understanding-is-the-new-bottleneck/pipeline.png)
+![From a lot of information to a solution: first assemble context at the business level (glossary, as-is processes, to-be processes, gap analysis), then connect the dots from perspectives such as solution architecture and risk analysis](../../assets/images/posts/understanding-is-the-new-bottleneck/pipeline.png)
 
-The clearest example is joining a new project. It happens to every engineer, and in consulting it happens to me often, usually in a business I don't know yet. Before touching the code or the backlog, I ask for four things, in this order:
+The clearest example is joining a new project. It happens to every engineer, and in consulting it happens to me often, usually in a business I don't know yet. I ask for four things, in this order:
 
 1. **A glossary of the terminology.** Every term the business uses, what it means, and which terms mean almost the same thing. Half the confusion in a new domain is vocabulary.
 2. **As-is process maps.** How the business operates today, end to end, as a set of holistic processes: who does what, with which inputs, producing which outputs.
@@ -143,6 +135,8 @@ From the documents and transcripts in this folder:
    what changes, who it affects, and how big it is.
 Stay at the business level. No technology, no solutions yet.
 ```
+
+Notice what these outputs are: the glossary gives you the **domain model**, the process maps give you the **key flows**, and the to-be map and the gap analysis give you the **intent**. The remaining lever, the **architecture decisions**, comes from connecting the dots, below. The routine is how the compressed model gets built.
 
 ### What it looks like: an example
 
@@ -164,7 +158,7 @@ The to-be map says the business wants same-day dispatch for orders placed before
 
 ### Learning lenses: one model, many angles
 
-For anything I need to really understand, I go one step further. I built a Claude skill, **learning-lenses**, that turns a spec, a folder of documents or a set of meeting transcripts into one local web app I can explore. It started from Karpathy's post, and I now use it to get my head around systems, requirements and new domains.
+For anything I need to really understand, I go one step further. I built a Claude skill, **learning-lenses**, that turns a spec, a folder of documents or a set of meeting transcripts into one local web app I can explore. I now use it to get my head around systems, requirements and new domains.
 
 It works in two steps. First, the AI reads all the material and writes one structured model of it: the parts, how they connect, the rules, the statuses things move through, and what's still undecided. Then the app shows that model through switchable lenses, one per tab:
 
@@ -174,7 +168,9 @@ It works in two steps. First, the AI reads all the material and writes one struc
 - **Quiz:** the essentials, the terms, and the misconceptions.
 - **State machines, open questions** and others, when the material calls for them.
 
-![The online shop example in the learning-lenses app: the Map lens with the "same-day dispatch" what-if switched on. The nightly sync becomes a real-time order feed, and the warehouse steps that change turn coral](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-map.png)
+Here's the same online shop in the app, this time as the whole system rather than one process:
+
+![The online shop example in the learning-lenses app, with its six lens tabs (Map, Reference, Quiz, State machines, Walkthrough, Open questions) and the confirmed / inferred / open legend. The Map lens is open, with the "same-day dispatch" what-if switched on. Across storefront, payments, warehouse, dispatch, returns and finance, the nightly sync becomes a real-time order feed, and the steps that change (live stock, the WMS, wave planning, a second carrier collection) turn coral](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-map.png)
 
 Every lens reads from the same model, so they can't contradict each other. But two features matter more than the visuals.
 
@@ -182,40 +178,36 @@ Every lens reads from the same model, so they can't contradict each other. But t
 
 **It tests me.** The walkthrough can stop at each decision point and ask what happens next. The quiz goes after the misconceptions: the look-alike terms and rules that people get wrong on first read. Seeing something isn't the same as knowing it. A few wrong answers show me exactly where my understanding is thin, before that thin spot turns into a bad prompt or a missed review comment.
 
-![The Walkthrough lens in quiz mode: Maya orders a T-shirt at 13:40, and the app asks when the warehouse will see the order, before revealing that it waits for the 02:00 sync](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-walkthrough.png)
-
-![The Quiz lens on a misconception: blue L is out of stock and Maya orders blue M. The wrong answer, back-order, is marked, with the explanation that stock is checked per SKU](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-quiz.png)
+![Testing yourself in the learning-lenses app. Left, the Walkthrough lens stops at a decision point: the shop showed one pair of jeans left when Maya paid, so were they really there? Right, the Quiz lens on a misconception: blue L is out of stock and Maya orders blue M; the wrong answer, back-order, is marked, because stock is checked per SKU](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-testing.png)
 
 It takes a few minutes to generate. A couple of years ago, nobody would have built a custom app just to understand something. Now it's cheaper than a meeting.
 
 ### Pick the format on purpose
 
-That's the broader point: paragraphs of prose are often the slowest way to take something in. Diagrams for flows, tables for anything I need to scan, and lenses for anything I need to really learn.
+Paragraphs of prose are often the slowest way to take something in: diagrams for flows, tables for anything to scan, lenses for anything to really learn. [Karpathy's post](https://x.com/karpathy/status/2105819303471976479) is exactly about this, and it's where the skill started. Diagrams, web pages and writing closer to ASD-STE100 all come from his list, and the skill can also build his favourite format, a narrated explainer video, as an optional lens.
 
-[Karpathy's post](https://x.com/karpathy/status/2105819303471976479) is exactly about this, and it's where the skill started: diagrams, web pages and writing closer to ASD-STE100 all come from his list. The skill can also build his favourite format, a narrated explainer video, as an optional lens.
+## Connecting the Dots: Looking From Different Perspectives
 
-## Connecting the Dots: Looking Through Different Lenses
-
-Once I understand the processes and the gaps, I connect the dots by looking at the same information through different lenses. Each lens asks one specific question of it, and each one surfaces things the others miss.
+Once I understand the processes and the gaps, I connect the dots by looking at the same information from different perspectives. Each perspective asks one specific question of it, and each one surfaces things the others miss.
 
 Two examples:
 
 - **Solution architecture** asks *what should we build?* It turns the process maps and the gap analysis into a practical architecture: which components, which boundaries, what integrates with what. In the shop example, the real-time order feed isn't an architect's preference. It traces straight back to a gap in a process map.
-- **Risk analysis** asks *where have we gone wrong before?* At Tecknoworks we keep a record of lessons from past projects, including the ones that went wrong. This lens checks the new solution against that record: is there anything here where we might make the same mistake again? In the shop example, if past projects underestimated integrating with a warehouse's legacy system, the order feed gets flagged and tested early, not discovered late.
+- **Risk analysis** asks *where have we gone wrong before?* At Tecknoworks we keep a record of lessons from past projects, including the ones that went wrong. This perspective checks the new solution against that record: is there anything here where we might make the same mistake again? In the shop example, if past projects underestimated integrating with a warehouse's legacy system, the order feed gets flagged and tested early, not discovered late.
 
-Other lenses work the same way, each with its own question: cost (*what will this cost to run?*), security (*what could be abused?*), change management (*who has to work differently, and will they?*), or a set of mental models such as inversion (*what would guarantee this fails?*).
+Other perspectives work the same way, each with its own question: cost (*what will this cost to run?*), security (*what could be abused?*), change management (*who has to work differently, and will they?*), or a set of mental models such as inversion (*what would guarantee this fails?*).
 
-The order matters. The understanding comes first and the lenses second, so every decision a lens produces has something concrete to be checked against, instead of being taken on trust.
+The order matters. The understanding comes first and the perspectives second, so every decision a perspective produces has something concrete to be checked against, instead of being taken on trust.
 
-### Lenses as skills that compound
+### Perspectives as skills that compound
 
-Each of these lenses is a Claude skill I've written: a reusable set of instructions for how to look at the information and what to produce. That's what makes them worth building.
+Each of these perspectives is a Claude skill I've written: a reusable set of instructions for how to look at the information and what to produce. That's what makes them worth building.
 
 The first version of a skill is usually mediocre. But every time I use one, I see where it helped and where it missed something, and I refine it. A question it should have asked, a format that was hard to read, a mistake it kept making. Over months, the skills get noticeably better, and they compound: each project makes the next one faster, because the lessons from the last one are now built into the skill rather than living only in my head.
 
 ## Verifying Efficiently: Reviewing to "Good Enough"
 
-The last skill is where the four levers pay off. They're where your human review belongs.
+This is where the levers pay off. They're where your human review belongs.
 
 Not "let the AI do its thing and skim the diff", but "check every change against the few structures that matter, and let tests and scenarios cover the rest". When the AI proposes something that crosses a boundary or changes a core rule, you notice immediately, because that's exactly what you're watching. The goal isn't to review everything. It's **reaching verifiability in the least amount of time**: knowing which parts you must check yourself, which parts tests can check for you, and when "good enough" really is good enough.
 
@@ -239,19 +231,31 @@ And a quick self-check for when you've dropped below "good enough". If any of th
 - Starting a fresh session would take you more than an hour to get back to where you are.
 - You're approving diffs because the tests pass, not because you know what changed.
 
+## The New High Performers
+
+Put the pieces together and you get a different picture of who performs well.
+
+<p class="callout">The new high performers are the people who reach a working understanding of the system fastest, and stay in control of it while the AI accelerates everything else.</p>
+
+The competitive programmer from the start of this post still has an edge, but it's no longer the deciding one. The deciding one is how fast you can compress a system into the few things that matter, and how cheaply you can check the AI's work against them.
+
+This needs a change in how we measure ourselves, and it's the hardest part. Most engineers, me included, have spent years feeling productive in proportion to the code we produced. That instinct now works against us: it pushes people to keep the AI generating, because generating feels like progress.
+
+The better measure is: **how quickly did I get to the core understanding that keeps me in control?** Once you have it, acceleration on everything else is safe. Without it, every bit of acceleration adds to a debt you'll pay later, usually as a catch-up tax.
+
 ## What This Means for Teams and Companies
 
-Every company now has access to the same models and the same tools, so buying licences doesn't create an advantage on its own. The companies that will pull ahead are the ones that **reconfigure how their teams work so these three skills become easy to practise**:
+Every company now has access to the same models and the same tools, so buying licences doesn't create an advantage on its own. The companies that will pull ahead are the ones that **reconfigure how their teams work so these skills become easy to practise**:
 
 | What to reconfigure | What it looks like |
 |---|---|
 | **Skillset** | Hiring, training and promoting for assembling context, connecting the dots and verifying, not for raw output. |
-| **Process** | Capturing intent once and reviewing at the level of the four levers, not line by line in the diff. Measuring time to understanding, not lines of code or tickets closed. |
+| **Process** | Capturing intent once and reviewing at the level of the levers, not line by line in the diff. Measuring time to understanding, not lines of code or tickets closed. |
 | **Structures** | Shared information structures (such as a Project Brain or Living Specs) that everyone and every agent works from, and team shapes built around them. |
 
 None of the three works alone. A team of strong engineers with no shared structure still loses days to re-explaining. A good spec process with people who don't read the specs becomes paperwork.
 
-Here's what we're seeing so far. On one project we've just started running fully on the AI-First SDLC, the biggest bottleneck so far has been managing the specs and getting people aligned; once that's done, implementation moves much faster than we're used to. That points me towards a hypothesis: on more complex projects, every team might need one person whose main job is consulting, spec management and alignment, with one owner per domain (a colleague suggests two for complex systems: a subject-matter expert and a strong agentic engineer). But we're two weeks in. I'll know much more in a few months, and my view might change.
+Here's what we're seeing so far. On one project we've just started running fully on the AI-First SDLC, the biggest bottleneck has been managing the specs and getting people aligned; once that's done, implementation moves much faster than we're used to. That points me towards a hypothesis: on more complex projects, every team might need one person whose main job is consulting, spec management and alignment, with one owner per domain (a colleague suggests two for complex systems: a subject-matter expert and a strong agentic engineer). But we're two weeks in. I'll know much more in a few months, and my view might change.
 
 The risk I worry about most was raised by another colleague. Documentation is the thing most developers have always hated doing, and now the shared project knowledge is the most important artefact on the project. If people treat it as something the AI fills in and nobody reads, they go shallow exactly where depth matters most. That's a skillset problem, not a tooling one, and we need to train for it deliberately rather than assume it.
 

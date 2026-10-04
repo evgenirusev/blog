@@ -1,148 +1,1227 @@
 {
-  "id": "shop-orders",
-  "title": "Online shop — from checkout to dispatch",
-  "subtitle": "How an order gets out of the door today, and what same-day dispatch would change",
-  "source": "Illustrative example for the blog post *Understanding Is the New Bottleneck*. Not a real client.",
-  "summary": [
-    "A customer checks out in the **shop**. The order waits there until a **nightly sync** sends it to the **warehouse system**. The warehouse then picks, packs and ships it, or turns it into a **back-order** if a SKU is out of stock.",
-    {"type": "note", "title": "The one idea to keep", "text": "Orders reach the warehouse once a night. Every promise about dispatch time is limited by that one step, not by how fast the warehouse works."}
-  ],
-  "lenses": ["map", "reference", "states", "walkthrough", "questions", "quiz"],
-  "legend": [
-    {"id": "confirmed", "label": "Confirmed", "tone": "good", "description": "Stated by the business"},
-    {"id": "inferred", "label": "Inferred", "tone": "warn", "description": "Our reading, not yet confirmed"},
-    {"id": "open", "label": "Open", "tone": "bad", "description": "Undecided or unknown"}
-  ],
-  "sections": [
-    {"id": "terms", "title": "Glossary", "status": "confirmed",
-     "summary": "Three teams, three names for the same thing.",
-     "blocks": [
-       {"type": "table", "head": ["Term", "Meaning", "Watch out"],
-        "rows": [["**Order**", "What a customer buys in one checkout.", "Finance says *sale*, the warehouse says *shipment*."],
-                 ["**SKU**", "One product variant the warehouse stocks.", "One T-shirt in three sizes is three SKUs."],
-                 ["**Back-order**", "An accepted order for something out of stock.", "The customer has paid; nothing ships yet."]]}
-     ]},
-    {"id": "asis", "title": "Today: checkout to dispatch", "status": "confirmed",
-     "summary": "Orders move to the warehouse in one batch, overnight.",
-     "blocks": [
-       "The shop saves each order as **Placed**. At 02:00 the nightly sync sends every Placed order to the warehouse system.",
-       "In the morning the warehouse picks and packs. If every SKU is in stock, the order ships. If not, it becomes a back-order and the customer gets an email.",
-       {"type": "p", "status": "inferred", "text": "Orders placed after 02:00 wait almost a full day before the warehouse sees them."}
-     ]},
-    {"id": "tobe", "title": "Target: same-day dispatch", "status": "confirmed",
-     "summary": "Orders placed before 14:00 should leave the same day.",
-     "blocks": [
-       "The business wants same-day dispatch for orders placed before 14:00.",
-       {"type": "p", "status": "open", "text": "Whether back-orders are part of the same-day promise is not decided. See [[questions:backorder_promise]]."}
-     ]},
-    {"id": "gap", "title": "The gap", "status": "inferred",
-     "summary": "The nightly sync, not the warehouse, blocks same-day dispatch.",
-     "blocks": [
-       "Same-day dispatch needs orders to reach the warehouse within minutes. That means a **real-time order feed**, not a faster warehouse team.",
-       "See the what-if on the [[map:sync|map]]."
-     ]}
-  ],
-  "map": {
-    "direction": "LR",
-    "hint": "Follow an order from the left. Click any step.",
-    "groups": [{"id": "shop", "label": "Shop"}, {"id": "wh", "label": "Warehouse"}],
-    "nodes": [
-      {"id": "checkout", "label": "Customer\nchecks out", "status": "confirmed", "shape": "pill",
-       "detail": ["One checkout creates one **Order**."]},
-      {"id": "saved", "label": "Order saved\n(Placed)", "status": "confirmed", "group": "shop", "section": "asis",
-       "detail": ["The shop stores the order. Payment is already taken."]},
-      {"id": "sync", "label": "Nightly sync\n02:00", "status": "confirmed", "shape": "round", "section": "gap",
-       "detail": ["Sends all Placed orders to the warehouse once a night. {{inferred}} This is the step that blocks same-day dispatch."]},
-      {"id": "wms", "label": "Warehouse\nsystem", "status": "confirmed", "shape": "db", "group": "wh",
-       "detail": ["Receives orders and plans the picking."]},
-      {"id": "pick", "label": "Pick and\npack", "status": "confirmed", "group": "wh", "section": "asis",
-       "detail": ["Staff collect each SKU and pack the order."]},
-      {"id": "stock", "label": "Every SKU\nin stock?", "status": "confirmed", "shape": "diamond", "group": "wh",
-       "detail": ["Checked per SKU, not per product."]},
-      {"id": "ship", "label": "Ship it", "status": "confirmed", "shape": "pill",
-       "detail": ["The carrier collects in the afternoon."]},
-      {"id": "backorder", "label": "Back-order\nemail", "status": "confirmed", "shape": "pill",
-       "detail": ["The customer is told; the order waits for stock."]}
-    ],
-    "edges": [
-      {"from": "checkout", "to": "saved", "style": "thick"},
-      {"from": "saved", "to": "sync", "style": "thick"},
-      {"from": "sync", "to": "wms", "style": "thick"},
-      {"from": "wms", "to": "pick"},
-      {"from": "pick", "to": "stock"},
-      {"from": "stock", "to": "ship", "label": "yes"},
-      {"from": "stock", "to": "backorder", "label": "no"}
-    ]
+ "id": "shop-orders",
+ "title": "Online shop — order to delivery",
+ "subtitle": "How an order moves through storefront, payments, stock, warehouse, carriers, returns and finance",
+ "source": "Illustrative example for the blog post *Understanding Is the New Bottleneck*. A composite of a typical mid-size online retailer, not a real client.",
+ "summary": [
+  "A customer checks out in the **shop**. Payment is captured, a fraud check runs, and the order waits until the **nightly sync** sends it to the **warehouse system (WMS)**. The warehouse plans picking in waves, picks and packs, and hands parcels to the **carrier**. Finance books revenue at dispatch. Returns come back through a portal and are refunded after inspection.",
+  {
+   "type": "note",
+   "title": "The one idea to keep",
+   "text": "Two things run on last night's data: the orders the warehouse sees, and the stock the shop shows. Same-day dispatch fails on the first; most back-orders come from the second."
+  }
+ ],
+ "lenses": [
+  "map",
+  "reference",
+  "quiz",
+  "states",
+  "walkthrough",
+  "questions"
+ ],
+ "legend": [
+  {
+   "id": "confirmed",
+   "label": "Confirmed",
+   "tone": "good",
+   "description": "Stated by the business or seen in the systems"
   },
-  "scenarios": [
-    {"id": "sameday", "title": "If same-day dispatch goes live",
-     "summary": "Coral changes; deep purple matters most; grey stays as it is.",
-     "changes": {
-       "sync": {"effect": "critical", "label": "Real-time\norder feed", "note": "Orders must reach the warehouse in minutes, so the nightly batch becomes a live feed."},
-       "wms": {"effect": "changed", "note": "Must accept orders all day, not one batch."},
-       "pick": {"effect": "changed", "note": "Picking runs in waves through the day, with a 14:00 cut-off."}
-     }}
-  ],
-  "machines": [
-    {"id": "order", "title": "An order over time", "status": "confirmed", "direction": "LR",
-     "summary": "The statuses an order moves through.",
-     "states": [
-       {"id": "placed", "label": "Placed", "initial": true, "status": "confirmed", "detail": ["Saved in the shop, paid, not yet sent to the warehouse."]},
-       {"id": "sent", "label": "Sent to\nwarehouse", "status": "confirmed", "detail": ["Delivered by the nightly sync."]},
-       {"id": "packed", "label": "Packed", "status": "confirmed", "detail": ["Every SKU picked."]},
-       {"id": "backordered", "label": "Back-ordered", "status": "confirmed", "detail": ["At least one SKU is out of stock."]},
-       {"id": "shipped", "label": "Shipped", "terminal": true, "status": "confirmed", "detail": ["Handed to the carrier."]}
+  {
+   "id": "inferred",
+   "label": "Inferred",
+   "tone": "warn",
+   "description": "Our reading, not yet confirmed"
+  },
+  {
+   "id": "open",
+   "label": "Open",
+   "tone": "bad",
+   "description": "Undecided or unknown"
+  }
+ ],
+ "sections": [
+  {
+   "id": "terms",
+   "title": "Glossary",
+   "status": "confirmed",
+   "summary": "Three teams, three names for the same thing, and a few look-alikes.",
+   "blocks": [
+    {
+     "type": "table",
+     "head": [
+      "Term",
+      "Meaning",
+      "Watch out"
      ],
-     "transitions": [
-       {"from": "placed", "to": "sent", "label": "nightly sync"},
-       {"from": "sent", "to": "packed", "label": "picked"},
-       {"from": "sent", "to": "backordered", "label": "SKU missing"},
-       {"from": "backordered", "to": "packed", "label": "stock arrives", "style": "dashed"},
-       {"from": "packed", "to": "shipped", "label": "carrier collects"}
-     ]}
+     "rows": [
+      [
+       "**Order**",
+       "What a customer buys in one checkout.",
+       "Finance says *sale*, the warehouse says *shipment*."
+      ],
+      [
+       "**SKU**",
+       "One product variant the warehouse stocks.",
+       "One T-shirt in three sizes is three SKUs."
+      ],
+      [
+       "**Available stock**",
+       "What the shop shows as buyable.",
+       "A copy of WMS stock from the last sync, minus today's orders. Not live."
+      ],
+      [
+       "**Back-order**",
+       "An accepted order that can't ship because a SKU is missing.",
+       "The customer has paid; nothing ships yet."
+      ],
+      [
+       "**Wave**",
+       "A batch of orders the warehouse picks together.",
+       "Planned from what the WMS has received, not from the shop."
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "checkout",
+   "title": "Storefront and checkout",
+   "status": "confirmed",
+   "summary": "The shop sells against its own copy of stock.",
+   "blocks": [
+    "The catalogue lists SKUs with prices and promotions. At checkout the shop checks **available stock**, captures payment with the payment provider, and saves the order as **Placed**.",
+    {
+     "type": "p",
+     "status": "inferred",
+     "text": "Available stock is last night's WMS figure minus orders placed since. Returns, damages and manual adjustments in the warehouse today are invisible to the shop until tonight."
+    }
+   ]
+  },
+  {
+   "id": "fraud",
+   "title": "Payments and fraud",
+   "status": "confirmed",
+   "summary": "Payment is captured at checkout; risky orders are held for review.",
+   "blocks": [
+    "The payment provider captures the full amount at checkout. A fraud score above the threshold puts the order **On hold** for manual review; held orders are skipped by the nightly sync.",
+    {
+     "type": "p",
+     "status": "open",
+     "text": "Who reviews held orders at weekends is not defined. See [[questions:fraud_weekend]]."
+    }
+   ]
+  },
+  {
+   "id": "sync",
+   "title": "The nightly sync",
+   "status": "confirmed",
+   "summary": "Once a night, at 02:00, in both directions.",
+   "blocks": [
+    "At 02:00 the integration sends every Placed order to the WMS and copies WMS stock levels back to the shop.",
+    "Everything downstream inherits this delay: wave planning, picking, carrier booking and the stock the shop sells against."
+   ]
+  },
+  {
+   "id": "warehouse",
+   "title": "Warehouse: waves, picking, packing",
+   "status": "confirmed",
+   "summary": "Orders are picked in waves, checked per SKU.",
+   "blocks": [
+    "The WMS groups received orders into waves. Pickers collect each SKU; packing checks every line.",
+    "If any SKU is missing, the **whole order** becomes a back-order. The shop does not split orders.",
+    {
+     "type": "p",
+     "status": "open",
+     "text": "Whether partial shipments should be allowed is undecided. See [[questions:partial]]."
+    }
+   ]
+  },
+  {
+   "id": "carrier",
+   "title": "Carriers and dispatch",
+   "status": "confirmed",
+   "summary": "One collection a day, at 16:00.",
+   "blocks": [
+    "Packed orders get a carrier label from the carrier API. The carrier collects once a day at 16:00. Dispatch triggers the customer email and the revenue entry in the ERP."
+   ]
+  },
+  {
+   "id": "returns",
+   "title": "Returns and refunds",
+   "status": "confirmed",
+   "summary": "Refund after inspection, not on receipt.",
+   "blocks": [
+    "Customers start a return in the portal. When the parcel arrives, the warehouse inspects it: sellable items go back to stock, damaged ones are written off. The refund is issued after inspection.",
+    {
+     "type": "p",
+     "status": "inferred",
+     "text": "Restocked items reach the shop's available stock only after the next nightly sync."
+    }
+   ]
+  },
+  {
+   "id": "finance",
+   "title": "Finance",
+   "status": "confirmed",
+   "summary": "The ERP books revenue at dispatch and reverses it on refund.",
+   "blocks": [
+    "The ERP records revenue when an order ships and a credit note when a refund is issued. Back-orders are cash received but not yet revenue."
+   ]
+  },
+  {
+   "id": "tobe",
+   "title": "Target: same-day dispatch",
+   "status": "confirmed",
+   "summary": "Orders placed before 14:00 should leave the same day.",
+   "blocks": [
+    "The business wants same-day dispatch for orders placed before 14:00.",
+    {
+     "type": "p",
+     "status": "inferred",
+     "text": "That needs orders in the WMS within minutes (a **real-time order feed**), live stock in the shop, and a carrier collection late enough to take the 14:00 orders."
+    }
+   ]
+  }
+ ],
+ "map": {
+  "direction": "LR",
+  "hint": "Click any node. The thick line is an order's main path; the dashed line back to the shop is last night's stock copy.",
+  "groups": [
+   {
+    "id": "front",
+    "label": "Storefront"
+   },
+   {
+    "id": "pay",
+    "label": "Payments and risk"
+   },
+   {
+    "id": "integ",
+    "label": "Integration"
+   },
+   {
+    "id": "wh",
+    "label": "Warehouse (WMS)"
+   },
+   {
+    "id": "out",
+    "label": "Dispatch"
+   },
+   {
+    "id": "ret",
+    "label": "Returns"
+   },
+   {
+    "id": "fin",
+    "label": "Finance"
+   }
   ],
-  "walkthroughs": [
-    {"id": "maya", "title": "Follow one order: Maya's T-shirt",
-     "intro": "An example case; the rules come from the process above. Maya buys a blue T-shirt in size M at 13:40 on a Tuesday.",
-     "steps": [
-       {"id": "buy", "title": "Maya checks out", "highlight": ["checkout", "saved"],
-        "blocks": ["She pays, and the shop saves her order as Placed."]},
-       {"id": "when", "title": "When does the warehouse see it?", "highlight": ["sync"],
-        "blocks": ["She ordered at 13:40, before the 14:00 cut-off the business wants."],
-        "choices": [{"label": "Within minutes, so it can leave today", "goto": "wrong_today"},
-                    {"label": "Not until the 02:00 sync tonight", "goto": "night"}]},
-       {"id": "wrong_today", "title": "Not today", "next": "night",
-        "blocks": ["Today the shop only sends orders in the nightly sync. The 14:00 cut-off is the *target*, not how it works now."]},
-       {"id": "night", "title": "The nightly sync sends it", "highlight": ["sync", "wms"],
-        "blocks": ["At 02:00 the order reaches the warehouse system, about twelve hours after she paid."]},
-       {"id": "pickstep", "title": "The warehouse picks it", "highlight": ["pick", "stock"],
-        "blocks": ["The blue M is in stock, even though the blue L is not."],
-        "choices": [{"label": "It ships: stock is checked per SKU", "goto": "shipstep"},
-                    {"label": "It becomes a back-order: the product is partly out of stock", "goto": "wrong_bo"}]},
-       {"id": "wrong_bo", "title": "Not a back-order", "next": "shipstep",
-        "blocks": ["Stock is checked per **SKU**. Blue L being out of stock doesn't affect blue M."]},
-       {"id": "shipstep", "title": "It ships on Wednesday", "highlight": ["ship"], "end": true,
-        "blocks": ["Maya's order leaves a day later than the business wants. Same-day dispatch needs the [[map:sync|real-time feed]]."]}
-     ]}
+  "nodes": [
+   {
+    "id": "catalog",
+    "label": "Catalogue\n(SKUs, prices)",
+    "status": "confirmed",
+    "group": "front",
+    "section": "checkout",
+    "detail": [
+     "Lists SKUs. Promotions change prices, not SKUs."
+    ]
+   },
+   {
+    "id": "avail",
+    "label": "Available stock\n(shop copy)",
+    "status": "inferred",
+    "shape": "db",
+    "group": "front",
+    "section": "checkout",
+    "detail": [
+     "Last night's WMS stock minus today's orders. {{inferred}} This is why the shop can sell stock that is no longer there."
+    ]
+   },
+   {
+    "id": "checkout",
+    "label": "Checkout",
+    "status": "confirmed",
+    "shape": "pill",
+    "group": "front",
+    "section": "checkout",
+    "detail": [
+     "Checks available stock, captures payment, saves the order as Placed."
+    ]
+   },
+   {
+    "id": "psp",
+    "label": "Payment\nprovider",
+    "status": "confirmed",
+    "shape": "db",
+    "group": "pay",
+    "section": "fraud",
+    "detail": [
+     "Captures the full amount at checkout."
+    ]
+   },
+   {
+    "id": "fraud",
+    "label": "Fraud score\nover threshold?",
+    "status": "confirmed",
+    "shape": "diamond",
+    "group": "pay",
+    "section": "fraud",
+    "detail": [
+     "High scores go On hold for manual review."
+    ]
+   },
+   {
+    "id": "hold",
+    "label": "On hold\n(manual review)",
+    "status": "confirmed",
+    "group": "pay",
+    "section": "fraud",
+    "detail": [
+     "Skipped by the nightly sync until released. {{open}} Weekend cover is undefined."
+    ]
+   },
+   {
+    "id": "order",
+    "label": "Order saved\n(Placed)",
+    "status": "confirmed",
+    "group": "front",
+    "section": "checkout",
+    "detail": [
+     "Paid and waiting for the sync."
+    ]
+   },
+   {
+    "id": "sync",
+    "label": "Nightly sync\n02:00",
+    "status": "confirmed",
+    "shape": "round",
+    "group": "integ",
+    "section": "sync",
+    "detail": [
+     "Sends Placed orders to the WMS and copies WMS stock back to the shop, once a night."
+    ]
+   },
+   {
+    "id": "wms",
+    "label": "WMS",
+    "status": "confirmed",
+    "shape": "db",
+    "group": "wh",
+    "section": "warehouse",
+    "detail": [
+     "The warehouse's system of record for stock and orders."
+    ]
+   },
+   {
+    "id": "wave",
+    "label": "Wave\nplanning",
+    "status": "confirmed",
+    "group": "wh",
+    "section": "warehouse",
+    "detail": [
+     "Groups received orders into picking batches."
+    ]
+   },
+   {
+    "id": "pick",
+    "label": "Pick and\npack",
+    "status": "confirmed",
+    "group": "wh",
+    "section": "warehouse",
+    "detail": [
+     "Each line is picked and checked per SKU."
+    ]
+   },
+   {
+    "id": "instock",
+    "label": "Every SKU\nin stock?",
+    "status": "confirmed",
+    "shape": "diamond",
+    "group": "wh",
+    "section": "warehouse",
+    "detail": [
+     "One missing SKU blocks the whole order. {{open}} Partial shipments are undecided."
+    ]
+   },
+   {
+    "id": "backorder",
+    "label": "Back-order",
+    "status": "confirmed",
+    "group": "wh",
+    "section": "warehouse",
+    "detail": [
+     "Paid, waiting for stock. The customer gets an email."
+    ]
+   },
+   {
+    "id": "label",
+    "label": "Carrier label\n(carrier API)",
+    "status": "confirmed",
+    "group": "out",
+    "section": "carrier",
+    "detail": [
+     "Booked when the parcel is packed."
+    ]
+   },
+   {
+    "id": "collect",
+    "label": "Carrier collects\n16:00",
+    "status": "confirmed",
+    "shape": "round",
+    "group": "out",
+    "section": "carrier",
+    "detail": [
+     "One collection a day."
+    ]
+   },
+   {
+    "id": "notify",
+    "label": "Customer\nemails",
+    "status": "confirmed",
+    "group": "out",
+    "section": "carrier",
+    "detail": [
+     "Order confirmed, dispatched, back-ordered, refunded."
+    ]
+   },
+   {
+    "id": "delivered",
+    "label": "Delivered",
+    "status": "confirmed",
+    "shape": "pill",
+    "group": "out",
+    "section": "carrier",
+    "detail": [
+     "Tracked by the carrier."
+    ]
+   },
+   {
+    "id": "portal",
+    "label": "Returns\nportal",
+    "status": "confirmed",
+    "group": "ret",
+    "section": "returns",
+    "detail": [
+     "The customer starts a return and gets a label."
+    ]
+   },
+   {
+    "id": "inspect",
+    "label": "Inspect\nreturn",
+    "status": "confirmed",
+    "shape": "diamond",
+    "group": "ret",
+    "section": "returns",
+    "detail": [
+     "Sellable goes back to stock; damaged is written off."
+    ]
+   },
+   {
+    "id": "restock",
+    "label": "Restock",
+    "status": "inferred",
+    "group": "ret",
+    "section": "returns",
+    "detail": [
+     "Back into WMS stock. {{inferred}} Visible to the shop only after the next nightly sync."
+    ]
+   },
+   {
+    "id": "refund",
+    "label": "Refund",
+    "status": "confirmed",
+    "group": "ret",
+    "section": "returns",
+    "detail": [
+     "Issued after inspection, paid back through the payment provider."
+    ]
+   },
+   {
+    "id": "erp",
+    "label": "ERP\n(revenue, credit notes)",
+    "status": "confirmed",
+    "shape": "db",
+    "group": "fin",
+    "section": "finance",
+    "detail": [
+     "Records revenue at dispatch and a credit note at refund."
+    ]
+   }
   ],
-  "questions": [
-    {"id": "backorder_promise", "title": "Are back-orders part of the same-day promise?", "status": "open", "owner": "Head of operations", "affects": ["backorder"], "refs": ["tobe"],
-     "blocks": ["If yes, partial shipments may be needed. If no, the promise only covers in-stock orders."]},
-    {"id": "cutoff", "title": "Is 14:00 the cut-off at weekends too?", "status": "open", "owner": "Warehouse manager", "affects": ["pick"],
-     "blocks": ["Weekend shifts are shorter."]},
-    {"id": "feed_owner", "title": "Who owns the real-time feed if the warehouse system is down?", "status": "open", "owner": "IT", "affects": ["sync", "wms"],
-     "blocks": ["Orders need somewhere to wait without being lost."]}
-  ],
-  "quiz": [
-    {"id": "q1", "kind": "essential", "q": "What stops same-day dispatch today?", "choices": ["The warehouse picks too slowly", "Orders only reach the warehouse in the nightly sync", "Payment is taken too late"], "answer": 1,
-     "explain": ["The warehouse can't pick an order it hasn't received. The nightly sync, not picking speed, sets the delay."], "ref": "map/sync"},
-    {"id": "q2", "kind": "misconception", "q": "Blue L is out of stock. Maya orders blue M. What happens?", "choices": ["Her order becomes a back-order", "Her order ships", "The shop cancels it"], "answer": 1,
-     "explain": ["Stock is checked per **SKU**, not per product. Blue M is its own SKU."], "ref": "reference/terms"},
-    {"id": "q3", "kind": "term", "q": "Finance talks about a *sale* and the warehouse about a *shipment*. What are they?", "choices": ["Two different records", "The same Order under different names", "A sale is an order that has shipped"], "answer": 1,
-     "explain": ["Same thing, three names. Pick one term (**Order**) and use it everywhere."], "ref": "reference/terms"},
-    {"id": "q4", "kind": "misconception", "q": "A customer has a back-order. Have they paid?", "choices": ["Yes", "No, payment waits for stock"], "answer": 0,
-     "explain": ["Payment is taken at checkout. A back-order is a paid order waiting for stock."], "ref": "reference/terms"},
-    {"id": "q5", "kind": "essential", "q": "What does same-day dispatch need first?", "answer": "A real-time order feed from the shop to the warehouse.", "ref": "reference/gap"}
-  ],
-  "suggested_lenses": []
+  "edges": [
+   {
+    "from": "catalog",
+    "to": "checkout"
+   },
+   {
+    "from": "avail",
+    "to": "checkout",
+    "label": "checked at"
+   },
+   {
+    "from": "checkout",
+    "to": "psp",
+    "label": "captures"
+   },
+   {
+    "from": "psp",
+    "to": "fraud"
+   },
+   {
+    "from": "fraud",
+    "to": "hold",
+    "label": "yes"
+   },
+   {
+    "from": "fraud",
+    "to": "order",
+    "label": "no",
+    "style": "thick"
+   },
+   {
+    "from": "hold",
+    "to": "order",
+    "label": "released",
+    "style": "dashed"
+   },
+   {
+    "from": "order",
+    "to": "sync",
+    "style": "thick"
+   },
+   {
+    "from": "sync",
+    "to": "wms",
+    "label": "orders",
+    "style": "thick"
+   },
+   {
+    "from": "sync",
+    "to": "avail",
+    "label": "stock copy, 02:00",
+    "style": "dashed"
+   },
+   {
+    "from": "wms",
+    "to": "wave",
+    "style": "thick"
+   },
+   {
+    "from": "wave",
+    "to": "pick",
+    "style": "thick"
+   },
+   {
+    "from": "pick",
+    "to": "instock",
+    "style": "thick"
+   },
+   {
+    "from": "instock",
+    "to": "label",
+    "label": "yes",
+    "style": "thick"
+   },
+   {
+    "from": "instock",
+    "to": "backorder",
+    "label": "no"
+   },
+   {
+    "from": "backorder",
+    "to": "notify",
+    "label": "email"
+   },
+   {
+    "from": "label",
+    "to": "collect",
+    "style": "thick"
+   },
+   {
+    "from": "collect",
+    "to": "delivered",
+    "style": "thick"
+   },
+   {
+    "from": "collect",
+    "to": "erp",
+    "label": "revenue"
+   },
+   {
+    "from": "collect",
+    "to": "notify",
+    "label": "email"
+   },
+   {
+    "from": "delivered",
+    "to": "portal",
+    "label": "return",
+    "style": "dashed"
+   },
+   {
+    "from": "portal",
+    "to": "inspect"
+   },
+   {
+    "from": "inspect",
+    "to": "restock",
+    "label": "sellable"
+   },
+   {
+    "from": "inspect",
+    "to": "refund"
+   },
+   {
+    "from": "refund",
+    "to": "erp",
+    "label": "credit note"
+   }
+  ]
+ },
+ "scenarios": [
+  {
+   "id": "sameday",
+   "title": "If same-day dispatch goes live",
+   "summary": "Coral changes; deep purple matters most; grey stays as it is.",
+   "changes": {
+    "sync": {
+     "effect": "critical",
+     "label": "Real-time\norder feed",
+     "note": "Orders must reach the WMS in minutes, so the nightly batch becomes a live feed."
+    },
+    "avail": {
+     "effect": "changed",
+     "label": "Available stock\n(live)",
+     "note": "Selling same-day needs live stock, or back-orders rise."
+    },
+    "wms": {
+     "effect": "changed",
+     "note": "Must accept orders all day."
+    },
+    "wave": {
+     "effect": "changed",
+     "note": "Waves run through the day, with a 14:00 cut-off wave."
+    },
+    "collect": {
+     "effect": "changed",
+     "label": "Carrier collects\n16:00 + 18:30",
+     "note": "A second, later collection to take the 14:00 orders."
+    }
+   }
+  },
+  {
+   "id": "partial",
+   "title": "If partial shipments are allowed",
+   "summary": "Coral changes; deep purple matters most; grey stays as it is.",
+   "changes": {
+    "instock": {
+     "effect": "critical",
+     "label": "Ship what's\nin stock?",
+     "note": "Missing SKUs no longer block the whole order."
+    },
+    "backorder": {
+     "effect": "changed",
+     "label": "Back-order\n(missing lines only)",
+     "note": "Only the missing lines wait."
+    },
+    "label": {
+     "effect": "changed",
+     "note": "One order can need several labels and carrier costs."
+    },
+    "erp": {
+     "effect": "changed",
+     "note": "One order produces several revenue entries, one per shipment."
+    },
+    "notify": {
+     "effect": "changed",
+     "note": "New emails: partly shipped, rest to follow."
+    }
+   }
+  }
+ ],
+ "machines": [
+  {
+   "id": "order",
+   "title": "An order over time",
+   "status": "confirmed",
+   "direction": "LR",
+   "summary": "The statuses an order moves through, from checkout to return.",
+   "states": [
+    {
+     "id": "placed",
+     "label": "Placed",
+     "initial": true,
+     "status": "confirmed",
+     "detail": [
+      "Paid, saved in the shop, waiting for the sync."
+     ]
+    },
+    {
+     "id": "onhold",
+     "label": "On hold",
+     "status": "confirmed",
+     "detail": [
+      "Fraud review. Skipped by the sync."
+     ]
+    },
+    {
+     "id": "cancelled",
+     "label": "Cancelled",
+     "terminal": true,
+     "status": "confirmed",
+     "detail": [
+      "Refunded in full."
+     ]
+    },
+    {
+     "id": "sent",
+     "label": "Sent to WMS",
+     "status": "confirmed",
+     "detail": [
+      "Delivered by the nightly sync."
+     ]
+    },
+    {
+     "id": "picking",
+     "label": "Picking",
+     "status": "confirmed",
+     "detail": [
+      "In a wave."
+     ]
+    },
+    {
+     "id": "backordered",
+     "label": "Back-ordered",
+     "status": "confirmed",
+     "detail": [
+      "At least one SKU is missing."
+     ]
+    },
+    {
+     "id": "shipped",
+     "label": "Shipped",
+     "status": "confirmed",
+     "detail": [
+      "Collected by the carrier; revenue recorded."
+     ]
+    },
+    {
+     "id": "delivered",
+     "label": "Delivered",
+     "status": "confirmed",
+     "detail": [
+      "Return window opens."
+     ]
+    },
+    {
+     "id": "returned",
+     "label": "Returned",
+     "terminal": true,
+     "status": "confirmed",
+     "detail": [
+      "Inspected and refunded."
+     ]
+    }
+   ],
+   "transitions": [
+    {
+     "from": "placed",
+     "to": "onhold",
+     "label": "fraud score high"
+    },
+    {
+     "from": "onhold",
+     "to": "placed",
+     "label": "released",
+     "style": "dashed"
+    },
+    {
+     "from": "onhold",
+     "to": "cancelled",
+     "label": "rejected"
+    },
+    {
+     "from": "placed",
+     "to": "cancelled",
+     "label": "customer cancels"
+    },
+    {
+     "from": "placed",
+     "to": "sent",
+     "label": "nightly sync"
+    },
+    {
+     "from": "sent",
+     "to": "picking",
+     "label": "wave starts"
+    },
+    {
+     "from": "picking",
+     "to": "backordered",
+     "label": "SKU missing"
+    },
+    {
+     "from": "backordered",
+     "to": "picking",
+     "label": "stock arrives",
+     "style": "dashed"
+    },
+    {
+     "from": "picking",
+     "to": "shipped",
+     "label": "packed + collected"
+    },
+    {
+     "from": "shipped",
+     "to": "delivered",
+     "label": "carrier"
+    },
+    {
+     "from": "delivered",
+     "to": "returned",
+     "label": "return inspected"
+    }
+   ]
+  },
+  {
+   "id": "return",
+   "title": "A return over time",
+   "status": "confirmed",
+   "direction": "LR",
+   "summary": "Refund follows inspection, not receipt.",
+   "states": [
+    {
+     "id": "requested",
+     "label": "Requested",
+     "initial": true,
+     "status": "confirmed",
+     "detail": [
+      "Started in the portal."
+     ]
+    },
+    {
+     "id": "intransit",
+     "label": "In transit",
+     "status": "confirmed",
+     "detail": [
+      "The customer has sent the parcel."
+     ]
+    },
+    {
+     "id": "received",
+     "label": "Received",
+     "status": "confirmed",
+     "detail": [
+      "At the warehouse, not yet inspected."
+     ]
+    },
+    {
+     "id": "restocked",
+     "label": "Restocked",
+     "status": "inferred",
+     "detail": [
+      "Sellable. The shop sees it after the next sync."
+     ]
+    },
+    {
+     "id": "writtenoff",
+     "label": "Written off",
+     "status": "confirmed",
+     "detail": [
+      "Damaged."
+     ]
+    },
+    {
+     "id": "refunded",
+     "label": "Refunded",
+     "terminal": true,
+     "status": "confirmed",
+     "detail": [
+      "Money back through the payment provider."
+     ]
+    }
+   ],
+   "transitions": [
+    {
+     "from": "requested",
+     "to": "intransit",
+     "label": "parcel sent"
+    },
+    {
+     "from": "intransit",
+     "to": "received",
+     "label": "arrives"
+    },
+    {
+     "from": "received",
+     "to": "restocked",
+     "label": "sellable"
+    },
+    {
+     "from": "received",
+     "to": "writtenoff",
+     "label": "damaged"
+    },
+    {
+     "from": "restocked",
+     "to": "refunded",
+     "label": "refund issued"
+    },
+    {
+     "from": "writtenoff",
+     "to": "refunded",
+     "label": "refund issued"
+    }
+   ]
+  }
+ ],
+ "walkthroughs": [
+  {
+   "id": "maya",
+   "title": "Follow one order: Maya's T-shirt and jeans",
+   "intro": "An example case; the rules come from the process above. On Tuesday at 13:40, Maya buys a blue T-shirt in size M and a pair of jeans in size 32. The shop shows one pair of jeans left.",
+   "steps": [
+    {
+     "id": "buy",
+     "title": "Maya checks out",
+     "highlight": [
+      "checkout",
+      "psp",
+      "avail"
+     ],
+     "blocks": [
+      "The shop checks its available stock, the payment provider captures the full amount, and the fraud score is low."
+     ]
+    },
+    {
+     "id": "when",
+     "title": "When does the warehouse see it?",
+     "highlight": [
+      "order",
+      "sync"
+     ],
+     "blocks": [
+      "She ordered at 13:40, before the 14:00 cut-off the business wants."
+     ],
+     "choices": [
+      {
+       "label": "Within minutes, so it can leave today",
+       "goto": "wrong_today"
+      },
+      {
+       "label": "Not until the 02:00 sync tonight",
+       "goto": "night"
+      }
+     ]
+    },
+    {
+     "id": "wrong_today",
+     "title": "Not today",
+     "next": "night",
+     "blocks": [
+      "Today orders only travel in the nightly sync. The 14:00 cut-off is the *target*, not how it works now."
+     ]
+    },
+    {
+     "id": "night",
+     "title": "The nightly sync sends it",
+     "highlight": [
+      "sync",
+      "wms"
+     ],
+     "blocks": [
+      "At 02:00 the order reaches the WMS, about twelve hours after she paid. The same sync overwrites the shop's stock copy."
+     ]
+    },
+    {
+     "id": "jeans",
+     "title": "Were the jeans really there?",
+     "highlight": [
+      "avail",
+      "wms"
+     ],
+     "blocks": [
+      "The shop showed one pair left when Maya paid."
+     ],
+     "choices": [
+      {
+       "label": "Yes: the shop checked stock at checkout",
+       "goto": "wrong_stock"
+      },
+      {
+       "label": "Not necessarily: the shop checked last night's copy",
+       "goto": "pickstep"
+      }
+     ]
+    },
+    {
+     "id": "wrong_stock",
+     "title": "The shop's figure was a copy",
+     "next": "pickstep",
+     "blocks": [
+      "Available stock is last night's WMS figure minus today's orders. A pair damaged in the warehouse that morning was still on sale."
+     ]
+    },
+    {
+     "id": "pickstep",
+     "title": "Wednesday's first wave",
+     "highlight": [
+      "wave",
+      "pick",
+      "instock"
+     ],
+     "blocks": [
+      "The T-shirt is on the shelf. The jeans are not: the last pair was damaged on Tuesday morning."
+     ],
+     "choices": [
+      {
+       "label": "The whole order becomes a back-order",
+       "goto": "bo"
+      },
+      {
+       "label": "The T-shirt ships; the jeans follow later",
+       "goto": "wrong_split"
+      }
+     ]
+    },
+    {
+     "id": "wrong_split",
+     "title": "No partial shipments",
+     "next": "bo",
+     "blocks": [
+      "The shop doesn't split orders today. One missing SKU holds the whole order. Whether to allow splits is still [[questions:partial|open]]."
+     ]
+    },
+    {
+     "id": "bo",
+     "title": "Back-ordered",
+     "highlight": [
+      "backorder",
+      "notify"
+     ],
+     "end": true,
+     "blocks": [
+      "Maya gets a back-order email. She has paid for both items, finance has no revenue yet, and nothing has shipped. Same-day dispatch would need a [[map:sync|real-time feed]] *and* live stock."
+     ]
+    }
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": "partial",
+   "title": "Should partial shipments be allowed?",
+   "status": "open",
+   "owner": "Head of operations",
+   "affects": [
+    "instock",
+    "backorder",
+    "label",
+    "erp"
+   ],
+   "refs": [
+    "warehouse"
+   ],
+   "blocks": [
+    "Faster for customers, but more parcels, carrier costs and several revenue entries per order. See the what-if on the map."
+   ]
+  },
+  {
+   "id": "backorder_promise",
+   "title": "Are back-orders part of the same-day promise?",
+   "status": "open",
+   "owner": "Head of operations",
+   "affects": [
+    "backorder"
+   ],
+   "refs": [
+    "tobe"
+   ],
+   "blocks": [
+    "If yes, partial shipments become almost unavoidable."
+   ]
+  },
+  {
+   "id": "fraud_weekend",
+   "title": "Who reviews held orders at weekends?",
+   "status": "open",
+   "owner": "Customer service lead",
+   "affects": [
+    "hold"
+   ],
+   "refs": [
+    "fraud"
+   ],
+   "blocks": [
+    "Held orders skip the sync, so a Friday-evening hold can wait until Monday night."
+   ]
+  },
+  {
+   "id": "live_stock",
+   "title": "Can the WMS publish stock changes in real time?",
+   "status": "open",
+   "owner": "IT / WMS vendor",
+   "affects": [
+    "avail",
+    "wms"
+   ],
+   "refs": [
+    "checkout"
+   ],
+   "blocks": [
+    "Without it, same-day dispatch still sells stock that is gone."
+   ]
+  },
+  {
+   "id": "second_collection",
+   "title": "Will the carrier add a later collection?",
+   "status": "open",
+   "owner": "Logistics",
+   "affects": [
+    "collect"
+   ],
+   "refs": [
+    "carrier"
+   ],
+   "blocks": [
+    "A 16:00 collection leaves two hours to pick and pack 14:00 orders."
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q1",
+   "kind": "essential",
+   "q": "What stops same-day dispatch today?",
+   "choices": [
+    "The warehouse picks too slowly",
+    "Orders only reach the warehouse in the nightly sync",
+    "Payment is taken too late"
+   ],
+   "answer": 1,
+   "explain": [
+    "The warehouse can't pick an order it hasn't received. The sync, not picking speed, sets the delay."
+   ],
+   "ref": "map/sync"
+  },
+  {
+   "id": "q2",
+   "kind": "misconception",
+   "q": "Blue L is out of stock. Maya orders blue M. What happens?",
+   "choices": [
+    "Her order becomes a back-order",
+    "Her order ships",
+    "The shop cancels it"
+   ],
+   "answer": 1,
+   "explain": [
+    "Stock is checked per **SKU**, not per product. Blue M is its own SKU."
+   ],
+   "ref": "reference/terms"
+  },
+  {
+   "id": "q3",
+   "kind": "misconception",
+   "q": "The shop showed one pair of jeans in stock at checkout. Is it guaranteed to ship?",
+   "choices": [
+    "Yes, the shop checked stock",
+    "No, the shop checked last night's copy of stock"
+   ],
+   "answer": 1,
+   "explain": [
+    "**Available stock** is the last sync's figure minus today's orders. Today's damages and adjustments are invisible until tonight."
+   ],
+   "ref": "reference/checkout"
+  },
+  {
+   "id": "q4",
+   "kind": "misconception",
+   "q": "One item in a three-item order is missing. What happens today?",
+   "choices": [
+    "The two items ship, the third follows",
+    "The whole order becomes a back-order",
+    "The missing item is cancelled automatically"
+   ],
+   "answer": 1,
+   "explain": [
+    "The shop doesn't split orders. Partial shipments are an open question."
+   ],
+   "ref": "reference/warehouse"
+  },
+  {
+   "id": "q5",
+   "kind": "term",
+   "q": "Finance talks about a *sale*, the warehouse about a *shipment*. What are they?",
+   "choices": [
+    "Two different records",
+    "The same Order under different names",
+    "Two stages of a return"
+   ],
+   "answer": 1,
+   "explain": [
+    "Same thing, three names. Pick one term (**Order**) and use it everywhere."
+   ],
+   "ref": "reference/terms"
+  },
+  {
+   "id": "q6",
+   "kind": "essential",
+   "q": "When is the refund for a return issued?",
+   "choices": [
+    "When the customer starts the return",
+    "When the parcel arrives",
+    "After inspection"
+   ],
+   "answer": 2,
+   "explain": [
+    "Inspection decides restock or write-off; the refund follows it."
+   ],
+   "ref": "states/return.received"
+  },
+  {
+   "id": "q7",
+   "kind": "misconception",
+   "q": "A return is restocked at 11:00. When can the shop sell it again?",
+   "choices": [
+    "Immediately",
+    "After the next nightly sync"
+   ],
+   "answer": 1,
+   "explain": [
+    "The shop sells against its copy of stock, refreshed at 02:00."
+   ],
+   "ref": "map/restock"
+  },
+  {
+   "id": "q8",
+   "kind": "term",
+   "q": "What is a wave?",
+   "answer": "A batch of received orders the warehouse picks together.",
+   "ref": "reference/warehouse"
+  },
+  {
+   "id": "q9",
+   "kind": "essential",
+   "q": "Same-day dispatch needs which two data changes?",
+   "answer": "A real-time order feed to the WMS, and live stock in the shop.",
+   "ref": "reference/tobe"
+  },
+  {
+   "id": "q10",
+   "kind": "misconception",
+   "q": "An order goes On hold for fraud review on Friday evening and is released on Saturday. When does the warehouse see it?",
+   "choices": [
+    "Saturday, straight after release",
+    "At the next 02:00 sync after release",
+    "Monday morning"
+   ],
+   "answer": 1,
+   "explain": [
+    "Held orders skip the sync; a released order travels in the next one."
+   ],
+   "ref": "reference/fraud"
+  }
+ ],
+ "suggested_lenses": []
 }
