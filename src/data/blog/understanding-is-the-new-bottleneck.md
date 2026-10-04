@@ -162,25 +162,37 @@ The **as-is map** for getting an order out of the door might look like this:
 
 The to-be map says the business wants same-day dispatch for orders placed before 2pm. The **gap analysis** then surfaces the one gap that matters most: orders only reach the warehouse in a nightly sync. That single line changes the architecture. Same-day dispatch needs a real-time order feed to the warehouse, not a faster warehouse team. Finding that in a process map on day two is much cheaper than finding it in a sprint review in month two.
 
-### The interactive walkthrough
+### Learning lenses: one model, many angles
 
-For anything I need to really understand, I go one step further. I ask the AI to turn everything above into a small interactive web app that walks me through it in sequence: the vocabulary first, then one process at a time, then the gaps, each step building on the last.
+For anything I need to really understand, I go one step further. I built a Claude skill, **learning-lenses**, that turns a spec, a folder of documents or a set of meeting transcripts into one local web app I can explore. It started from Karpathy's post, and I now use it to get my head around systems, requirements and new domains.
 
-```text
-Turn the glossary, process maps and gap analysis into a single-page
-interactive walkthrough. Step 1: the 10 terms that matter most.
-Then one process per step, as-is and to-be side by side, with the
-glossary terms highlighted. Last step: the gaps, biggest first.
-Keep it to one HTML file I can open locally.
-```
+It works in two steps. First, the AI reads all the material and writes one structured model of it: the parts, how they connect, the rules, the statuses things move through, and what's still undecided. Then the app shows that model through switchable lenses, one per tab:
 
-It builds up the holistic intuition in order, instead of dropping a folder of documents on me at once. It takes minutes to generate, and I throw it away once I've got what I need. A couple of years ago, nobody would have built a custom app just to understand something. Now it's cheaper than a meeting.
+- **Map:** the whole system as one clickable diagram. What-if scenarios recolour it to show what a decision would change.
+- **Reference:** the full content, section by section, in the source's order, written close to ASD-STE100: short sentences, one meaning per word.
+- **Walkthrough:** one realistic case, followed step by step like a story.
+- **Quiz:** the essentials, the terms, and the misconceptions.
+- **State machines, open questions** and others, when the material calls for them.
+
+![The online shop example in the learning-lenses app: the Map lens with the "same-day dispatch" what-if switched on. The nightly sync becomes a real-time order feed, and the warehouse steps that change turn coral](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-map.png)
+
+Every lens reads from the same model, so they can't contradict each other. But two features matter more than the visuals.
+
+**Every claim is tagged confirmed, inferred or open.** Specs and transcripts mix decisions with assumptions, and the AI's own reading adds more. The tags make the difference visible at a glance, so I know which parts I can build on and which I still need to ask about. That's the "know what you know and what you don't" from earlier, made explicit.
+
+**It tests me.** The walkthrough can stop at each decision point and ask what happens next. The quiz goes after the misconceptions: the look-alike terms and rules that people get wrong on first read. Seeing something isn't the same as knowing it. A few wrong answers show me exactly where my understanding is thin, before that thin spot turns into a bad prompt or a missed review comment.
+
+![The Walkthrough lens in quiz mode: Maya orders a T-shirt at 13:40, and the app asks when the warehouse will see the order, before revealing that it waits for the 02:00 sync](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-walkthrough.png)
+
+![The Quiz lens on a misconception: blue L is out of stock and Maya orders blue M. The wrong answer, back-order, is marked, with the explanation that stock is checked per SKU](../../assets/images/posts/understanding-is-the-new-bottleneck/lenses-quiz.png)
+
+It takes a few minutes to generate. A couple of years ago, nobody would have built a custom app just to understand something. Now it's cheaper than a meeting.
 
 ### Pick the format on purpose
 
-That's the broader point: paragraphs of prose are often the slowest way to take something in. I ask for diagrams for flows, tables for anything I need to scan, and the walkthrough for anything I need to really learn.
+That's the broader point: paragraphs of prose are often the slowest way to take something in. Diagrams for flows, tables for anything I need to scan, and lenses for anything I need to really learn.
 
-And I see Karpathy does the same. [His post](https://x.com/karpathy/status/2105819303471976479) is exactly about this, with diagrams and web pages on his list too, plus two I hadn't tried: explanations in ASD-STE100, the controlled English used in aerospace maintenance manuals, and custom explainer videos.
+[Karpathy's post](https://x.com/karpathy/status/2105819303471976479) is exactly about this, and it's where the skill started: diagrams, web pages and writing closer to ASD-STE100 all come from his list. The skill can also build his favourite format, a narrated explainer video, as an optional lens.
 
 ## Connecting the Dots: Looking Through Different Lenses
 
@@ -239,7 +251,7 @@ Every company now has access to the same models and the same tools, so buying li
 
 None of the three works alone. A team of strong engineers with no shared structure still loses days to re-explaining. A good spec process with people who don't read the specs becomes paperwork.
 
-What that looks like in practice, I don't fully know yet. On one project we've just started running fully on the AI-First SDLC, the biggest bottleneck so far has been managing the specs and getting people aligned; once that's done, implementation moves much faster than we're used to. That points me towards a hypothesis: on more complex projects, every team might need one person whose main job is consulting, spec management and alignment, with one owner per domain (a colleague suggests two for complex systems: a subject-matter expert and a strong agentic engineer). But we're two weeks in. I'll know much more in a few months, and my view might change.
+Here's what we're seeing so far. On one project we've just started running fully on the AI-First SDLC, the biggest bottleneck so far has been managing the specs and getting people aligned; once that's done, implementation moves much faster than we're used to. That points me towards a hypothesis: on more complex projects, every team might need one person whose main job is consulting, spec management and alignment, with one owner per domain (a colleague suggests two for complex systems: a subject-matter expert and a strong agentic engineer). But we're two weeks in. I'll know much more in a few months, and my view might change.
 
 The risk I worry about most was raised by another colleague. Documentation is the thing most developers have always hated doing, and now the shared project knowledge is the most important artefact on the project. If people treat it as something the AI fills in and nobody reads, they go shallow exactly where depth matters most. That's a skillset problem, not a tooling one, and we need to train for it deliberately rather than assume it.
 
