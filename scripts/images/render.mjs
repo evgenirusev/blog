@@ -48,6 +48,9 @@ for (const file of files) {
   if (!h) {
     h = await page.evaluate(() => Math.ceil(document.querySelector(".frame").getBoundingClientRect().bottom));
     await page.setViewportSize({ width: w, height: h });
+    // Let Chrome repaint at the new size: screenshotting straight after a resize can capture
+    // stale tiles (the image comes out as a repeated grid of its top-left corner).
+    await page.waitForTimeout(400);
   }
 
   // Catch the usual layout failures before anyone looks at the PNG.
