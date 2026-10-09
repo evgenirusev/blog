@@ -267,14 +267,49 @@ This is the work we do at Tecknoworks, and a short conversation is usually enoug
   var vids = Array.prototype.slice.call(
     document.querySelectorAll('video[src*="/images/posts/ai-opportunities/"]')
   );
-  if (!vids.length || !('IntersectionObserver' in window)) return;
+  if (!vids.length) return;
+
+  // Autoplay can be blocked (extensions, browser settings, power saving). Every video gets a
+  // play button that shows whenever it isn't playing; a click always works because it's a
+  // user gesture. Clicking the video itself toggles play/pause.
+  vids.forEach(function (v) {
+    if (v.dataset.playWired) return;
+    v.dataset.playWired = "1";
+    var wrap = document.createElement("div");
+    wrap.style.cssText = "position:relative;";
+    v.parentNode.insertBefore(wrap, v);
+    wrap.appendChild(v);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Play video");
+    btn.style.cssText = "position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;border:0;background:#ea2775;box-shadow:0 6px 20px rgba(50,0,99,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:opacity .2s;";
+    btn.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    wrap.appendChild(btn);
+    var sync = function () {
+      var playing = !v.paused && !v.ended;
+      btn.style.opacity = playing ? "0" : "1";
+      btn.style.pointerEvents = playing ? "none" : "auto";
+    };
+    var play = function () { var p = v.play(); if (p && p.catch) p.catch(sync); };
+    btn.addEventListener("click", function (e) { e.stopPropagation(); v.dataset.userPaused = ""; play(); });
+    v.addEventListener("click", function () {
+      if (v.paused) { v.dataset.userPaused = ""; play(); } else { v.dataset.userPaused = "1"; v.pause(); }
+    });
+    v.style.cursor = "pointer";
+    ["play", "playing", "pause", "ended", "emptied"].forEach(function (ev) { v.addEventListener(ev, sync); });
+    sync();
+  });
+
+  if (!("IntersectionObserver" in window)) return;
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       var v = e.target;
-      if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-      else { v.pause(); }
+      if (e.isIntersecting) {
+        if (v.dataset.userPaused) return;
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      } else { v.pause(); }
     });
-  }, { rootMargin: '300px 0px' });
+  }, { rootMargin: "300px 0px" });
   vids.forEach(function (v) { io.observe(v); });
 })();
 </script>
