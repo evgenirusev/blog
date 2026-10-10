@@ -26,6 +26,35 @@ If you write software today, you've already seen AI speed up coding a lot. **But
 
 This post covers the SDLC we adopted to fix both problems. It speeds up delivery further, keeps teams and projects consistent, and leaves everyone better aligned and less frustrated.
 
+**Prefer to watch?** Here's the full webinar where I walk through the approach, with Q&A at the end (57 min):
+
+<div class="yt-embed" data-id="KCJlQRfpilQ" data-title="The AI-First SDLC: From Coding to Context Engineering (Full Webinar)" style="position:relative;aspect-ratio:16/9;border-radius:0.5rem;overflow:hidden;background:#1a1226;">
+<a href="https://www.youtube.com/watch?v=KCJlQRfpilQ" class="yt-embed-play" aria-label="Play the AI-First SDLC webinar video" style="position:absolute;inset:0;display:block;">
+<img src="/images/posts/ai-first-sdlc/webinar-cover.webp" alt="AI-First SDLC full webinar: From coding to context engineering, with Evgeni Rusev" width="1280" height="720" loading="lazy" style="width:100%;height:100%;object-fit:cover;margin:0;" />
+<span aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:#ea2775;box-shadow:0 8px 24px rgba(50,0,99,.4);display:flex;align-items:center;justify-content:center;"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+</a>
+</div>
+
+<script>
+(function () {
+  document.querySelectorAll(".yt-embed").forEach(function (box) {
+    if (box.dataset.wired) return;
+    box.dataset.wired = "1";
+    var link = box.querySelector(".yt-embed-play");
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + box.dataset.id + "?autoplay=1&rel=0";
+      f.title = box.dataset.title;
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      f.allowFullscreen = true;
+      f.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;";
+      box.replaceChildren(f);
+    });
+  });
+})();
+</script>
+
 ## Table of contents
 
 ## What Has Changed: Implementation Collapsed
