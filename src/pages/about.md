@@ -8,7 +8,7 @@ I'm Evgeni Rusev — a forward-deployed Solution Architect at [Tecknoworks](http
 
 I lead the architecture end to end, from solution design and technology selection through implementation oversight, with a focus on security, production readiness, and long-term maintainability. I also lead the adoption of AI-driven SDLC practices, internally and with clients, through workshops, training and hands-on enablement.
 
-Before this I was AI Practice Lead, running a 15-person team that took applied AI from pilot to production — the 80% beyond the model: integration, data quality, governance, observability, and the engineering discipline that makes AI work outside a notebook.
+Before this I was AI Practice Lead, where I led a 15-person team taking applied AI projects from pilot to production. Most of that work was everything around the model: integration, data quality, governance, observability and solid engineering practice.
 
 ## What I write about
 
